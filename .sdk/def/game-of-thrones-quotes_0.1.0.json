@@ -1,0 +1,373 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Game of Thrones Quotes API",
+    "description": "A free API to retrieve quotes from Game of Thrones. Users can retrieve random quotes, quotes by specific characters, and information about houses and their members.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://gameofthronesquotes.xyz/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.gameofthronesquotes.xyz/v1",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/random": {
+      "get": {
+        "summary": "Get a random quote",
+        "description": "Retrieves a single random quote from Game of Thrones",
+        "operationId": "getRandomQuote",
+        "tags": [
+          "Quotes"
+        ],
+        "responses": {
+          "200": {
+            "description": "A random quote",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                },
+                "example": {
+                  "sentence": "If I fall, don't bring me back.",
+                  "character": {
+                    "name": "Jon Snow",
+                    "slug": "jon"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/random/{count}": {
+      "get": {
+        "summary": "Get several random quotes",
+        "description": "Retrieves multiple random quotes from Game of Thrones",
+        "operationId": "getRandomQuotes",
+        "tags": [
+          "Quotes"
+        ],
+        "parameters": [
+          {
+            "name": "count",
+            "in": "path",
+            "required": true,
+            "description": "Number of random quotes to retrieve",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Multiple random quotes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Quote"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/author/{character}/{count}": {
+      "get": {
+        "summary": "Get quotes from a character",
+        "description": "Retrieves quotes from a specific Game of Thrones character",
+        "operationId": "getQuotesByAuthor",
+        "tags": [
+          "Quotes"
+        ],
+        "parameters": [
+          {
+            "name": "character",
+            "in": "path",
+            "required": true,
+            "description": "Slug or name of the character",
+            "schema": {
+              "type": "string",
+              "example": "tyrion"
+            }
+          },
+          {
+            "name": "count",
+            "in": "path",
+            "required": true,
+            "description": "Number of quotes to retrieve",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 2
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quotes from the specified character",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Quote"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/houses": {
+      "get": {
+        "summary": "List of houses with their members",
+        "description": "Retrieves a list of all houses from Game of Thrones with their members",
+        "operationId": "getHouses",
+        "tags": [
+          "Houses"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of houses with members",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/House"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/house/{house}": {
+      "get": {
+        "summary": "Get house details",
+        "description": "Retrieves detailed information about a specific house",
+        "operationId": "getHouseDetails",
+        "tags": [
+          "Houses"
+        ],
+        "parameters": [
+          {
+            "name": "house",
+            "in": "path",
+            "required": true,
+            "description": "Slug or name of the house",
+            "schema": {
+              "type": "string",
+              "example": "lannister"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the specified house",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/House"
+                },
+                "example": {
+                  "slug": "lannister",
+                  "name": "House Lannister of Casterly Rock",
+                  "members": [
+                    {
+                      "name": "Tyrion Lannister",
+                      "slug": "tyrion"
+                    },
+                    {
+                      "name": "Cersei Lannister",
+                      "slug": "cersei"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/characters": {
+      "get": {
+        "summary": "List of characters with their quotes",
+        "description": "Retrieves a list of all characters from Game of Thrones with their quotes",
+        "operationId": "getCharacters",
+        "tags": [
+          "Characters"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of characters with quotes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/character/{character}": {
+      "get": {
+        "summary": "Get character details with quotes",
+        "description": "Retrieves detailed information about a specific character including their quotes",
+        "operationId": "getCharacterDetails",
+        "tags": [
+          "Characters"
+        ],
+        "parameters": [
+          {
+            "name": "character",
+            "in": "path",
+            "required": true,
+            "description": "Slug or name of the character",
+            "schema": {
+              "type": "string",
+              "example": "jon"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the specified character with quotes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Character"
+                },
+                "example": {
+                  "name": "Jon Snow",
+                  "slug": "jon",
+                  "house": {
+                    "name": "House Stark of Winterfell",
+                    "slug": "stark"
+                  },
+                  "quotes": [
+                    "If I fall, don't bring me back."
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Quote": {
+        "type": "object",
+        "properties": {
+          "sentence": {
+            "type": "string",
+            "description": "The quote text"
+          },
+          "character": {
+            "$ref": "#/components/schemas/CharacterReference"
+          }
+        }
+      },
+      "CharacterReference": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the character"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly identifier for the character"
+          }
+        }
+      },
+      "House": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly identifier for the house"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full name of the house"
+          },
+          "members": {
+            "type": "array",
+            "description": "Members belonging to this house",
+            "items": {
+              "$ref": "#/components/schemas/CharacterReference"
+            }
+          }
+        }
+      },
+      "Character": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the character"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly identifier for the character"
+          },
+          "house": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Full name of the house"
+              },
+              "slug": {
+                "type": "string",
+                "description": "URL-friendly identifier for the house"
+              }
+            }
+          },
+          "quotes": {
+            "type": "array",
+            "description": "Quotes by this character",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Quotes",
+      "description": "Operations related to Game of Thrones quotes"
+    },
+    {
+      "name": "Houses",
+      "description": "Operations related to Game of Thrones houses"
+    },
+    {
+      "name": "Characters",
+      "description": "Operations related to Game of Thrones characters"
+    }
+  ]
+}

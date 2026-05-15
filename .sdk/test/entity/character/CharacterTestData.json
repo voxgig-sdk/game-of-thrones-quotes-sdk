@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "character": {
+      "CHARACTER00": {
+        "houses": {},
+        "name": "s29",
+        "quote": [],
+        "slug": "s2b"
+      },
+      "CHARACTER01": {
+        "houses": {},
+        "name": "s51",
+        "quote": [],
+        "slug": "s53"
+      },
+      "CHARACTER02": {
+        "houses": {},
+        "name": "s79",
+        "quote": [],
+        "slug": "s7b"
+      }
+    }
+  },
+  "new": {
+    "character": {
+      "character_ref01": {
+        "houses": {},
+        "name": "sa1",
+        "quote": [],
+        "slug": "sa3"
+      }
+    }
+  }
+}

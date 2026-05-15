@@ -1,0 +1,76 @@
+# Entity: random
+
+main: kit: entity: random: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "character"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "sentence"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "random"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: 5
+                kind: "param"
+                name: "id"
+                orig: "count"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/random/{count}"
+          parts: [
+            "random"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              count: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "GET"
+          orig: "/random"
+          parts: [
+            "random"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

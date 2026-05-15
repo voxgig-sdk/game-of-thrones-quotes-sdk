@@ -1,0 +1,22 @@
+# BasicHousFlow
+
+main: kit: flow: BasicHousFlow:
+{
+  entity: "hous",
+  kind: "basic",
+  name: "BasicHousFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "hous_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicHousFlow"
+}

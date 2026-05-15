@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "random": {
+      "RANDOM00": {
+        "character": {},
+        "sentence": "s15"
+      },
+      "RANDOM01": {
+        "character": {},
+        "sentence": "s29"
+      },
+      "RANDOM02": {
+        "character": {},
+        "sentence": "s3d"
+      }
+    }
+  },
+  "new": {
+    "random": {
+      "random_ref01": {
+        "character": {},
+        "sentence": "s51"
+      }
+    }
+  }
+}

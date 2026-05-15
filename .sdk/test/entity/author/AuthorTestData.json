@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "author": {
+      "AUTHOR00": {
+        "character": {},
+        "sentence": "s15",
+        "count": "COUNT01"
+      },
+      "AUTHOR01": {
+        "character": {},
+        "sentence": "s29",
+        "count": "COUNT01"
+      },
+      "AUTHOR02": {
+        "character": {},
+        "sentence": "s3d",
+        "count": "COUNT01"
+      }
+    }
+  },
+  "new": {
+    "author": {
+      "author_ref01": {
+        "character": {},
+        "sentence": "s51"
+      }
+    }
+  }
+}
