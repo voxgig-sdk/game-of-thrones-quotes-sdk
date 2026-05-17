@@ -50,13 +50,9 @@ Create a new `AuthorEntity` instance. Pass `None` for no initial data.
 
 Create a new `CharacterEntity` instance. Pass `None` for no initial data.
 
-#### `Hous(data=None)`
+#### `House(data=None)`
 
-Create a new `HousEntity` instance. Pass `None` for no initial data.
-
-#### `Houses(data=None)`
-
-Create a new `HousesEntity` instance. Pass `None` for no initial data.
+Create a new `HouseEntity` instance. Pass `None` for no initial data.
 
 #### `Random(data=None)`
 
@@ -156,7 +152,7 @@ character = client.Character()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `houses` | ``$OBJECT`` | No |  |
+| `house` | ``$OBJECT`` | No |  |
 | `name` | ``$STRING`` | No |  |
 | `quote` | ``$ARRAY`` | No |  |
 | `slug` | ``$STRING`` | No |  |
@@ -208,10 +204,10 @@ Return the entity name.
 
 ---
 
-## HousEntity
+## HouseEntity
 
 ```python
-hous = client.Hous()
+house = client.House()
 ```
 
 ### Fields
@@ -229,60 +225,15 @@ hous = client.Hous()
 List entities matching the given criteria. Returns an array.
 
 ```python
-results, err = client.Hous().list({})
+results, err = client.House().list({})
 ```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `HousEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## HousesEntity
-
-```python
-houses = client.Houses()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-
-### Operations
 
 #### `load(reqmatch, ctrl=None) -> tuple`
 
 Load a single entity matching the given criteria.
 
 ```python
-result, err = client.Houses().load({"id": "houses_id"})
+result, err = client.House().load({"id": "house_id"})
 ```
 
 ### Common Methods
@@ -305,7 +256,7 @@ Set the entity match criteria.
 
 #### `make() -> Entity`
 
-Create a new `HousesEntity` instance with the same options.
+Create a new `HouseEntity` instance with the same options.
 
 #### `get_name() -> str`
 

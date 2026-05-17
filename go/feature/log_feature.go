@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/core"
+	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/core"
 )
 
 type LogFeature struct {

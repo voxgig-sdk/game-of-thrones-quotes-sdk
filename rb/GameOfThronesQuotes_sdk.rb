@@ -211,15 +211,9 @@ class GameOfThronesQuotesSDK
   end
 
 
-  def Hous(data = nil)
-    require_relative 'entity/hous_entity'
-    HousEntity.new(self, data)
-  end
-
-
-  def Houses(data = nil)
-    require_relative 'entity/houses_entity'
-    HousesEntity.new(self, data)
+  def House(data = nil)
+    require_relative 'entity/house_entity'
+    HouseEntity.new(self, data)
   end
 
 

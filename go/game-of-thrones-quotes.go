@@ -1,10 +1,10 @@
 package voxgiggameofthronesquotessdk
 
 import (
-	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/core"
-	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/entity"
-	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/feature"
-	_ "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/utility"
+	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/core"
+	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/entity"
+	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/feature"
+	_ "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
@@ -38,11 +38,8 @@ func init() {
 	core.NewCharacterEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
 		return entity.NewCharacterEntity(client, entopts)
 	}
-	core.NewHousEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
-		return entity.NewHousEntity(client, entopts)
-	}
-	core.NewHousesEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
-		return entity.NewHousesEntity(client, entopts)
+	core.NewHouseEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
+		return entity.NewHouseEntity(client, entopts)
 	}
 	core.NewRandomEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
 		return entity.NewRandomEntity(client, entopts)

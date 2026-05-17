@@ -23,8 +23,7 @@ local function make_config()
       entity = {
         ["author"] = {},
         ["character"] = {},
-        ["hous"] = {},
-        ["houses"] = {},
+        ["house"] = {},
         ["random"] = {},
       },
     },
@@ -110,7 +109,7 @@ local function make_config()
       ["character"] = {
         ["fields"] = {
           {
-            ["name"] = "houses",
+            ["name"] = "house",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["active"] = true,
@@ -211,7 +210,7 @@ local function make_config()
           ["ancestors"] = {},
         },
       },
-      ["hous"] = {
+      ["house"] = {
         ["fields"] = {
           {
             ["name"] = "member",
@@ -235,7 +234,7 @@ local function make_config()
             ["index$"] = 2,
           },
         },
-        ["name"] = "hous",
+        ["name"] = "house",
         ["op"] = {
           ["list"] = {
             ["name"] = "list",
@@ -259,37 +258,6 @@ local function make_config()
             ["input"] = "data",
             ["key$"] = "list",
           },
-        },
-        ["relations"] = {
-          ["ancestors"] = {},
-        },
-      },
-      ["houses"] = {
-        ["fields"] = {
-          {
-            ["name"] = "member",
-            ["req"] = false,
-            ["type"] = "`$ARRAY`",
-            ["active"] = true,
-            ["index$"] = 0,
-          },
-          {
-            ["name"] = "name",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["active"] = true,
-            ["index$"] = 1,
-          },
-          {
-            ["name"] = "slug",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["active"] = true,
-            ["index$"] = 2,
-          },
-        },
-        ["name"] = "houses",
-        ["op"] = {
           ["load"] = {
             ["name"] = "load",
             ["points"] = {
@@ -300,7 +268,7 @@ local function make_config()
                       ["example"] = "lannister",
                       ["kind"] = "param",
                       ["name"] = "id",
-                      ["orig"] = "houses",
+                      ["orig"] = "house",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
                       ["active"] = true,

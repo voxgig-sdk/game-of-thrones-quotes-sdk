@@ -10,9 +10,7 @@ var NewAuthorEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]
 
 var NewCharacterEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
 
-var NewHousEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
-
-var NewHousesEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
+var NewHouseEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
 
 var NewRandomEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
 

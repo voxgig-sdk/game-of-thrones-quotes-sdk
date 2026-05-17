@@ -237,17 +237,10 @@ class GameOfThronesQuotesSDK
     }
 
 
-    public function Hous($data = null)
+    public function House($data = null)
     {
-        require_once __DIR__ . '/entity/hous_entity.php';
-        return new HousEntity($this, $data);
-    }
-
-
-    public function Houses($data = null)
-    {
-        require_once __DIR__ . '/entity/houses_entity.php';
-        return new HousesEntity($this, $data);
+        require_once __DIR__ . '/entity/house_entity.php';
+        return new HouseEntity($this, $data);
     }
 
 

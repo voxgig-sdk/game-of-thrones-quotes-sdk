@@ -1,0 +1,44 @@
+# BasicHouseFlow
+
+main: kit: flow: BasicHouseFlow:
+{
+  entity: "house",
+  kind: "basic",
+  name: "BasicHouseFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "house_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "house_ref01",
+        srcdatavar: "house_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "house01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-house_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicHouseFlow"
+}

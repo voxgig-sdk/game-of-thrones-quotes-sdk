@@ -50,13 +50,9 @@ Create a new `Author` entity instance. Pass `nil` for no initial data.
 
 Create a new `Character` entity instance. Pass `nil` for no initial data.
 
-#### `Hous(data = nil)`
+#### `House(data = nil)`
 
-Create a new `Hous` entity instance. Pass `nil` for no initial data.
-
-#### `Houses(data = nil)`
-
-Create a new `Houses` entity instance. Pass `nil` for no initial data.
+Create a new `House` entity instance. Pass `nil` for no initial data.
 
 #### `Random(data = nil)`
 
@@ -161,7 +157,7 @@ character = client.Character
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `houses` | ``$OBJECT`` | No |  |
+| `house` | ``$OBJECT`` | No |  |
 | `name` | ``$STRING`` | No |  |
 | `quote` | ``$ARRAY`` | No |  |
 | `slug` | ``$STRING`` | No |  |
@@ -214,10 +210,10 @@ Return the entity name.
 
 ---
 
-## HousEntity
+## HouseEntity
 
 ```ruby
-hous = client.Hous
+house = client.House
 ```
 
 ### Fields
@@ -235,61 +231,15 @@ hous = client.Hous
 List entities matching the given criteria. Returns an array.
 
 ```ruby
-results, err = client.Hous.list(nil)
+results, err = client.House.list(nil)
 ```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `HousEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## HousesEntity
-
-```ruby
-houses = client.Houses
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-
-### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result, err`
 
 Load a single entity matching the given criteria.
 
 ```ruby
-result, err = client.Houses.load({ "id" => "houses_id" })
+result, err = client.House.load({ "id" => "house_id" })
 ```
 
 ### Common Methods
@@ -312,7 +262,7 @@ Set the entity match criteria.
 
 #### `make -> Entity`
 
-Create a new `HousesEntity` instance with the same client and
+Create a new `HouseEntity` instance with the same client and
 options.
 
 #### `get_name -> String`

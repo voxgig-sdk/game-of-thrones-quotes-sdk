@@ -1,7 +1,7 @@
 # Guide
 
 guide: {
-  metrics: count: entity: 5
+  metrics: count: entity: 4
   metrics: count: path: 7
   metrics: count: method: 7
 
@@ -21,16 +21,13 @@ guide: {
     }
   }
 
-  entity: hous: {
-    path: "/houses": {
-      op: list: method: *GET
-    }
-  }
-
-  entity: houses: {
+  entity: house: {
     path: "/house/{house}": {
       rename: param: "house": *"id"
       op: load: method: *GET
+    }
+    path: "/houses": {
+      op: list: method: *GET
     }
   }
 

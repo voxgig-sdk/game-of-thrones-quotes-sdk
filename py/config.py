@@ -24,8 +24,7 @@ def make_config():
             "entity": {
                 "author": {},
                 "character": {},
-                "hous": {},
-                "houses": {},
+                "house": {},
                 "random": {},
             },
         },
@@ -111,7 +110,7 @@ def make_config():
       "character": {
         "fields": [
           {
-            "name": "houses",
+            "name": "house",
             "req": False,
             "type": "`$OBJECT`",
             "active": True,
@@ -212,7 +211,7 @@ def make_config():
           "ancestors": [],
         },
       },
-      "hous": {
+      "house": {
         "fields": [
           {
             "name": "member",
@@ -236,7 +235,7 @@ def make_config():
             "index$": 2,
           },
         ],
-        "name": "hous",
+        "name": "house",
         "op": {
           "list": {
             "name": "list",
@@ -260,37 +259,6 @@ def make_config():
             "input": "data",
             "key$": "list",
           },
-        },
-        "relations": {
-          "ancestors": [],
-        },
-      },
-      "houses": {
-        "fields": [
-          {
-            "name": "member",
-            "req": False,
-            "type": "`$ARRAY`",
-            "active": True,
-            "index$": 0,
-          },
-          {
-            "name": "name",
-            "req": False,
-            "type": "`$STRING`",
-            "active": True,
-            "index$": 1,
-          },
-          {
-            "name": "slug",
-            "req": False,
-            "type": "`$STRING`",
-            "active": True,
-            "index$": 2,
-          },
-        ],
-        "name": "houses",
-        "op": {
           "load": {
             "name": "load",
             "points": [
@@ -301,7 +269,7 @@ def make_config():
                       "example": "lannister",
                       "kind": "param",
                       "name": "id",
-                      "orig": "houses",
+                      "orig": "house",
                       "reqd": True,
                       "type": "`$STRING`",
                       "active": True,

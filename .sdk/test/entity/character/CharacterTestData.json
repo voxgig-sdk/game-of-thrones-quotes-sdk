@@ -2,29 +2,32 @@
   "existing": {
     "character": {
       "CHARACTER00": {
-        "houses": {},
+        "house": {},
         "name": "s29",
         "quote": [],
-        "slug": "s2b"
+        "slug": "s2b",
+        "id": "CHARACTER00"
       },
       "CHARACTER01": {
-        "houses": {},
+        "house": {},
         "name": "s51",
         "quote": [],
-        "slug": "s53"
+        "slug": "s53",
+        "id": "CHARACTER01"
       },
       "CHARACTER02": {
-        "houses": {},
+        "house": {},
         "name": "s79",
         "quote": [],
-        "slug": "s7b"
+        "slug": "s7b",
+        "id": "CHARACTER02"
       }
     }
   },
   "new": {
     "character": {
       "character_ref01": {
-        "houses": {},
+        "house": {},
         "name": "sa1",
         "quote": [],
         "slug": "sa3"

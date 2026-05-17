@@ -24,8 +24,7 @@ module GameOfThronesQuotesConfig
         "entity" => {
           "author" => {},
           "character" => {},
-          "hous" => {},
-          "houses" => {},
+          "house" => {},
           "random" => {},
         },
       },
@@ -111,7 +110,7 @@ module GameOfThronesQuotesConfig
         "character" => {
           "fields" => [
             {
-              "name" => "houses",
+              "name" => "house",
               "req" => false,
               "type" => "`$OBJECT`",
               "active" => true,
@@ -212,7 +211,7 @@ module GameOfThronesQuotesConfig
             "ancestors" => [],
           },
         },
-        "hous" => {
+        "house" => {
           "fields" => [
             {
               "name" => "member",
@@ -236,7 +235,7 @@ module GameOfThronesQuotesConfig
               "index$" => 2,
             },
           ],
-          "name" => "hous",
+          "name" => "house",
           "op" => {
             "list" => {
               "name" => "list",
@@ -260,37 +259,6 @@ module GameOfThronesQuotesConfig
               "input" => "data",
               "key$" => "list",
             },
-          },
-          "relations" => {
-            "ancestors" => [],
-          },
-        },
-        "houses" => {
-          "fields" => [
-            {
-              "name" => "member",
-              "req" => false,
-              "type" => "`$ARRAY`",
-              "active" => true,
-              "index$" => 0,
-            },
-            {
-              "name" => "name",
-              "req" => false,
-              "type" => "`$STRING`",
-              "active" => true,
-              "index$" => 1,
-            },
-            {
-              "name" => "slug",
-              "req" => false,
-              "type" => "`$STRING`",
-              "active" => true,
-              "index$" => 2,
-            },
-          ],
-          "name" => "houses",
-          "op" => {
             "load" => {
               "name" => "load",
               "points" => [
@@ -301,7 +269,7 @@ module GameOfThronesQuotesConfig
                         "example" => "lannister",
                         "kind" => "param",
                         "name" => "id",
-                        "orig" => "houses",
+                        "orig" => "house",
                         "reqd" => true,
                         "type" => "`$STRING`",
                         "active" => true,

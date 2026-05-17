@@ -2,8 +2,7 @@
 
 import { AuthorEntity } from './entity/AuthorEntity'
 import { CharacterEntity } from './entity/CharacterEntity'
-import { HousEntity } from './entity/HousEntity'
-import { HousesEntity } from './entity/HousesEntity'
+import { HouseEntity } from './entity/HouseEntity'
 import { RandomEntity } from './entity/RandomEntity'
 
 
@@ -218,15 +217,9 @@ class GameOfThronesQuotesSDK {
   }
 
 
-  Hous(data?: any) {
+  House(data?: any) {
     const self = this
-    return new HousEntity(self,data)
-  }
-
-
-  Houses(data?: any) {
-    const self = this
-    return new HousesEntity(self,data)
+    return new HouseEntity(self,data)
   }
 
 

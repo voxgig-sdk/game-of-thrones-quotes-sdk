@@ -2,19 +2,18 @@
 
 
 
-Available for [Golang](go/) and [Lua](lua/) and [PHP](php/) and [Python](py/) and [Ruby](rb/) and [TypeScript](ts/).
+Available for [Golang](go/) and [Go CLI](go-cli/) and [Lua](lua/) and [PHP](php/) and [Python](py/) and [Ruby](rb/) and [TypeScript](ts/).
 
 
 ## Entities
 
-The API exposes 5 entities:
+The API exposes 4 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
 | **Author** |  | `/author/{character}/{count}` |
 | **Character** |  | `/characters` |
-| **Hous** |  | `/houses` |
-| **Houses** |  | `/house/{house}` |
+| **House** |  | `/houses` |
 | **Random** |  | `/random/{count}` |
 
 Each entity supports the following operations where available: **load**, **list**, **create**,
@@ -63,7 +62,7 @@ and `body`.
 ### Golang
 
 ```go
-import sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk"
+import sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go"
 
 client := sdk.NewGameOfThronesQuotesSDK(map[string]any{
     "apikey": os.Getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
@@ -265,6 +264,7 @@ console.log(result.data)
 ## Language-specific documentation
 
 - [Golang SDK](go/README.md)
+- [Go CLI SDK](go-cli/README.md)
 - [Lua SDK](lua/README.md)
 - [PHP SDK](php/README.md)
 - [Python SDK](py/README.md)

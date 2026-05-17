@@ -223,14 +223,9 @@ class GameOfThronesQuotesSDK:
         return CharacterEntity(self, data)
 
 
-    def Hous(self, data=None):
-        from entity.hous_entity import HousEntity
-        return HousEntity(self, data)
-
-
-    def Houses(self, data=None):
-        from entity.houses_entity import HousesEntity
-        return HousesEntity(self, data)
+    def House(self, data=None):
+        from entity.house_entity import HouseEntity
+        return HouseEntity(self, data)
 
 
     def Random(self, data=None):

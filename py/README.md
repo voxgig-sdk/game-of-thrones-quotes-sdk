@@ -171,8 +171,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `direct` | `(fetchargs) -> (dict, err)` | Build and send an HTTP request. |
 | `Author` | `(data) -> AuthorEntity` | Create a Author entity instance. |
 | `Character` | `(data) -> CharacterEntity` | Create a Character entity instance. |
-| `Hous` | `(data) -> HousEntity` | Create a Hous entity instance. |
-| `Houses` | `(data) -> HousesEntity` | Create a Houses entity instance. |
+| `House` | `(data) -> HouseEntity` | Create a House entity instance. |
 | `Random` | `(data) -> RandomEntity` | Create a Random entity instance. |
 
 ### Entity interface
@@ -224,7 +223,7 @@ API path: `/author/{character}/{count}`
 
 | Field | Description |
 | --- | --- |
-| `houses` |  |
+| `house` |  |
 | `name` |  |
 | `quote` |  |
 | `slug` |  |
@@ -233,7 +232,7 @@ Operations: List, Load.
 
 API path: `/characters`
 
-#### Hous
+#### House
 
 | Field | Description |
 | --- | --- |
@@ -241,21 +240,9 @@ API path: `/characters`
 | `name` |  |
 | `slug` |  |
 
-Operations: List.
+Operations: List, Load.
 
 API path: `/houses`
-
-#### Houses
-
-| Field | Description |
-| --- | --- |
-| `member` |  |
-| `name` |  |
-| `slug` |  |
-
-Operations: Load.
-
-API path: `/house/{house}`
 
 #### Random
 
@@ -312,7 +299,7 @@ Create an instance: `const character = client.Character()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `houses` | ``$OBJECT`` |  |
+| `house` | ``$OBJECT`` |  |
 | `name` | ``$STRING`` |  |
 | `quote` | ``$ARRAY`` |  |
 | `slug` | ``$STRING`` |  |
@@ -330,39 +317,15 @@ const characters = await client.Character().list()
 ```
 
 
-### Hous
+### House
 
-Create an instance: `const hous = client.Hous()`
+Create an instance: `const house = client.House()`
 
 #### Operations
 
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `member` | ``$ARRAY`` |  |
-| `name` | ``$STRING`` |  |
-| `slug` | ``$STRING`` |  |
-
-#### Example: List
-
-```ts
-const houss = await client.Hous().list()
-```
-
-
-### Houses
-
-Create an instance: `const houses = client.Houses()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -376,7 +339,13 @@ Create an instance: `const houses = client.Houses()`
 #### Example: Load
 
 ```ts
-const houses = await client.Houses().load({ id: 'houses_id' })
+const house = await client.House().load({ id: 'house_id' })
+```
+
+#### Example: List
+
+```ts
+const houses = await client.House().list()
 ```
 
 

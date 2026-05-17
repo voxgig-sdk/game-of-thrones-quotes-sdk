@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/core"
+	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/core"
 )
 
 type BaseFeature struct {

@@ -48,13 +48,9 @@ Create a new `Author` entity instance. Pass `nil` for no initial data.
 
 Create a new `Character` entity instance. Pass `nil` for no initial data.
 
-#### `Hous(data map[string]any) GameOfThronesQuotesEntity`
+#### `House(data map[string]any) GameOfThronesQuotesEntity`
 
-Create a new `Hous` entity instance. Pass `nil` for no initial data.
-
-#### `Houses(data map[string]any) GameOfThronesQuotesEntity`
-
-Create a new `Houses` entity instance. Pass `nil` for no initial data.
+Create a new `House` entity instance. Pass `nil` for no initial data.
 
 #### `Random(data map[string]any) GameOfThronesQuotesEntity`
 
@@ -153,7 +149,7 @@ character := client.Character(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `houses` | ``$OBJECT`` | No |  |
+| `house` | ``$OBJECT`` | No |  |
 | `name` | ``$STRING`` | No |  |
 | `quote` | ``$ARRAY`` | No |  |
 | `slug` | ``$STRING`` | No |  |
@@ -200,10 +196,10 @@ Return the entity name.
 
 ---
 
-## HousEntity
+## HouseEntity
 
 ```go
-hous := client.Hous(nil)
+house := client.House(nil)
 ```
 
 ### Fields
@@ -221,55 +217,15 @@ hous := client.Hous(nil)
 List entities matching the given criteria. Returns an array.
 
 ```go
-results, err := client.Hous(nil).List(nil, nil)
+results, err := client.House(nil).List(nil, nil)
 ```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `HousEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## HousesEntity
-
-```go
-houses := client.Houses(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-
-### Operations
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Houses(nil).Load(map[string]any{"id": "houses_id"}, nil)
+result, err := client.House(nil).Load(map[string]any{"id": "house_id"}, nil)
 ```
 
 ### Common Methods
@@ -286,7 +242,7 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 #### `Make() Entity`
 
-Create a new `HousesEntity` instance with the same client and
+Create a new `HouseEntity` instance with the same client and
 options.
 
 #### `GetName() string`

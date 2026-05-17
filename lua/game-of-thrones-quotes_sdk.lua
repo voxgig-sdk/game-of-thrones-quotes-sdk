@@ -256,14 +256,8 @@ function GameOfThronesQuotesSDK:Character(data)
 end
 
 
-function GameOfThronesQuotesSDK:Hous(data)
-  local EntityMod = require("entity.hous_entity")
-  return EntityMod.new(self, data)
-end
-
-
-function GameOfThronesQuotesSDK:Houses(data)
-  local EntityMod = require("entity.houses_entity")
+function GameOfThronesQuotesSDK:House(data)
+  local EntityMod = require("entity.house_entity")
   return EntityMod.new(self, data)
 end
 

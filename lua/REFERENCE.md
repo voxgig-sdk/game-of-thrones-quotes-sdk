@@ -49,13 +49,9 @@ Create a new `Author` entity instance. Pass `nil` for no initial data.
 
 Create a new `Character` entity instance. Pass `nil` for no initial data.
 
-#### `Hous(data)`
+#### `House(data)`
 
-Create a new `Hous` entity instance. Pass `nil` for no initial data.
-
-#### `Houses(data)`
-
-Create a new `Houses` entity instance. Pass `nil` for no initial data.
+Create a new `House` entity instance. Pass `nil` for no initial data.
 
 #### `Random(data)`
 
@@ -160,7 +156,7 @@ local character = client:Character(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `houses` | ``$OBJECT`` | No |  |
+| `house` | ``$OBJECT`` | No |  |
 | `name` | ``$STRING`` | No |  |
 | `quote` | ``$ARRAY`` | No |  |
 | `slug` | ``$STRING`` | No |  |
@@ -213,10 +209,10 @@ Return the entity name.
 
 ---
 
-## HousEntity
+## HouseEntity
 
 ```lua
-local hous = client:Hous(nil)
+local house = client:House(nil)
 ```
 
 ### Fields
@@ -234,61 +230,15 @@ local hous = client:Hous(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Hous(nil):list(nil, nil)
+local results, err = client:House(nil):list(nil, nil)
 ```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `HousEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## HousesEntity
-
-```lua
-local houses = client:Houses(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-
-### Operations
 
 #### `load(reqmatch, ctrl) -> any, err`
 
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Houses(nil):load({ id = "houses_id" }, nil)
+local result, err = client:House(nil):load({ id = "house_id" }, nil)
 ```
 
 ### Common Methods
@@ -311,7 +261,7 @@ Set the entity match criteria.
 
 #### `make() -> Entity`
 
-Create a new `HousesEntity` instance with the same client and
+Create a new `HouseEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`

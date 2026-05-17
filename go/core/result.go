@@ -1,7 +1,7 @@
 package core
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/utility/struct"
 )
 
 type Result struct {

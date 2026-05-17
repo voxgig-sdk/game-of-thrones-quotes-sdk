@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk"
-	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/core"
+	sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go"
+	"github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/utility/struct"
 )
 
 func TestAuthorEntity(t *testing.T) {

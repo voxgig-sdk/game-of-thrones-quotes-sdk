@@ -1,0 +1,86 @@
+# Entity: house
+
+main: kit: entity: house: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "member"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "slug"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "house"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/houses"
+          parts: [
+            "houses"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "lannister"
+                kind: "param"
+                name: "id"
+                orig: "house"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/house/{house}"
+          parts: [
+            "house"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              house: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

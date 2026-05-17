@@ -111,7 +111,7 @@
           },
           "fields": [
             {
-              "name": "houses",
+              "name": "house",
               "req": false,
               "type": "`$OBJECT`",
               "active": true
@@ -205,7 +205,7 @@
             "ancestors": []
           }
         },
-        "hous": {
+        "house": {
           "alias": {
             "field": {}
           },
@@ -229,7 +229,7 @@
               "active": true
             }
           ],
-          "name": "hous",
+          "name": "house",
           "op": {
             "list": {
               "name": "list",
@@ -250,39 +250,7 @@
                 }
               ],
               "input": "data"
-            }
-          },
-          "active": true,
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "houses": {
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "name": "member",
-              "req": false,
-              "type": "`$ARRAY`",
-              "active": true
             },
-            {
-              "name": "name",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "slug",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            }
-          ],
-          "name": "houses",
-          "op": {
             "load": {
               "name": "load",
               "points": [
@@ -293,7 +261,7 @@
                         "example": "lannister",
                         "kind": "param",
                         "name": "id",
-                        "orig": "houses",
+                        "orig": "house",
                         "reqd": true,
                         "type": "`$STRING`",
                         "active": true
@@ -495,6 +463,9 @@
             },
             "rb": {
               "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
             }
           }
         }
@@ -577,10 +548,10 @@
           "active": true,
           "param": {}
         },
-        "BasicHousFlow": {
-          "entity": "hous",
+        "BasicHouseFlow": {
+          "entity": "house",
           "kind": "basic",
-          "name": "BasicHousFlow",
+          "name": "BasicHouseFlow",
           "step": [
             {
               "op": "list",
@@ -588,7 +559,7 @@
                 {
                   "apply": "ItemExists",
                   "def": {
-                    "ref": "hous_ref01"
+                    "ref": "house_ref01"
                   }
                 }
               ],
@@ -597,32 +568,22 @@
               "data": {},
               "input": {},
               "spec": []
-            }
-          ],
-          "key$": "BasicHousFlow",
-          "active": true,
-          "param": {}
-        },
-        "BasicHousesFlow": {
-          "entity": "houses",
-          "kind": "basic",
-          "name": "BasicHousesFlow",
-          "step": [
+            },
             {
               "input": {
-                "ref": "houses_ref01",
-                "srcdatavar": "houses_ref01_data",
+                "ref": "house_ref01",
+                "srcdatavar": "house_ref01_data",
                 "suffix": "_dt0"
               },
               "match": {
-                "id": "houses01"
+                "id": "house01"
               },
               "op": "load",
               "valid": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
-                    "mark": "Mark01-houses_ref01"
+                    "mark": "Mark01-house_ref01"
                   }
                 }
               ],
@@ -631,7 +592,7 @@
               "spec": []
             }
           ],
-          "key$": "BasicHousesFlow",
+          "key$": "BasicHouseFlow",
           "active": true,
           "param": {}
         },
@@ -667,6 +628,33 @@
         }
       },
       "target": {
+        "go-cli": {
+          "title": "Go CLI",
+          "ext": "go",
+          "comment": {
+            "line": "//"
+          },
+          "module": {
+            "name": "game-of-thrones-quotes"
+          },
+          "phase": {
+            "entity": {
+              "active": false
+            },
+            "feature": {
+              "active": false
+            },
+            "readme": {
+              "active": false
+            },
+            "test": {
+              "active": false
+            }
+          },
+          "deps": {},
+          "name": "go-cli",
+          "active": true
+        },
         "ts": {
           "title": "TypeScript",
           "ext": "ts",
@@ -707,14 +695,7 @@
             "name": "game-of-thrones-quotes"
           },
           "srcfeature": false,
-          "deps": {
-            "github.com/voxgig/struct": {
-              "active": true,
-              "version": "v0.0.0",
-              "replace": "./utility/struct",
-              "kind": "prod"
-            }
-          },
+          "deps": {},
           "name": "go",
           "active": true
         },
@@ -802,15 +783,6 @@
     },
     "def": {
       "desc": ""
-    },
-    "api": {
-      "guide": {},
-      "entity": {}
     }
-  },
-  "name__orig": "game-of-thrones-quotes",
-  "Name": "GameOfThronesQuotes",
-  "name_": "game_of_thrones_quotes",
-  "name-": "game-of-thrones-quotes",
-  "NAME": "GAME-OF-THRONES-QUOTES"
+  }
 }

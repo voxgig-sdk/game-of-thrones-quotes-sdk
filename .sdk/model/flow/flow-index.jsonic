@@ -2,6 +2,5 @@
 
 @"BasicAuthorFlow.jsonic"
 @"BasicCharacterFlow.jsonic"
-@"BasicHousFlow.jsonic"
-@"BasicHousesFlow.jsonic"
+@"BasicHouseFlow.jsonic"
 @"BasicRandomFlow.jsonic"

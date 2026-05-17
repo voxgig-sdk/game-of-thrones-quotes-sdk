@@ -5,14 +5,14 @@ The Golang SDK for the GameOfThronesQuotes API. Provides an entity-oriented inte
 
 ## Install
 ```bash
-go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk
+go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go
 ```
 
 If the module is not yet published to a registry, use a `replace` directive
 in your `go.mod` to point to a local checkout:
 
 ```bash
-go mod edit -replace github.com/voxgig-sdk/game-of-thrones-quotes-sdk=../path/to/github.com/voxgig-sdk/game-of-thrones-quotes-sdk
+go mod edit -replace github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go=../path/to/github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go
 ```
 
 
@@ -30,8 +30,8 @@ import (
     "fmt"
     "os"
 
-    sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk"
-    "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/core"
+    sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go"
+    "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/core"
 )
 
 func main() {
@@ -188,8 +188,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
 | `Author` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Author entity instance. |
 | `Character` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Character entity instance. |
-| `Hous` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Hous entity instance. |
-| `Houses` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Houses entity instance. |
+| `House` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a House entity instance. |
 | `Random` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Random entity instance. |
 
 ### Entity interface (GameOfThronesQuotesEntity)
@@ -239,7 +238,7 @@ API path: `/author/{character}/{count}`
 
 | Field | Description |
 | --- | --- |
-| `"houses"` |  |
+| `"house"` |  |
 | `"name"` |  |
 | `"quote"` |  |
 | `"slug"` |  |
@@ -248,7 +247,7 @@ Operations: List, Load.
 
 API path: `/characters`
 
-#### Hous
+#### House
 
 | Field | Description |
 | --- | --- |
@@ -256,21 +255,9 @@ API path: `/characters`
 | `"name"` |  |
 | `"slug"` |  |
 
-Operations: List.
+Operations: List, Load.
 
 API path: `/houses`
-
-#### Houses
-
-| Field | Description |
-| --- | --- |
-| `"member"` |  |
-| `"name"` |  |
-| `"slug"` |  |
-
-Operations: Load.
-
-API path: `/house/{house}`
 
 #### Random
 
@@ -327,7 +314,7 @@ Create an instance: `character := client.Character(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `houses` | ``$OBJECT`` |  |
+| `house` | ``$OBJECT`` |  |
 | `name` | ``$STRING`` |  |
 | `quote` | ``$ARRAY`` |  |
 | `slug` | ``$STRING`` |  |
@@ -345,39 +332,15 @@ results, err := client.Character(nil).List(nil, nil)
 ```
 
 
-### Hous
+### House
 
-Create an instance: `hous := client.Hous(nil)`
+Create an instance: `house := client.House(nil)`
 
 #### Operations
 
 | Method | Description |
 | --- | --- |
 | `List(match, ctrl)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `member` | ``$ARRAY`` |  |
-| `name` | ``$STRING`` |  |
-| `slug` | ``$STRING`` |  |
-
-#### Example: List
-
-```go
-results, err := client.Hous(nil).List(nil, nil)
-```
-
-
-### Houses
-
-Create an instance: `houses := client.Houses(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -391,7 +354,13 @@ Create an instance: `houses := client.Houses(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Houses(nil).Load(map[string]any{"id": "houses_id"}, nil)
+result, err := client.House(nil).Load(map[string]any{"id": "house_id"}, nil)
+```
+
+#### Example: List
+
+```go
+results, err := client.House(nil).List(nil, nil)
 ```
 
 
@@ -469,7 +438,7 @@ Use `core.ToMapAny()` to safely cast results and nested data.
 ### Package structure
 
 ```
-github.com/voxgig-sdk/game-of-thrones-quotes-sdk/
+github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/
 ├── game-of-thrones-quotes.go        # Root package — type aliases and constructors
 ├── core/               # SDK core — client, types, pipeline
 ├── entity/             # Entity implementations
@@ -478,7 +447,7 @@ github.com/voxgig-sdk/game-of-thrones-quotes-sdk/
 └── test/               # Test suites
 ```
 
-The root package (`github.com/voxgig-sdk/game-of-thrones-quotes-sdk`) re-exports everything needed
+The root package (`github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go`) re-exports everything needed
 for normal use. Import sub-packages only when you need specific types
 like `core.ToMapAny`.
 

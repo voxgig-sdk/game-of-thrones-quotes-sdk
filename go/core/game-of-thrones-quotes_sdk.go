@@ -3,7 +3,7 @@ package core
 import (
 	"fmt"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/utility/struct"
 )
 
 type GameOfThronesQuotesSDK struct {
@@ -255,13 +255,8 @@ func (sdk *GameOfThronesQuotesSDK) Character(data map[string]any) GameOfThronesQ
 }
 
 
-func (sdk *GameOfThronesQuotesSDK) Hous(data map[string]any) GameOfThronesQuotesEntity {
-	return NewHousEntityFunc(sdk, data)
-}
-
-
-func (sdk *GameOfThronesQuotesSDK) Houses(data map[string]any) GameOfThronesQuotesEntity {
-	return NewHousesEntityFunc(sdk, data)
+func (sdk *GameOfThronesQuotesSDK) House(data map[string]any) GameOfThronesQuotesEntity {
+	return NewHouseEntityFunc(sdk, data)
 }
 
 

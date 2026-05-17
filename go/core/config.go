@@ -23,8 +23,7 @@ func MakeConfig() map[string]any {
 			"entity": map[string]any{
 				"author": map[string]any{},
 				"character": map[string]any{},
-				"hous": map[string]any{},
-				"houses": map[string]any{},
+				"house": map[string]any{},
 				"random": map[string]any{},
 			},
 		},
@@ -110,7 +109,7 @@ func MakeConfig() map[string]any {
 			"character": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "houses",
+						"name": "house",
 						"req": false,
 						"type": "`$OBJECT`",
 						"active": true,
@@ -211,7 +210,7 @@ func MakeConfig() map[string]any {
 					"ancestors": []any{},
 				},
 			},
-			"hous": map[string]any{
+			"house": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"name": "member",
@@ -235,7 +234,7 @@ func MakeConfig() map[string]any {
 						"index$": 2,
 					},
 				},
-				"name": "hous",
+				"name": "house",
 				"op": map[string]any{
 					"list": map[string]any{
 						"name": "list",
@@ -259,37 +258,6 @@ func MakeConfig() map[string]any {
 						"input": "data",
 						"key$": "list",
 					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"houses": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "member",
-						"req": false,
-						"type": "`$ARRAY`",
-						"active": true,
-						"index$": 0,
-					},
-					map[string]any{
-						"name": "name",
-						"req": false,
-						"type": "`$STRING`",
-						"active": true,
-						"index$": 1,
-					},
-					map[string]any{
-						"name": "slug",
-						"req": false,
-						"type": "`$STRING`",
-						"active": true,
-						"index$": 2,
-					},
-				},
-				"name": "houses",
-				"op": map[string]any{
 					"load": map[string]any{
 						"name": "load",
 						"points": []any{
@@ -300,7 +268,7 @@ func MakeConfig() map[string]any {
 											"example": "lannister",
 											"kind": "param",
 											"name": "id",
-											"orig": "houses",
+											"orig": "house",
 											"reqd": true,
 											"type": "`$STRING`",
 											"active": true,

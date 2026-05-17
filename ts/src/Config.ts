@@ -54,10 +54,7 @@ class Config {
       character: {
       },
 
-      hous: {
-      },
-
-      houses: {
+      house: {
       },
 
       random: {
@@ -149,7 +146,7 @@ class Config {
     "character": {
       "fields": [
         {
-          "name": "houses",
+          "name": "house",
           "req": false,
           "type": "`$OBJECT`",
           "active": true,
@@ -250,7 +247,7 @@ class Config {
         "ancestors": []
       }
     },
-    "hous": {
+    "house": {
       "fields": [
         {
           "name": "member",
@@ -274,7 +271,7 @@ class Config {
           "index$": 2
         }
       ],
-      "name": "hous",
+      "name": "house",
       "op": {
         "list": {
           "name": "list",
@@ -297,38 +294,7 @@ class Config {
           ],
           "input": "data",
           "key$": "list"
-        }
-      },
-      "relations": {
-        "ancestors": []
-      }
-    },
-    "houses": {
-      "fields": [
-        {
-          "name": "member",
-          "req": false,
-          "type": "`$ARRAY`",
-          "active": true,
-          "index$": 0
         },
-        {
-          "name": "name",
-          "req": false,
-          "type": "`$STRING`",
-          "active": true,
-          "index$": 1
-        },
-        {
-          "name": "slug",
-          "req": false,
-          "type": "`$STRING`",
-          "active": true,
-          "index$": 2
-        }
-      ],
-      "name": "houses",
-      "op": {
         "load": {
           "name": "load",
           "points": [
@@ -339,7 +305,7 @@ class Config {
                     "example": "lannister",
                     "kind": "param",
                     "name": "id",
-                    "orig": "houses",
+                    "orig": "house",
                     "reqd": true,
                     "type": "`$STRING`",
                     "active": true

@@ -6,7 +6,7 @@ main: kit: entity: character: {
 
   fields: [
     {
-      name: "houses"
+      name: "house"
       req: false
       type: "`$OBJECT`"
     }

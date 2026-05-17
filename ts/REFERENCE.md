@@ -73,21 +73,9 @@ Create a new `Character` entity instance.
 
 **Returns:** `CharacterEntity` instance.
 
-#### `Hous(data?: object)`
+#### `House(data?: object)`
 
-Create a new `Hous` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `HousEntity` instance.
-
-#### `Houses(data?: object)`
-
-Create a new `Houses` entity instance.
+Create a new `House` entity instance.
 
 **Parameters:**
 
@@ -95,7 +83,7 @@ Create a new `Houses` entity instance.
 | --- | --- | --- |
 | `data` | `object` | Initial entity data. |
 
-**Returns:** `HousesEntity` instance.
+**Returns:** `HouseEntity` instance.
 
 #### `Random(data?: object)`
 
@@ -216,7 +204,7 @@ const character = client.Character()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `houses` | ``$OBJECT`` | No |  |
+| `house` | ``$OBJECT`` | No |  |
 | `name` | ``$STRING`` | No |  |
 | `quote` | ``$ARRAY`` | No |  |
 | `slug` | ``$STRING`` | No |  |
@@ -267,10 +255,10 @@ Return a copy of the entity options.
 
 ---
 
-## HousEntity
+## HouseEntity
 
 ```ts
-const hous = client.Hous()
+const house = client.House()
 ```
 
 ### Fields
@@ -288,59 +276,15 @@ const hous = client.Hous()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Hous().list()
+const results = await client.House().list()
 ```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `HousEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `GameOfThronesQuotesSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## HousesEntity
-
-```ts
-const houses = client.Houses()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-
-### Operations
 
 #### `load(match: object, ctrl?: object)`
 
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Houses().load({ id: 'houses_id' })
+const result = await client.House().load({ id: 'house_id' })
 ```
 
 ### Common Methods
@@ -357,7 +301,7 @@ Get or set the entity match criteria. Works the same as `data()`.
 
 #### `make()`
 
-Create a new `HousesEntity` instance with the same client and
+Create a new `HouseEntity` instance with the same client and
 options.
 
 #### `client()`

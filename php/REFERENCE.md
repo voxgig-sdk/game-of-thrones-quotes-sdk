@@ -50,13 +50,9 @@ Create a new `AuthorEntity` instance. Pass `null` for no initial data.
 
 Create a new `CharacterEntity` instance. Pass `null` for no initial data.
 
-#### `Hous($data = null)`
+#### `House($data = null)`
 
-Create a new `HousEntity` instance. Pass `null` for no initial data.
-
-#### `Houses($data = null)`
-
-Create a new `HousesEntity` instance. Pass `null` for no initial data.
+Create a new `HouseEntity` instance. Pass `null` for no initial data.
 
 #### `Random($data = null)`
 
@@ -158,7 +154,7 @@ $character = $client->Character();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `houses` | ``$OBJECT`` | No |  |
+| `house` | ``$OBJECT`` | No |  |
 | `name` | ``$STRING`` | No |  |
 | `quote` | ``$ARRAY`` | No |  |
 | `slug` | ``$STRING`` | No |  |
@@ -211,10 +207,10 @@ Return the entity name.
 
 ---
 
-## HousEntity
+## HouseEntity
 
 ```php
-$hous = $client->Hous();
+$house = $client->House();
 ```
 
 ### Fields
@@ -232,61 +228,15 @@ $hous = $client->Hous();
 List entities matching the given criteria. Returns an array.
 
 ```php
-[$results, $err] = $client->Hous()->list([]);
+[$results, $err] = $client->House()->list([]);
 ```
-
-### Common Methods
-
-#### `dataGet(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `dataSet($data): void`
-
-Set the entity data.
-
-#### `matchGet(): array`
-
-Get the entity match criteria.
-
-#### `matchSet($match): void`
-
-Set the entity match criteria.
-
-#### `make(): HousEntity`
-
-Create a new `HousEntity` instance with the same client and
-options.
-
-#### `getName(): string`
-
-Return the entity name.
-
-
----
-
-## HousesEntity
-
-```php
-$houses = $client->Houses();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-
-### Operations
 
 #### `load(array $reqmatch, ?array $ctrl = null): array`
 
 Load a single entity matching the given criteria.
 
 ```php
-[$result, $err] = $client->Houses()->load(["id" => "houses_id"]);
+[$result, $err] = $client->House()->load(["id" => "house_id"]);
 ```
 
 ### Common Methods
@@ -307,9 +257,9 @@ Get the entity match criteria.
 
 Set the entity match criteria.
 
-#### `make(): HousesEntity`
+#### `make(): HouseEntity`
 
-Create a new `HousesEntity` instance with the same client and
+Create a new `HouseEntity` instance with the same client and
 options.
 
 #### `getName(): string`

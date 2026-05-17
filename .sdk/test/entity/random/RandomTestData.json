@@ -3,15 +3,18 @@
     "random": {
       "RANDOM00": {
         "character": {},
-        "sentence": "s15"
+        "sentence": "s15",
+        "id": "RANDOM00"
       },
       "RANDOM01": {
         "character": {},
-        "sentence": "s29"
+        "sentence": "s29",
+        "id": "RANDOM01"
       },
       "RANDOM02": {
         "character": {},
-        "sentence": "s3d"
+        "sentence": "s3d",
+        "id": "RANDOM02"
       }
     }
   },
