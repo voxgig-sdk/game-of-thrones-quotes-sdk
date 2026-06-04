@@ -20,9 +20,7 @@ loading a specific record.
 <?php
 require_once 'gameofthronesquotes_sdk.php';
 
-$client = new GameOfThronesQuotesSDK([
-    "apikey" => getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
-]);
+$client = new GameOfThronesQuotesSDK([]);
 ```
 
 ### 2. List authors
@@ -119,7 +117,6 @@ Create a `.env.local` file at the project root:
 
 ```
 GAME-OF-THRONES-QUOTES_TEST_LIVE=TRUE
-GAME-OF-THRONES-QUOTES_APIKEY=<your-key>
 ```
 
 Then run:
@@ -142,7 +139,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

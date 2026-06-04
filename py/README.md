@@ -23,12 +23,9 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
-import os
 from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 
-client = GameOfThronesQuotesSDK({
-    "apikey": os.environ.get("GAME-OF-THRONES-QUOTES_APIKEY"),
-})
+client = GameOfThronesQuotesSDK({})
 ```
 
 ### 2. List authors
@@ -121,7 +118,6 @@ Create a `.env.local` file at the project root:
 
 ```
 GAME-OF-THRONES-QUOTES_TEST_LIVE=TRUE
-GAME-OF-THRONES-QUOTES_APIKEY=<your-key>
 ```
 
 Then run:
@@ -145,7 +141,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

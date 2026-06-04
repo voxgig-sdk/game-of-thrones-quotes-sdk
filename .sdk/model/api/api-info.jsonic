@@ -16,8 +16,27 @@ main: {
       ]
       title: "Game of Thrones Quotes API"
       version: "1.0.0"
+      tagline: "Fetch random quotes, character lines, and house rosters from HBO's Game of Thrones"
+      homepage: "https://gameofthronesquotes.xyz/"
+      docs_url: "https://gameofthronesquotes.xyz/"
+      about_md: `The Game of Thrones Quotes API is a free, no-auth service maintained by [Shevabam](https://github.com/shevabam) that serves quotations from the HBO television series *Game of Thrones*, along with metadata about the characters who said them and the houses they belong to.
+
+What you get from the API:
+
+- A single random quote via \`/random\`, or a batch via \`/random/{count}\`
+- Quotes by a specific character via \`/author/{slug}/{count}\` (for example, \`/author/tyrion/2\`)
+- A character profile with all their quotes via \`/character/{slug}\` (for example, \`/character/jon\`)
+- A list of every character with their quotes via \`/characters\`
+- A list of all noble houses and their members via \`/houses\`, or a specific house via \`/house/{slug}\` (for example, \`/house/lannister\`)
+
+The service is described as free and no API key is required. License terms are not stated on the homepage, so treat the data as fan-curated and check the project's GitHub repository for current status before relying on it in production.`
+      entity_desc: {
+        author: "Quote lookups scoped to a named speaker, returning a configurable number of their lines via `/author/{slug}/{count}`."
+        character: "Character profiles with biographical metadata and all associated quotes, served from `/character/{slug}` and `/characters`."
+        house: "Noble houses of Westeros and their member rosters, served from `/houses` and `/house/{slug}`."
+        random: "Randomly selected quote(s) from any speaker, served from `/random` and `/random/{count}`."
+      }
+      auth: false
     }
   }
-}
-
 }

@@ -31,9 +31,7 @@ loading a specific record.
 ```ruby
 require_relative "GameOfThronesQuotes_sdk"
 
-client = GameOfThronesQuotesSDK.new({
-  "apikey" => ENV["GAME-OF-THRONES-QUOTES_APIKEY"],
-})
+client = GameOfThronesQuotesSDK.new({})
 ```
 
 ### 2. List authors
@@ -127,7 +125,6 @@ Create a `.env.local` file at the project root:
 
 ```
 GAME-OF-THRONES-QUOTES_TEST_LIVE=TRUE
-GAME-OF-THRONES-QUOTES_APIKEY=<your-key>
 ```
 
 Then run:
@@ -150,7 +147,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

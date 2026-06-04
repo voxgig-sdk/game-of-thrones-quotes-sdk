@@ -111,7 +111,6 @@ function basicSetup(extra?: any) {
     'GAME_OF_THRONES_QUOTES_TEST_RANDOM_ENTID': idmap,
     'GAME_OF_THRONES_QUOTES_TEST_LIVE': 'FALSE',
     'GAME_OF_THRONES_QUOTES_TEST_EXPLAIN': 'FALSE',
-    'GAME_OF_THRONES_QUOTES_APIKEY': 'NONE',
   })
 
   idmap = env['GAME_OF_THRONES_QUOTES_TEST_RANDOM_ENTID']
@@ -121,7 +120,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new GameOfThronesQuotesSDK(merge([
       {
-        apikey: env.GAME_OF_THRONES_QUOTES_APIKEY,
       },
       extra
     ]))
