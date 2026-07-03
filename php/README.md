@@ -10,7 +10,7 @@ The PHP SDK for the GameOfThronesQuotes API — an entity-oriented client using 
 
 ## Install
 ```bash
-composer require voxgig/game-of-thrones-quotes-sdk
+composer require voxgig-sdk/game-of-thrones-quotes
 ```
 
 

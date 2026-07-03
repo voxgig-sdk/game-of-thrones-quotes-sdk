@@ -8,12 +8,14 @@ source = {
   dir = "game-of-thrones-quotes-sdk/lua"
 }
 description = {
-  summary = "GameOfThronesQuotes SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the Game of Thrones Quotes public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk",
+  issues_url = "https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "game-of-thrones-quotes" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

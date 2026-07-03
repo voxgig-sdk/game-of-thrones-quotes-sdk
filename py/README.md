@@ -10,7 +10,7 @@ The Python SDK for the GameOfThronesQuotes API — an entity-oriented client fol
 
 ## Install
 ```bash
-pip install game-of-thrones-quotes-sdk
+pip install voxgig-sdk-game-of-thrones-quotes
 ```
 
 Or install from source:

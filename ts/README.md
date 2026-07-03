@@ -10,7 +10,7 @@ The TypeScript SDK for the GameOfThronesQuotes API — a type-safe, entity-orien
 
 ## Install
 ```bash
-npm install game-of-thrones-quotes
+npm install @voxgig-sdk/game-of-thrones-quotes
 ```
 ## Tutorial: your first API call
 

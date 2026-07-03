@@ -10,7 +10,7 @@ The Lua SDK for the GameOfThronesQuotes API — an entity-oriented client using 
 
 ## Install
 ```bash
-luarocks install game-of-thrones-quotes-sdk
+luarocks install voxgig-sdk-game-of-thrones-quotes
 ```
 
 If the module is not yet published, add the source directory to

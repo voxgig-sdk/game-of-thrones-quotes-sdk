@@ -10,13 +10,13 @@ The Ruby SDK for the GameOfThronesQuotes API — an entity-oriented client using
 
 ## Install
 ```bash
-gem install game-of-thrones-quotes-sdk
+gem install voxgig-sdk-game-of-thrones-quotes
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "game-of-thrones-quotes-sdk"
+gem "voxgig-sdk-game-of-thrones-quotes"
 ```
 
 Then run:
