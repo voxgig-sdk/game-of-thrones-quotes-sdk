@@ -175,12 +175,14 @@ func houseDirectSetup(mockres any) *houseDirectSetupResult {
 	env := envOverride(map[string]any{
 		"GAMEOFTHRONESQUOTES_TEST_HOUSE_ENTID": map[string]any{},
 		"GAMEOFTHRONESQUOTES_TEST_LIVE":    "FALSE",
+		"GAMEOFTHRONESQUOTES_APIKEY":       "NONE",
 	})
 
 	live := env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["GAMEOFTHRONESQUOTES_APIKEY"],
 		}
 		client := sdk.NewGameOfThronesQuotesSDK(mergedOpts)
 

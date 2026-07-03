@@ -77,12 +77,14 @@ def _author_direct_setup(mockres):
     env = runner.env_override({
         "GAMEOFTHRONESQUOTES_TEST_AUTHOR_ENTID": {},
         "GAMEOFTHRONESQUOTES_TEST_LIVE": "FALSE",
+        "GAMEOFTHRONESQUOTES_APIKEY": "NONE",
     })
 
     live = env.get("GAMEOFTHRONESQUOTES_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("GAMEOFTHRONESQUOTES_APIKEY"),
         }
         client = GameOfThronesQuotesSDK(merged_opts)
         return {

@@ -91,6 +91,7 @@ function random_basic_setup(extra)
     ["GAMEOFTHRONESQUOTES_TEST_RANDOM_ENTID"] = idmap,
     ["GAMEOFTHRONESQUOTES_TEST_LIVE"] = "FALSE",
     ["GAMEOFTHRONESQUOTES_TEST_EXPLAIN"] = "FALSE",
+    ["GAMEOFTHRONESQUOTES_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ function random_basic_setup(extra)
   if env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["GAMEOFTHRONESQUOTES_APIKEY"],
       },
       extra or {},
     })

@@ -79,12 +79,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'GAMEOFTHRONESQUOTES_TEST_RANDOM_ENTID': {},
     'GAMEOFTHRONESQUOTES_TEST_LIVE': 'FALSE',
+    'GAMEOFTHRONESQUOTES_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.GAMEOFTHRONESQUOTES_TEST_LIVE
 
   if (live) {
     const client = new GameOfThronesQuotesSDK({
+      apikey: env.GAMEOFTHRONESQUOTES_APIKEY,
     })
 
     let idmap: any = env['GAMEOFTHRONESQUOTES_TEST_RANDOM_ENTID']

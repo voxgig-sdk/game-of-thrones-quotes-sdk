@@ -98,6 +98,7 @@ def _house_basic_setup(extra):
         "GAMEOFTHRONESQUOTES_TEST_HOUSE_ENTID": idmap,
         "GAMEOFTHRONESQUOTES_TEST_LIVE": "FALSE",
         "GAMEOFTHRONESQUOTES_TEST_EXPLAIN": "FALSE",
+        "GAMEOFTHRONESQUOTES_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -108,6 +109,7 @@ def _house_basic_setup(extra):
     if env.get("GAMEOFTHRONESQUOTES_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("GAMEOFTHRONESQUOTES_APIKEY"),
             },
             extra or {},
         ])

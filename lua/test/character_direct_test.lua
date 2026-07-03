@@ -115,12 +115,14 @@ function character_direct_setup(mockres)
   local env = runner.env_override({
     ["GAMEOFTHRONESQUOTES_TEST_CHARACTER_ENTID"] = {},
     ["GAMEOFTHRONESQUOTES_TEST_LIVE"] = "FALSE",
+    ["GAMEOFTHRONESQUOTES_APIKEY"] = "NONE",
   })
 
   local live = env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["GAMEOFTHRONESQUOTES_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

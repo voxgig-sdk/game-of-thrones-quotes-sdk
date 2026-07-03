@@ -126,12 +126,14 @@ func authorDirectSetup(mockres any) *authorDirectSetupResult {
 	env := envOverride(map[string]any{
 		"GAMEOFTHRONESQUOTES_TEST_AUTHOR_ENTID": map[string]any{},
 		"GAMEOFTHRONESQUOTES_TEST_LIVE":    "FALSE",
+		"GAMEOFTHRONESQUOTES_APIKEY":       "NONE",
 	})
 
 	live := env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["GAMEOFTHRONESQUOTES_APIKEY"],
 		}
 		client := sdk.NewGameOfThronesQuotesSDK(mergedOpts)
 

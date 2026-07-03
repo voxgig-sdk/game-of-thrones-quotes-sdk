@@ -69,12 +69,14 @@ def random_direct_setup(mockres)
   env = Runner.env_override({
     "GAMEOFTHRONESQUOTES_TEST_RANDOM_ENTID" => {},
     "GAMEOFTHRONESQUOTES_TEST_LIVE" => "FALSE",
+    "GAMEOFTHRONESQUOTES_APIKEY" => "NONE",
   })
 
   live = env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["GAMEOFTHRONESQUOTES_APIKEY"],
     }
     client = GameOfThronesQuotesSDK.new(merged_opts)
     return {

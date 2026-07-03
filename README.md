@@ -1,22 +1,8 @@
 # GameOfThronesQuotes SDK
 
-Fetch random quotes, character lines, and house rosters from HBO's Game of Thrones
+Game of Thrones Quotes API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Game of Thrones Quotes API
-
-The Game of Thrones Quotes API is a free, no-auth service maintained by [Shevabam](https://github.com/shevabam) that serves quotations from the HBO television series *Game of Thrones*, along with metadata about the characters who said them and the houses they belong to.
-
-What you get from the API:
-
-- A single random quote via `/random`, or a batch via `/random/{count}`
-- Quotes by a specific character via `/author/{slug}/{count}` (for example, `/author/tyrion/2`)
-- A character profile with all their quotes via `/character/{slug}` (for example, `/character/jon`)
-- A list of every character with their quotes via `/characters`
-- A list of all noble houses and their members via `/houses`, or a specific house via `/house/{slug}` (for example, `/house/lannister`)
-
-The service is described as free and no API key is required. License terms are not stated on the homepage, so treat the data as fan-curated and check the project's GitHub repository for current status before relying on it in production.
 
 ## Try it
 
@@ -50,29 +36,31 @@ gem install game-of-thrones-quotes-sdk
 luarocks install game-of-thrones-quotes-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { GameOfThronesQuotesSDK } from 'game-of-thrones-quotes'
 
-const client = new GameOfThronesQuotesSDK({})
+const client = new GameOfThronesQuotesSDK({
+  apikey: process.env.GAME-OF-THRONES-QUOTES_APIKEY,
+})
 
 // List all authors
 const authors = await client.Author().list()
+console.log(authors.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -102,10 +90,10 @@ The API exposes 4 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Author** | Quote lookups scoped to a named speaker, returning a configurable number of their lines via `/author/{slug}/{count}`. | `/author/{character}/{count}` |
-| **Character** | Character profiles with biographical metadata and all associated quotes, served from `/character/{slug}` and `/characters`. | `/characters` |
-| **House** | Noble houses of Westeros and their member rosters, served from `/houses` and `/house/{slug}`. | `/houses` |
-| **Random** | Randomly selected quote(s) from any speaker, served from `/random` and `/random/{count}`. | `/random/{count}` |
+| **Author** |  | `/author/{character}/{count}` |
+| **Character** |  | `/characters` |
+| **House** |  | `/houses` |
+| **Random** |  | `/random/{count}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -115,12 +103,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 
-client = GameOfThronesQuotesSDK({})
+client = GameOfThronesQuotesSDK({
+    "apikey": os.environ.get("GAME-OF-THRONES-QUOTES_APIKEY"),
+})
 
 # List all authors
-authors, err = client.Author(None).list(None, None)
+authors, err = client.Author().list()
+print(authors)
 ```
 
 ### PHP
@@ -129,10 +121,13 @@ authors, err = client.Author(None).list(None, None)
 <?php
 require_once 'gameofthronesquotes_sdk.php';
 
-$client = new GameOfThronesQuotesSDK([]);
+$client = new GameOfThronesQuotesSDK([
+    "apikey" => getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
+]);
 
 // List all authors
-[$authors, $err] = $client->Author(null)->list(null, null);
+[$authors, $err] = $client->Author()->list();
+print_r($authors);
 ```
 
 ### Golang
@@ -140,10 +135,13 @@ $client = new GameOfThronesQuotesSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go"
 
-client := sdk.NewGameOfThronesQuotesSDK(map[string]any{})
+client := sdk.NewGameOfThronesQuotesSDK(map[string]any{
+    "apikey": os.Getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
+})
 
 // List all authors
 authors, err := client.Author(nil).List(nil, nil)
+fmt.Println(authors)
 ```
 
 ### Ruby
@@ -151,10 +149,13 @@ authors, err := client.Author(nil).List(nil, nil)
 ```ruby
 require_relative "GameOfThronesQuotes_sdk"
 
-client = GameOfThronesQuotesSDK.new({})
+client = GameOfThronesQuotesSDK.new({
+  "apikey" => ENV["GAME-OF-THRONES-QUOTES_APIKEY"],
+})
 
 # List all authors
-authors, err = client.Author(nil).list(nil, nil)
+authors, err = client.Author().list
+puts authors
 ```
 
 ### Lua
@@ -162,10 +163,13 @@ authors, err = client.Author(nil).list(nil, nil)
 ```lua
 local sdk = require("game-of-thrones-quotes_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
+})
 
 -- List all authors
-local authors, err = client:Author(nil):list(nil, nil)
+local authors, err = client:Author():list()
+print(authors)
 ```
 
 ## Unit testing in offline mode
@@ -184,25 +188,21 @@ const result = await client.Author().load({ id: 'test01' })
 ### Python
 
 ```python
-client = GameOfThronesQuotesSDK.test(None, None)
-result, err = client.Author(None).load(
-    {"id": "test01"}, None
-)
+client = GameOfThronesQuotesSDK.test()
+result, err = client.Author().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = GameOfThronesQuotesSDK::test(null, null);
-[$result, $err] = $client->Author(null)->load(
-    ["id" => "test01"], null
-);
+$client = GameOfThronesQuotesSDK::test();
+[$result, $err] = $client->Author()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Author(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -211,19 +211,15 @@ result, err := client.Author(nil).Load(
 ### Ruby
 
 ```ruby
-client = GameOfThronesQuotesSDK.test(nil, nil)
-result, err = client.Author(nil).load(
-  { "id" => "test01" }, nil
-)
+client = GameOfThronesQuotesSDK.test
+result, err = client.Author().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Author(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Author():load({ id = "test01" })
 ```
 
 ## How it works
@@ -327,10 +323,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Game of Thrones Quotes API
-
-- Upstream: [https://gameofthronesquotes.xyz/](https://gameofthronesquotes.xyz/)
 
 ---
 
