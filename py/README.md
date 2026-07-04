@@ -31,14 +31,16 @@ from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 client = GameOfThronesQuotesSDK()
 ```
 
-### 2. List authors
+### 2. List author records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.author.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    authors = client.Author().list({})
+    for author in authors:
+        print(author)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -86,8 +88,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = GameOfThronesQuotesSDK.test()
 
-result = client.author.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+author = client.Author().load({"id": "test01"})
+# author contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -163,7 +166,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Author` | `(data) -> AuthorEntity` | Create a Author entity instance. |
+| `Author` | `(data) -> AuthorEntity` | Create an Author entity instance. |
 | `Character` | `(data) -> CharacterEntity` | Create a Character entity instance. |
 | `House` | `(data) -> HouseEntity` | Create a House entity instance. |
 | `Random` | `(data) -> RandomEntity` | Create a Random entity instance. |
@@ -260,7 +263,7 @@ API path: `/random/{count}`
 
 ### Author
 
-Create an instance: `const author = client.author`
+Create an instance: `author = client.Author()`
 
 #### Operations
 
@@ -277,14 +280,14 @@ Create an instance: `const author = client.author`
 
 #### Example: List
 
-```ts
-const authors = await client.author.list()
+```python
+authors = client.Author().list({})
 ```
 
 
 ### Character
 
-Create an instance: `const character = client.character`
+Create an instance: `character = client.Character()`
 
 #### Operations
 
@@ -304,20 +307,20 @@ Create an instance: `const character = client.character`
 
 #### Example: Load
 
-```ts
-const character = await client.character.load({ id: 'character_id' })
+```python
+character = client.Character().load({"id": "character_id"})
 ```
 
 #### Example: List
 
-```ts
-const characters = await client.character.list()
+```python
+characters = client.Character().list({})
 ```
 
 
 ### House
 
-Create an instance: `const house = client.house`
+Create an instance: `house = client.House()`
 
 #### Operations
 
@@ -336,20 +339,20 @@ Create an instance: `const house = client.house`
 
 #### Example: Load
 
-```ts
-const house = await client.house.load({ id: 'house_id' })
+```python
+house = client.House().load({"id": "house_id"})
 ```
 
 #### Example: List
 
-```ts
-const houses = await client.house.list()
+```python
+houses = client.House().list({})
 ```
 
 
 ### Random
 
-Create an instance: `const random = client.random`
+Create an instance: `random = client.Random()`
 
 #### Operations
 
@@ -366,8 +369,8 @@ Create an instance: `const random = client.random`
 
 #### Example: Load
 
-```ts
-const random = await client.random.load({ id: 'random_id' })
+```python
+random = client.Random().load({"id": "random_id"})
 ```
 
 
@@ -441,7 +444,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-author = client.author
+author = client.Author()
 author.load({"id": "example_id"})
 
 # author.data_get() now returns the loaded author data

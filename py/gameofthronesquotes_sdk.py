@@ -220,73 +220,33 @@ class GameOfThronesQuotesSDK:
         }
 
 
-    @property
-    def author(self):
-        """Idiomatic facade: client.author.list() / client.author.load({"id": ...})."""
-        from entity.author_entity import AuthorEntity
-        cached = getattr(self, "_author", None)
-        if cached is None:
-            cached = AuthorEntity(self, None)
-            self._author = cached
-        return cached
-
-    def Author(self, data=None):
-        # Deprecated: use client.author instead.
+    def Author(self, data=None) -> "AuthorEntity":
+        """Entity factory: client.Author().list({}) / client.Author().load({"id": ...})."""
         from entity.author_entity import AuthorEntity
         return AuthorEntity(self, data)
 
 
-    @property
-    def character(self):
-        """Idiomatic facade: client.character.list() / client.character.load({"id": ...})."""
-        from entity.character_entity import CharacterEntity
-        cached = getattr(self, "_character", None)
-        if cached is None:
-            cached = CharacterEntity(self, None)
-            self._character = cached
-        return cached
-
-    def Character(self, data=None):
-        # Deprecated: use client.character instead.
+    def Character(self, data=None) -> "CharacterEntity":
+        """Entity factory: client.Character().list({}) / client.Character().load({"id": ...})."""
         from entity.character_entity import CharacterEntity
         return CharacterEntity(self, data)
 
 
-    @property
-    def house(self):
-        """Idiomatic facade: client.house.list() / client.house.load({"id": ...})."""
-        from entity.house_entity import HouseEntity
-        cached = getattr(self, "_house", None)
-        if cached is None:
-            cached = HouseEntity(self, None)
-            self._house = cached
-        return cached
-
-    def House(self, data=None):
-        # Deprecated: use client.house instead.
+    def House(self, data=None) -> "HouseEntity":
+        """Entity factory: client.House().list({}) / client.House().load({"id": ...})."""
         from entity.house_entity import HouseEntity
         return HouseEntity(self, data)
 
 
-    @property
-    def random(self):
-        """Idiomatic facade: client.random.list() / client.random.load({"id": ...})."""
-        from entity.random_entity import RandomEntity
-        cached = getattr(self, "_random", None)
-        if cached is None:
-            cached = RandomEntity(self, None)
-            self._random = cached
-        return cached
-
-    def Random(self, data=None):
-        # Deprecated: use client.random instead.
+    def Random(self, data=None) -> "RandomEntity":
+        """Entity factory: client.Random().list({}) / client.Random().load({"id": ...})."""
         from entity.random_entity import RandomEntity
         return RandomEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "GameOfThronesQuotesSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -306,3 +266,12 @@ class GameOfThronesQuotesSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.author_entity import AuthorEntity
+    from entity.character_entity import CharacterEntity
+    from entity.house_entity import HouseEntity
+    from entity.random_entity import RandomEntity

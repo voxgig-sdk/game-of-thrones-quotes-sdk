@@ -208,52 +208,28 @@ class GameOfThronesQuotesSDK
   end
 
 
-  # Idiomatic facade: client.author.list / client.author.load({ "id" => ... })
-  def author
-    require_relative 'entity/author_entity'
-    @author ||= AuthorEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.author instead.
+  # Canonical facade: client.Author.list / client.Author.load({ "id" => ... })
   def Author(data = nil)
     require_relative 'entity/author_entity'
     AuthorEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.character.list / client.character.load({ "id" => ... })
-  def character
-    require_relative 'entity/character_entity'
-    @character ||= CharacterEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.character instead.
+  # Canonical facade: client.Character.list / client.Character.load({ "id" => ... })
   def Character(data = nil)
     require_relative 'entity/character_entity'
     CharacterEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.house.list / client.house.load({ "id" => ... })
-  def house
-    require_relative 'entity/house_entity'
-    @house ||= HouseEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.house instead.
+  # Canonical facade: client.House.list / client.House.load({ "id" => ... })
   def House(data = nil)
     require_relative 'entity/house_entity'
     HouseEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.random.list / client.random.load({ "id" => ... })
-  def random
-    require_relative 'entity/random_entity'
-    @random ||= RandomEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.random instead.
+  # Canonical facade: client.Random.list / client.Random.load({ "id" => ... })
   def Random(data = nil)
     require_relative 'entity/random_entity'
     RandomEntity.new(self, data)

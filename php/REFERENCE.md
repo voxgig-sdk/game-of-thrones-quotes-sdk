@@ -97,7 +97,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## AuthorEntity
 
 ```php
-$author = $client->author();
+$author = $client->Author();
 ```
 
 ### Fields
@@ -114,7 +114,7 @@ $author = $client->author();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->author()->list([]);
+$results = $client->Author()->list([]);
 ```
 
 ### Common Methods
@@ -150,7 +150,7 @@ Return the entity name.
 ## CharacterEntity
 
 ```php
-$character = $client->character();
+$character = $client->Character();
 ```
 
 ### Fields
@@ -169,7 +169,7 @@ $character = $client->character();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->character()->list([]);
+$results = $client->Character()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -177,7 +177,7 @@ $results = $client->character()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->character()->load(["id" => "character_id"]);
+$result = $client->Character()->load(["id" => "character_id"]);
 ```
 
 ### Common Methods
@@ -213,7 +213,7 @@ Return the entity name.
 ## HouseEntity
 
 ```php
-$house = $client->house();
+$house = $client->House();
 ```
 
 ### Fields
@@ -231,7 +231,7 @@ $house = $client->house();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->house()->list([]);
+$results = $client->House()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -239,7 +239,7 @@ $results = $client->house()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->house()->load(["id" => "house_id"]);
+$result = $client->House()->load(["id" => "house_id"]);
 ```
 
 ### Common Methods
@@ -275,7 +275,7 @@ Return the entity name.
 ## RandomEntity
 
 ```php
-$random = $client->random();
+$random = $client->Random();
 ```
 
 ### Fields
@@ -292,7 +292,7 @@ $random = $client->random();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->random()->load(["id" => "random_id"]);
+$result = $client->Random()->load(["id" => "random_id"]);
 ```
 
 ### Common Methods

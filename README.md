@@ -26,9 +26,11 @@ import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
 
 const client = new GameOfThronesQuotesSDK()
 
-// List all authors
-const authors = await client.author.list()
-console.log(authors.data)
+// List all authors (returns Author[])
+const authors = await client.Author().list()
+for (const author of authors) {
+  console.log(author)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -86,9 +88,10 @@ from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 
 client = GameOfThronesQuotesSDK()
 
-# List all authors
-authors = client.author.list()
-print(authors)
+# List all authors (returns a list, raises on error)
+authors = client.Author().list({})
+for author in authors:
+    print(author)
 ```
 
 ### PHP
@@ -99,8 +102,8 @@ require_once 'gameofthronesquotes_sdk.php';
 
 $client = new GameOfThronesQuotesSDK();
 
-// List all authors (throws on error)
-$authors = $client->author()->list();
+// List all authors (returns an array; throws on error)
+$authors = $client->Author()->list();
 print_r($authors);
 ```
 
@@ -123,8 +126,8 @@ require_relative "GameOfThronesQuotes_sdk"
 
 client = GameOfThronesQuotesSDK.new
 
-# List all authors
-authors = client.author.list
+# List all authors (returns an Array; raises on error)
+authors = client.Author.list
 puts authors
 ```
 
@@ -136,7 +139,7 @@ local sdk = require("game-of-thrones-quotes_sdk")
 local client = sdk.new()
 
 -- List all authors
-local authors, err = client:author():list()
+local authors, err = client:Author():list()
 print(authors)
 ```
 
@@ -149,22 +152,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = GameOfThronesQuotesSDK.test()
-const result = await client.author.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const author = await client.Author().load({ id: 'test01' })
+// author is a bare Author populated with mock data
+console.log(author)
 ```
 
 ### Python
 
 ```python
 client = GameOfThronesQuotesSDK.test()
-result = client.author.load({"id": "test01"})
+author = client.Author().load({"id": "test01"})
+print(author)
 ```
 
 ### PHP
 
 ```php
-$client = GameOfThronesQuotesSDK::test();
-$result = $client->author()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = GameOfThronesQuotesSDK::test([
+    "entity" => ["author" => ["test01" => ["id" => "test01"]]],
+]);
+$author = $client->Author()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -179,15 +187,18 @@ result, err := client.Author(nil).Load(
 ### Ruby
 
 ```ruby
-client = GameOfThronesQuotesSDK.test
-result = client.author.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = GameOfThronesQuotesSDK.test({
+  "entity" => { "author" => { "test01" => { "id" => "test01" } } },
+})
+author = client.Author.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:author():load({ id = "test01" })
+local result, err = client:Author():load({ id = "test01" })
 ```
 
 ## How it works
@@ -235,6 +246,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

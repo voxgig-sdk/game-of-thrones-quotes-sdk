@@ -95,7 +95,7 @@ same parameters as `direct()`.
 ## AuthorEntity
 
 ```lua
-local author = client:author(nil)
+local author = client:Author(nil)
 ```
 
 ### Fields
@@ -112,7 +112,7 @@ local author = client:author(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:author():list()
+local results, err = client:Author():list()
 ```
 
 ### Common Methods
@@ -148,7 +148,7 @@ Return the entity name.
 ## CharacterEntity
 
 ```lua
-local character = client:character(nil)
+local character = client:Character(nil)
 ```
 
 ### Fields
@@ -167,7 +167,7 @@ local character = client:character(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:character():list()
+local results, err = client:Character():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -175,7 +175,7 @@ local results, err = client:character():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:character():load({ id = "character_id" })
+local result, err = client:Character():load({ id = "character_id" })
 ```
 
 ### Common Methods
@@ -211,7 +211,7 @@ Return the entity name.
 ## HouseEntity
 
 ```lua
-local house = client:house(nil)
+local house = client:House(nil)
 ```
 
 ### Fields
@@ -229,7 +229,7 @@ local house = client:house(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:house():list()
+local results, err = client:House():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -237,7 +237,7 @@ local results, err = client:house():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:house():load({ id = "house_id" })
+local result, err = client:House():load({ id = "house_id" })
 ```
 
 ### Common Methods
@@ -273,7 +273,7 @@ Return the entity name.
 ## RandomEntity
 
 ```lua
-local random = client:random(nil)
+local random = client:Random(nil)
 ```
 
 ### Fields
@@ -290,7 +290,7 @@ local random = client:random(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:random():load({ id = "random_id" })
+local result, err = client:Random():load({ id = "random_id" })
 ```
 
 ### Common Methods

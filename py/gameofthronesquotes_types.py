@@ -4,72 +4,66 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Author:
-    character: Optional[dict] = None
-    sentence: Optional[str] = None
+class Author(TypedDict, total=False):
+    character: dict
+    sentence: str
 
 
-@dataclass
-class AuthorListMatch:
+class AuthorListMatch(TypedDict):
     character: str
     count: int
 
 
-@dataclass
-class Character:
-    house: Optional[dict] = None
-    name: Optional[str] = None
-    quote: Optional[list] = None
-    slug: Optional[str] = None
+class Character(TypedDict, total=False):
+    house: dict
+    name: str
+    quote: list
+    slug: str
 
 
-@dataclass
-class CharacterLoadMatch:
+class CharacterLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class CharacterListMatch:
-    house: Optional[dict] = None
-    name: Optional[str] = None
-    quote: Optional[list] = None
-    slug: Optional[str] = None
+class CharacterListMatch(TypedDict, total=False):
+    house: dict
+    name: str
+    quote: list
+    slug: str
 
 
-@dataclass
-class House:
-    member: Optional[list] = None
-    name: Optional[str] = None
-    slug: Optional[str] = None
+class House(TypedDict, total=False):
+    member: list
+    name: str
+    slug: str
 
 
-@dataclass
-class HouseLoadMatch:
+class HouseLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class HouseListMatch:
-    member: Optional[list] = None
-    name: Optional[str] = None
-    slug: Optional[str] = None
+class HouseListMatch(TypedDict, total=False):
+    member: list
+    name: str
+    slug: str
 
 
-@dataclass
-class Random:
-    character: Optional[dict] = None
-    sentence: Optional[str] = None
+class Random(TypedDict, total=False):
+    character: dict
+    sentence: str
 
 
-@dataclass
-class RandomLoadMatch:
+class RandomLoadMatch(TypedDict):
     id: int
-

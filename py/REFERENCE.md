@@ -92,7 +92,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## AuthorEntity
 
 ```python
-author = client.author
+author = client.Author()
 ```
 
 ### Fields
@@ -109,7 +109,9 @@ author = client.author
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.author.list({})
+results = client.Author().list({})
+for author in results:
+    print(author)
 ```
 
 ### Common Methods
@@ -144,7 +146,7 @@ Return the entity name.
 ## CharacterEntity
 
 ```python
-character = client.character
+character = client.Character()
 ```
 
 ### Fields
@@ -163,7 +165,9 @@ character = client.character
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.character.list({})
+results = client.Character().list({})
+for character in results:
+    print(character)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -171,7 +175,7 @@ results = client.character.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.character.load({"id": "character_id"})
+result = client.Character().load({"id": "character_id"})
 ```
 
 ### Common Methods
@@ -206,7 +210,7 @@ Return the entity name.
 ## HouseEntity
 
 ```python
-house = client.house
+house = client.House()
 ```
 
 ### Fields
@@ -224,7 +228,9 @@ house = client.house
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.house.list({})
+results = client.House().list({})
+for house in results:
+    print(house)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -232,7 +238,7 @@ results = client.house.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.house.load({"id": "house_id"})
+result = client.House().load({"id": "house_id"})
 ```
 
 ### Common Methods
@@ -267,7 +273,7 @@ Return the entity name.
 ## RandomEntity
 
 ```python
-random = client.random
+random = client.Random()
 ```
 
 ### Fields
@@ -284,7 +290,7 @@ random = client.random
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.random.load({"id": "random_id"})
+result = client.Random().load({"id": "random_id"})
 ```
 
 ### Common Methods

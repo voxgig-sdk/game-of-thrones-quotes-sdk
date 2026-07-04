@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:author():list() / client:author():load({ id = ... })
-function GameOfThronesQuotesSDK:author(data)
+-- Idiomatic facade: client:Author():list() / client:Author():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function GameOfThronesQuotesSDK:Author(data)
   local EntityMod = require("entity.author_entity")
   if data == nil then
     if self._author == nil then
@@ -256,15 +257,10 @@ function GameOfThronesQuotesSDK:author(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:author() instead.
-function GameOfThronesQuotesSDK:Author(data)
-  local EntityMod = require("entity.author_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:character():list() / client:character():load({ id = ... })
-function GameOfThronesQuotesSDK:character(data)
+-- Idiomatic facade: client:Character():list() / client:Character():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function GameOfThronesQuotesSDK:Character(data)
   local EntityMod = require("entity.character_entity")
   if data == nil then
     if self._character == nil then
@@ -275,15 +271,10 @@ function GameOfThronesQuotesSDK:character(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:character() instead.
-function GameOfThronesQuotesSDK:Character(data)
-  local EntityMod = require("entity.character_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:house():list() / client:house():load({ id = ... })
-function GameOfThronesQuotesSDK:house(data)
+-- Idiomatic facade: client:House():list() / client:House():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function GameOfThronesQuotesSDK:House(data)
   local EntityMod = require("entity.house_entity")
   if data == nil then
     if self._house == nil then
@@ -294,15 +285,10 @@ function GameOfThronesQuotesSDK:house(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:house() instead.
-function GameOfThronesQuotesSDK:House(data)
-  local EntityMod = require("entity.house_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:random():list() / client:random():load({ id = ... })
-function GameOfThronesQuotesSDK:random(data)
+-- Idiomatic facade: client:Random():list() / client:Random():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function GameOfThronesQuotesSDK:Random(data)
   local EntityMod = require("entity.random_entity")
   if data == nil then
     if self._random == nil then
@@ -310,12 +296,6 @@ function GameOfThronesQuotesSDK:random(data)
     end
     return self._random
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:random() instead.
-function GameOfThronesQuotesSDK:Random(data)
-  local EntityMod = require("entity.random_entity")
   return EntityMod.new(self, data)
 end
 

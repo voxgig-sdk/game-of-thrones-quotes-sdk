@@ -233,10 +233,10 @@ class GameOfThronesQuotesSDK
 
     private $_author = null;
 
-    // Idiomatic facade: $client->author()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Author() (PHP method
-    // names are case-insensitive).
-    public function author($data = null)
+    // Canonical facade: $client->Author()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->author()
+    // resolves here too.
+    public function Author($data = null)
     {
         require_once __DIR__ . '/entity/author_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class GameOfThronesQuotesSDK
 
     private $_character = null;
 
-    // Idiomatic facade: $client->character()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Character() (PHP method
-    // names are case-insensitive).
-    public function character($data = null)
+    // Canonical facade: $client->Character()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->character()
+    // resolves here too.
+    public function Character($data = null)
     {
         require_once __DIR__ . '/entity/character_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class GameOfThronesQuotesSDK
 
     private $_house = null;
 
-    // Idiomatic facade: $client->house()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias House() (PHP method
-    // names are case-insensitive).
-    public function house($data = null)
+    // Canonical facade: $client->House()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->house()
+    // resolves here too.
+    public function House($data = null)
     {
         require_once __DIR__ . '/entity/house_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class GameOfThronesQuotesSDK
 
     private $_random = null;
 
-    // Idiomatic facade: $client->random()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Random() (PHP method
-    // names are case-insensitive).
-    public function random($data = null)
+    // Canonical facade: $client->Random()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->random()
+    // resolves here too.
+    public function Random($data = null)
     {
         require_once __DIR__ . '/entity/random_entity.php';
         if ($data === null) {

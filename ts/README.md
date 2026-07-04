@@ -28,15 +28,15 @@ import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
 const client = new GameOfThronesQuotesSDK()
 ```
 
-### 2. List authors
+### 2. List author records
+
+`list()` resolves to an array of Author objects — iterate it directly:
 
 ```ts
-const result = await client.author.list()
+const authors = await client.Author().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const author of authors) {
+  console.log(author)
 }
 ```
 
@@ -54,6 +54,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -82,9 +85,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = GameOfThronesQuotesSDK.test()
 
-const result = await client.author.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const author = await client.Author().load({ id: 'test01' })
+// author is a bare entity populated with mock response data
+console.log(author)
 ```
 
 You can also use the instance method:
@@ -99,7 +102,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.author
+const entity = client.Author()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -177,7 +180,7 @@ new GameOfThronesQuotesSDK(options?: {
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
-| `Author(data?)` | `AuthorEntity` | Create a Author entity instance. |
+| `Author(data?)` | `AuthorEntity` | Create an Author entity instance. |
 | `Character(data?)` | `CharacterEntity` | Create a Character entity instance. |
 | `House(data?)` | `HouseEntity` | Create a House entity instance. |
 | `Random(data?)` | `RandomEntity` | Create a Random entity instance. |
@@ -197,29 +200,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): GameOfThronesQuotesSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -305,7 +309,7 @@ API path: `/random/{count}`
 
 ### Author
 
-Create an instance: `const author = client.author`
+Create an instance: `const author = client.Author()`
 
 #### Operations
 
@@ -323,13 +327,13 @@ Create an instance: `const author = client.author`
 #### Example: List
 
 ```ts
-const authors = await client.author.list()
+const authors = await client.Author().list()
 ```
 
 
 ### Character
 
-Create an instance: `const character = client.character`
+Create an instance: `const character = client.Character()`
 
 #### Operations
 
@@ -350,19 +354,19 @@ Create an instance: `const character = client.character`
 #### Example: Load
 
 ```ts
-const character = await client.character.load({ id: 'character_id' })
+const character = await client.Character().load({ id: 'character_id' })
 ```
 
 #### Example: List
 
 ```ts
-const characters = await client.character.list()
+const characters = await client.Character().list()
 ```
 
 
 ### House
 
-Create an instance: `const house = client.house`
+Create an instance: `const house = client.House()`
 
 #### Operations
 
@@ -382,19 +386,19 @@ Create an instance: `const house = client.house`
 #### Example: Load
 
 ```ts
-const house = await client.house.load({ id: 'house_id' })
+const house = await client.House().load({ id: 'house_id' })
 ```
 
 #### Example: List
 
 ```ts
-const houses = await client.house.list()
+const houses = await client.House().list()
 ```
 
 
 ### Random
 
-Create an instance: `const random = client.random`
+Create an instance: `const random = client.Random()`
 
 #### Operations
 
@@ -412,7 +416,7 @@ Create an instance: `const random = client.random`
 #### Example: Load
 
 ```ts
-const random = await client.random.load({ id: 'random_id' })
+const random = await client.Random().load({ id: 'random_id' })
 ```
 
 
@@ -483,7 +487,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const author = client.author
+const author = client.Author()
 await author.load({ id: "example_id" })
 
 // author.data() now returns the loaded author data

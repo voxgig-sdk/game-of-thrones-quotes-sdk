@@ -30,37 +30,33 @@ go mod edit -replace github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go=../game
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go"
-    "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 2. List authors
-
-```go
-    result, err := client.Author(nil).List(nil, nil)
+    // List author records — the value is the array of records itself.
+    authors, err := client.Author(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range authors.([]any) {
+        fmt.Println(item)
     }
+}
 ```
 
 
@@ -110,10 +106,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Author(nil).Load(
+author, err := client.Author(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(author) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -190,7 +189,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Author` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Author entity instance. |
+| `Author` | `(data map[string]any) GameOfThronesQuotesEntity` | Create an Author entity instance. |
 | `Character` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Character entity instance. |
 | `House` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a House entity instance. |
 | `Random` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Random entity instance. |
@@ -213,17 +212,24 @@ All entities implement the `GameOfThronesQuotesEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    author, err := client.Author(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // author is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -299,7 +305,11 @@ Create an instance: `author := client.Author(nil)`
 #### Example: List
 
 ```go
-results, err := client.Author(nil).List(nil, nil)
+authors, err := client.Author(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(authors) // the array of records
 ```
 
 
@@ -326,13 +336,21 @@ Create an instance: `character := client.Character(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Character(nil).Load(map[string]any{"id": "character_id"}, nil)
+character, err := client.Character(nil).Load(map[string]any{"id": "character_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(character) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Character(nil).List(nil, nil)
+characters, err := client.Character(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(characters) // the array of records
 ```
 
 
@@ -358,13 +376,21 @@ Create an instance: `house := client.House(nil)`
 #### Example: Load
 
 ```go
-result, err := client.House(nil).Load(map[string]any{"id": "house_id"}, nil)
+house, err := client.House(nil).Load(map[string]any{"id": "house_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(house) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.House(nil).List(nil, nil)
+houses, err := client.House(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(houses) // the array of records
 ```
 
 
@@ -388,7 +414,11 @@ Create an instance: `random := client.Random(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Random(nil).Load(map[string]any{"id": "random_id"}, nil)
+random, err := client.Random(nil).Load(map[string]any{"id": "random_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(random) // the loaded record
 ```
 
 

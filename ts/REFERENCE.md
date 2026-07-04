@@ -145,7 +145,7 @@ Alias for `GameOfThronesQuotesSDK.test()`.
 ## AuthorEntity
 
 ```ts
-const author = client.author
+const author = client.Author()
 ```
 
 ### Fields
@@ -162,7 +162,7 @@ const author = client.author
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.author.list()
+const results = await client.Author().list()
 ```
 
 ### Common Methods
@@ -196,7 +196,7 @@ Return a copy of the entity options.
 ## CharacterEntity
 
 ```ts
-const character = client.character
+const character = client.Character()
 ```
 
 ### Fields
@@ -215,7 +215,7 @@ const character = client.character
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.character.list()
+const results = await client.Character().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -223,7 +223,7 @@ const results = await client.character.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.character.load({ id: 'character_id' })
+const result = await client.Character().load({ id: 'character_id' })
 ```
 
 ### Common Methods
@@ -257,7 +257,7 @@ Return a copy of the entity options.
 ## HouseEntity
 
 ```ts
-const house = client.house
+const house = client.House()
 ```
 
 ### Fields
@@ -275,7 +275,7 @@ const house = client.house
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.house.list()
+const results = await client.House().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -283,7 +283,7 @@ const results = await client.house.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.house.load({ id: 'house_id' })
+const result = await client.House().load({ id: 'house_id' })
 ```
 
 ### Common Methods
@@ -317,7 +317,7 @@ Return a copy of the entity options.
 ## RandomEntity
 
 ```ts
-const random = client.random
+const random = client.Random()
 ```
 
 ### Fields
@@ -334,7 +334,7 @@ const random = client.random
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.random.load({ id: 'random_id' })
+const result = await client.Random().load({ id: 'random_id' })
 ```
 
 ### Common Methods
