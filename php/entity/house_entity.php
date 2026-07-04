@@ -55,6 +55,9 @@ class HouseEntity
         return new HouseEntity($this->_client, $opts);
     }
 
+    /**
+     * @param House|array $args House data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class HouseEntity
         }
     }
 
+    /**
+     * @return House|array The current House data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of House fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class HouseEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of House fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class HouseEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single House.
+     *
+     * @param HouseLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed HouseLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return House|array The loaded House as an assoc-array at the
+     *   SDK boundary; throws GameOfThronesQuotesError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class HouseEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List House items matching the given filter.
+     *
+     * @param HouseListMatch|array|null $reqmatch Match filter (any subset
+     *   of House fields) as an assoc-array; HouseListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return House[]|array A list of House items as assoc-arrays at
+     *   the SDK boundary; throws GameOfThronesQuotesError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -138,7 +168,7 @@ class HouseEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

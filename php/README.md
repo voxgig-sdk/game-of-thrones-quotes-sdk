@@ -9,9 +9,10 @@ The PHP SDK for the GameOfThronesQuotes API — an entity-oriented client using 
 
 
 ## Install
-```bash
-composer require voxgig-sdk/game-of-thrones-quotes
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,22 +26,22 @@ loading a specific record.
 <?php
 require_once 'gameofthronesquotes_sdk.php';
 
-$client = new GameOfThronesQuotesSDK([
-    "apikey" => getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
-]);
+$client = new GameOfThronesQuotesSDK();
 ```
 
 ### 2. List authors
 
 ```php
-[$result, $err] = $client->Author()->list();
-if ($err) { throw new \Exception($err); }
-
-if (is_array($result)) {
-    foreach ($result as $item) {
-        $d = $item->data_get();
-        echo $d["id"] . " " . $d["name"] . "\n";
+try {
+    $result = $client->author()->list();
+    if (is_array($result)) {
+        foreach ($result as $item) {
+            $d = $item->data_get();
+            echo $d["id"] . " " . $d["name"] . "\n";
+        }
     }
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
 }
 ```
 
@@ -52,28 +53,31 @@ if (is_array($result)) {
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -87,7 +91,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = GameOfThronesQuotesSDK::test();
 
-[$result, $err] = $client->GameOfThronesQuotes()->load(["id" => "test01"]);
+$result = $client->author()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -121,8 +125,7 @@ $client = new GameOfThronesQuotesSDK([
 Create a `.env.local` file at the project root:
 
 ```
-GAME-OF-THRONES-QUOTES_TEST_LIVE=TRUE
-GAME-OF-THRONES-QUOTES_APIKEY=<your-key>
+GAME_OF_THRONES_QUOTES_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -145,7 +148,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -194,8 +196,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -262,7 +268,7 @@ API path: `/random/{count}`
 
 ### Author
 
-Create an instance: `const author = client.Author()`
+Create an instance: `const author = client.author`
 
 #### Operations
 
@@ -280,13 +286,13 @@ Create an instance: `const author = client.Author()`
 #### Example: List
 
 ```ts
-const authors = await client.Author().list()
+const authors = await client.author.list()
 ```
 
 
 ### Character
 
-Create an instance: `const character = client.Character()`
+Create an instance: `const character = client.character`
 
 #### Operations
 
@@ -307,19 +313,19 @@ Create an instance: `const character = client.Character()`
 #### Example: Load
 
 ```ts
-const character = await client.Character().load({ id: 'character_id' })
+const character = await client.character.load({ id: 'character_id' })
 ```
 
 #### Example: List
 
 ```ts
-const characters = await client.Character().list()
+const characters = await client.character.list()
 ```
 
 
 ### House
 
-Create an instance: `const house = client.House()`
+Create an instance: `const house = client.house`
 
 #### Operations
 
@@ -339,19 +345,19 @@ Create an instance: `const house = client.House()`
 #### Example: Load
 
 ```ts
-const house = await client.House().load({ id: 'house_id' })
+const house = await client.house.load({ id: 'house_id' })
 ```
 
 #### Example: List
 
 ```ts
-const houses = await client.House().list()
+const houses = await client.house.list()
 ```
 
 
 ### Random
 
-Create an instance: `const random = client.Random()`
+Create an instance: `const random = client.random`
 
 #### Operations
 
@@ -369,7 +375,7 @@ Create an instance: `const random = client.Random()`
 #### Example: Load
 
 ```ts
-const random = await client.Random().load({ id: 'random_id' })
+const random = await client.random.load({ id: 'random_id' })
 ```
 
 
@@ -444,11 +450,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$author = $client->author();
+$author->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $author->dataGet() now returns the loaded author data
+// $author->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

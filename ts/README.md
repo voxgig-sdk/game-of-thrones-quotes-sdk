@@ -9,9 +9,12 @@ The TypeScript SDK for the GameOfThronesQuotes API — a type-safe, entity-orien
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/game-of-thrones-quotes
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { GameOfThronesQuotesSDK } from 'game-of-thrones-quotes'
+import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
 
-const client = new GameOfThronesQuotesSDK({
-  apikey: process.env.GAME-OF-THRONES-QUOTES_APIKEY,
-})
+const client = new GameOfThronesQuotesSDK()
 ```
 
 ### 2. List authors
 
 ```ts
-const result = await client.Author().list()
+const result = await client.author.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -81,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = GameOfThronesQuotesSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.author.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -89,7 +90,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new GameOfThronesQuotesSDK({ apikey: '...' })
+const client = new GameOfThronesQuotesSDK()
 const testClient = client.tester()
 ```
 
@@ -98,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.author
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -125,7 +126,6 @@ const logger = {
 }
 
 const client = new GameOfThronesQuotesSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -135,8 +135,7 @@ const client = new GameOfThronesQuotesSDK({
 Create a `.env.local` file at the project root:
 
 ```
-GAME-OF-THRONES-QUOTES_TEST_LIVE=TRUE
-GAME-OF-THRONES-QUOTES_APIKEY=<your-key>
+GAME_OF_THRONES_QUOTES_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -154,7 +153,6 @@ cd ts && npm test
 
 ```ts
 new GameOfThronesQuotesSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -165,7 +163,6 @@ new GameOfThronesQuotesSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -308,7 +305,7 @@ API path: `/random/{count}`
 
 ### Author
 
-Create an instance: `const author = client.Author()`
+Create an instance: `const author = client.author`
 
 #### Operations
 
@@ -326,13 +323,13 @@ Create an instance: `const author = client.Author()`
 #### Example: List
 
 ```ts
-const authors = await client.Author().list()
+const authors = await client.author.list()
 ```
 
 
 ### Character
 
-Create an instance: `const character = client.Character()`
+Create an instance: `const character = client.character`
 
 #### Operations
 
@@ -353,19 +350,19 @@ Create an instance: `const character = client.Character()`
 #### Example: Load
 
 ```ts
-const character = await client.Character().load({ id: 'character_id' })
+const character = await client.character.load({ id: 'character_id' })
 ```
 
 #### Example: List
 
 ```ts
-const characters = await client.Character().list()
+const characters = await client.character.list()
 ```
 
 
 ### House
 
-Create an instance: `const house = client.House()`
+Create an instance: `const house = client.house`
 
 #### Operations
 
@@ -385,19 +382,19 @@ Create an instance: `const house = client.House()`
 #### Example: Load
 
 ```ts
-const house = await client.House().load({ id: 'house_id' })
+const house = await client.house.load({ id: 'house_id' })
 ```
 
 #### Example: List
 
 ```ts
-const houses = await client.House().list()
+const houses = await client.house.list()
 ```
 
 
 ### Random
 
-Create an instance: `const random = client.Random()`
+Create an instance: `const random = client.random`
 
 #### Operations
 
@@ -415,7 +412,7 @@ Create an instance: `const random = client.Random()`
 #### Example: Load
 
 ```ts
-const random = await client.Random().load({ id: 'random_id' })
+const random = await client.random.load({ id: 'random_id' })
 ```
 
 
@@ -476,7 +473,7 @@ game-of-thrones-quotes/
 Import the SDK from the package root:
 
 ```ts
-import { GameOfThronesQuotesSDK } from 'game-of-thrones-quotes'
+import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
 ```
 
 ### Entity state
@@ -486,11 +483,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const author = client.author
+await author.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// author.data() now returns the loaded author data
+// author.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

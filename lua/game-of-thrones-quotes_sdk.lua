@@ -244,24 +244,76 @@ end
 
 
 
+-- Idiomatic facade: client:author():list() / client:author():load({ id = ... })
+function GameOfThronesQuotesSDK:author(data)
+  local EntityMod = require("entity.author_entity")
+  if data == nil then
+    if self._author == nil then
+      self._author = EntityMod.new(self, nil)
+    end
+    return self._author
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:author() instead.
 function GameOfThronesQuotesSDK:Author(data)
   local EntityMod = require("entity.author_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:character():list() / client:character():load({ id = ... })
+function GameOfThronesQuotesSDK:character(data)
+  local EntityMod = require("entity.character_entity")
+  if data == nil then
+    if self._character == nil then
+      self._character = EntityMod.new(self, nil)
+    end
+    return self._character
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:character() instead.
 function GameOfThronesQuotesSDK:Character(data)
   local EntityMod = require("entity.character_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:house():list() / client:house():load({ id = ... })
+function GameOfThronesQuotesSDK:house(data)
+  local EntityMod = require("entity.house_entity")
+  if data == nil then
+    if self._house == nil then
+      self._house = EntityMod.new(self, nil)
+    end
+    return self._house
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:house() instead.
 function GameOfThronesQuotesSDK:House(data)
   local EntityMod = require("entity.house_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:random():list() / client:random():load({ id = ... })
+function GameOfThronesQuotesSDK:random(data)
+  local EntityMod = require("entity.random_entity")
+  if data == nil then
+    if self._random == nil then
+      self._random = EntityMod.new(self, nil)
+    end
+    return self._random
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:random() instead.
 function GameOfThronesQuotesSDK:Random(data)
   local EntityMod = require("entity.random_entity")
   return EntityMod.new(self, data)

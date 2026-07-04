@@ -5,6 +5,8 @@ import { CharacterEntity } from './entity/CharacterEntity'
 import { HouseEntity } from './entity/HouseEntity'
 import { RandomEntity } from './entity/RandomEntity'
 
+export type * from './GameOfThronesQuotesTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -205,24 +207,56 @@ class GameOfThronesQuotesSDK {
 
 
 
+  _author?: AuthorEntity
+
+  // Idiomatic facade: `client.author.list()` / `client.author.load({ id })`.
+  get author(): AuthorEntity {
+    return (this._author ??= new AuthorEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.author` instead. */
   Author(data?: any) {
     const self = this
     return new AuthorEntity(self,data)
   }
 
 
+  _character?: CharacterEntity
+
+  // Idiomatic facade: `client.character.list()` / `client.character.load({ id })`.
+  get character(): CharacterEntity {
+    return (this._character ??= new CharacterEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.character` instead. */
   Character(data?: any) {
     const self = this
     return new CharacterEntity(self,data)
   }
 
 
+  _house?: HouseEntity
+
+  // Idiomatic facade: `client.house.list()` / `client.house.load({ id })`.
+  get house(): HouseEntity {
+    return (this._house ??= new HouseEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.house` instead. */
   House(data?: any) {
     const self = this
     return new HouseEntity(self,data)
   }
 
 
+  _random?: RandomEntity
+
+  // Idiomatic facade: `client.random.list()` / `client.random.load({ id })`.
+  get random(): RandomEntity {
+    return (this._random ??= new RandomEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.random` instead. */
   Random(data?: any) {
     const self = this
     return new RandomEntity(self,data)

@@ -43,14 +43,12 @@ class HouseEntityTest < Minitest::Test
     house_ref01_ent = client.House(nil)
     house_ref01_match = {}
 
-    house_ref01_list_result, err = house_ref01_ent.list(house_ref01_match, nil)
-    assert_nil err
+    house_ref01_list_result = house_ref01_ent.list(house_ref01_match, nil)
     assert house_ref01_list_result.is_a?(Array)
 
     # LOAD
     house_ref01_match_dt0 = {}
-    house_ref01_data_dt0_loaded, err = house_ref01_ent.load(house_ref01_match_dt0, nil)
-    assert_nil err
+    house_ref01_data_dt0_loaded = house_ref01_ent.load(house_ref01_match_dt0, nil)
     assert !house_ref01_data_dt0_loaded.nil?
 
   end
@@ -89,7 +87,6 @@ def house_basic_setup(extra)
     "GAMEOFTHRONESQUOTES_TEST_HOUSE_ENTID" => idmap,
     "GAMEOFTHRONESQUOTES_TEST_LIVE" => "FALSE",
     "GAMEOFTHRONESQUOTES_TEST_EXPLAIN" => "FALSE",
-    "GAMEOFTHRONESQUOTES_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -101,7 +98,6 @@ def house_basic_setup(extra)
   if env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["GAMEOFTHRONESQUOTES_APIKEY"],
       },
       extra || {},
     ])

@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://api.gameofthronesquotes.xyz/v1',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -99,7 +95,8 @@ class Config {
                     "name": "character",
                     "orig": "character",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   },
                   {
                     "active": true,
@@ -108,7 +105,8 @@ class Config {
                     "name": "count",
                     "orig": "count",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 1
                   }
                 ]
               },
@@ -213,7 +211,8 @@ class Config {
                     "name": "id",
                     "orig": "character",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -310,7 +309,8 @@ class Config {
                     "name": "id",
                     "orig": "house",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -378,7 +378,8 @@ class Config {
                     "name": "id",
                     "orig": "count",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },

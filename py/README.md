@@ -9,11 +9,9 @@ The Python SDK for the GameOfThronesQuotes API — an entity-oriented client fol
 
 
 ## Install
-```bash
-pip install voxgig-sdk-game-of-thrones-quotes
-```
-
-Or install from source:
+This package is not yet published to PyPI. Install it from the GitHub
+release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)) or
+from a source checkout:
 
 ```bash
 pip install -e .
@@ -28,25 +26,21 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
-import os
 from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 
-client = GameOfThronesQuotesSDK({
-    "apikey": os.environ.get("GAME-OF-THRONES-QUOTES_APIKEY"),
-})
+client = GameOfThronesQuotesSDK()
 ```
 
 ### 2. List authors
 
 ```python
-result, err = client.Author().list()
-if err:
-    raise Exception(err)
-
-if isinstance(result, list):
+try:
+    result = client.author.list()
     for item in result:
         d = item.data_get()
         print(d["id"], d["name"])
+except Exception as err:
+    print(f"list failed: {err}")
 ```
 
 
@@ -57,29 +51,28 @@ if isinstance(result, list):
 For endpoints not covered by entity methods:
 
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
+else:
+    print(result["err"])     # error value
 ```
 
 ### Prepare a request without sending it
 
 ```python
-fetchdef, err = client.prepare({
+# prepare() returns the fetch definition and raises on error.
+fetchdef = client.prepare({
     "path": "/api/resource/{id}",
     "method": "DELETE",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 print(fetchdef["url"])
 print(fetchdef["method"])
@@ -93,7 +86,7 @@ Create a mock client for unit testing — no server required:
 ```python
 client = GameOfThronesQuotesSDK.test()
 
-result, err = client.GameOfThronesQuotes().load({"id": "test01"})
+result = client.author.load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -123,8 +116,7 @@ client = GameOfThronesQuotesSDK({
 Create a `.env.local` file at the project root:
 
 ```
-GAME-OF-THRONES-QUOTES_TEST_LIVE=TRUE
-GAME-OF-THRONES-QUOTES_APIKEY=<your-key>
+GAME_OF_THRONES_QUOTES_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -148,7 +140,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |
@@ -170,8 +161,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | --- | --- | --- |
 | `options_map` | `() -> dict` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> (dict, err)` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> (dict, err)` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
 | `Author` | `(data) -> AuthorEntity` | Create a Author entity instance. |
 | `Character` | `(data) -> CharacterEntity` | Create a Character entity instance. |
 | `House` | `(data) -> HouseEntity` | Create a House entity instance. |
@@ -183,11 +174,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> (any, err)` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> (any, err)` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> (any, err)` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> (any, err)` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> (any, err)` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -197,8 +188,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`dict` with these keys:
+Entity operations return the bare result data (a `dict` for single-entity
+ops, a `list` for `list`) and raise on error. Wrap calls in
+`try`/`except` to handle failures.
+
+The `direct()` escape hatch never raises — it returns a result `dict`
+you branch on via `result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -265,7 +260,7 @@ API path: `/random/{count}`
 
 ### Author
 
-Create an instance: `const author = client.Author()`
+Create an instance: `const author = client.author`
 
 #### Operations
 
@@ -283,13 +278,13 @@ Create an instance: `const author = client.Author()`
 #### Example: List
 
 ```ts
-const authors = await client.Author().list()
+const authors = await client.author.list()
 ```
 
 
 ### Character
 
-Create an instance: `const character = client.Character()`
+Create an instance: `const character = client.character`
 
 #### Operations
 
@@ -310,19 +305,19 @@ Create an instance: `const character = client.Character()`
 #### Example: Load
 
 ```ts
-const character = await client.Character().load({ id: 'character_id' })
+const character = await client.character.load({ id: 'character_id' })
 ```
 
 #### Example: List
 
 ```ts
-const characters = await client.Character().list()
+const characters = await client.character.list()
 ```
 
 
 ### House
 
-Create an instance: `const house = client.House()`
+Create an instance: `const house = client.house`
 
 #### Operations
 
@@ -342,19 +337,19 @@ Create an instance: `const house = client.House()`
 #### Example: Load
 
 ```ts
-const house = await client.House().load({ id: 'house_id' })
+const house = await client.house.load({ id: 'house_id' })
 ```
 
 #### Example: List
 
 ```ts
-const houses = await client.House().list()
+const houses = await client.house.list()
 ```
 
 
 ### Random
 
-Create an instance: `const random = client.Random()`
+Create an instance: `const random = client.random`
 
 #### Operations
 
@@ -372,7 +367,7 @@ Create an instance: `const random = client.Random()`
 #### Example: Load
 
 ```ts
-const random = await client.Random().load({ id: 'random_id' })
+const random = await client.random.load({ id: 'random_id' })
 ```
 
 
@@ -446,11 +441,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-moon = client.Moon()
-moon.load({"planet_id": "earth", "id": "luna"})
+author = client.author
+author.load({"id": "example_id"})
 
-# moon.data_get() now returns the loaded moon data
-# moon.match_get() returns the last match criteria
+# author.data_get() now returns the loaded author data
+# author.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

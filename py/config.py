@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://api.gameofthronesquotes.xyz/v1",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -64,6 +61,7 @@ def make_config():
                       "orig": "character",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -73,6 +71,7 @@ def make_config():
                       "orig": "count",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 1,
                     },
                   ],
                 },
@@ -178,6 +177,7 @@ def make_config():
                       "orig": "character",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },
@@ -275,6 +275,7 @@ def make_config():
                       "orig": "house",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },
@@ -343,6 +344,7 @@ def make_config():
                       "orig": "count",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 0,
                     },
                   ],
                 },

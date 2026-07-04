@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  House,
+  HouseLoadMatch,
+  HouseListMatch,
+} from '../GameOfThronesQuotesTypes'
 
 // TODO: needs Entity superclass
-class HouseEntity extends GameOfThronesQuotesEntityBase {
+class HouseEntity extends GameOfThronesQuotesEntityBase<House> {
 
   constructor(client: GameOfThronesQuotesSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class HouseEntity extends GameOfThronesQuotesEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: HouseLoadMatch, ctrl?: Control): Promise<House> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class HouseEntity extends GameOfThronesQuotesEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<House> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: HouseListMatch, ctrl?: Control): Promise<House[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class HouseEntity extends GameOfThronesQuotesEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<House[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

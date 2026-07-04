@@ -46,8 +46,7 @@ class AuthorEntityTest < Minitest::Test
       "count" => setup[:idmap]["count01"],
     }
 
-    author_ref01_list_result, err = author_ref01_ent.list(author_ref01_match, nil)
-    assert_nil err
+    author_ref01_list_result = author_ref01_ent.list(author_ref01_match, nil)
     assert author_ref01_list_result.is_a?(Array)
 
   end
@@ -86,7 +85,6 @@ def author_basic_setup(extra)
     "GAMEOFTHRONESQUOTES_TEST_AUTHOR_ENTID" => idmap,
     "GAMEOFTHRONESQUOTES_TEST_LIVE" => "FALSE",
     "GAMEOFTHRONESQUOTES_TEST_EXPLAIN" => "FALSE",
-    "GAMEOFTHRONESQUOTES_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -98,7 +96,6 @@ def author_basic_setup(extra)
   if env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["GAMEOFTHRONESQUOTES_APIKEY"],
       },
       extra || {},
     ])

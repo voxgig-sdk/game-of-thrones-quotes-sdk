@@ -1,7 +1,14 @@
 # GameOfThronesQuotes SDK House entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from gameofthronesquotes_types import (
+    House,
+    HouseLoadMatch,
+    HouseListMatch,
+)
 
 
 class HouseEntity:
@@ -44,7 +51,7 @@ class HouseEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> House:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +60,12 @@ class HouseEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> House:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: HouseLoadMatch, ctrl=None) -> House:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -80,7 +87,7 @@ class HouseEntity:
 
 
     
-    def list(self, reqmatch, ctrl=None):
+    def list(self, reqmatch: HouseListMatch, ctrl=None) -> list[House]:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "list",

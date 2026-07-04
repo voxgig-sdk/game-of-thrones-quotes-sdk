@@ -129,7 +129,6 @@ func houseBasicSetup(extra map[string]any) *entityTestSetup {
 		"GAMEOFTHRONESQUOTES_TEST_HOUSE_ENTID": idmap,
 		"GAMEOFTHRONESQUOTES_TEST_LIVE":      "FALSE",
 		"GAMEOFTHRONESQUOTES_TEST_EXPLAIN":   "FALSE",
-		"GAMEOFTHRONESQUOTES_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["GAMEOFTHRONESQUOTES_TEST_HOUSE_ENTID"])
@@ -140,7 +139,6 @@ func houseBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["GAMEOFTHRONESQUOTES_APIKEY"],
 			},
 			extra,
 		})

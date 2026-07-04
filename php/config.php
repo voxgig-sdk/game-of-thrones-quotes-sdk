@@ -20,9 +20,6 @@ class GameOfThronesQuotesConfig
             ],
             "options" => [
                 "base" => "https://api.gameofthronesquotes.xyz/v1",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -69,6 +66,7 @@ class GameOfThronesQuotesConfig
                         'orig' => 'character',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                       [
                         'active' => true,
@@ -78,6 +76,7 @@ class GameOfThronesQuotesConfig
                         'orig' => 'count',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 1,
                       ],
                     ],
                   ],
@@ -183,6 +182,7 @@ class GameOfThronesQuotesConfig
                         'orig' => 'character',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -280,6 +280,7 @@ class GameOfThronesQuotesConfig
                         'orig' => 'house',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -348,6 +349,7 @@ class GameOfThronesQuotesConfig
                         'orig' => 'count',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 0,
                       ],
                     ],
                   ],

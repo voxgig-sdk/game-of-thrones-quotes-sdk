@@ -53,8 +53,7 @@ class TestAuthorEntity:
             "count": setup["idmap"]["count01"],
         }
 
-        author_ref01_list_result, err = author_ref01_ent.list(author_ref01_match, None)
-        assert err is None
+        author_ref01_list_result = author_ref01_ent.list(author_ref01_match, None)
         assert isinstance(author_ref01_list_result, list)
 
 
@@ -95,7 +94,6 @@ def _author_basic_setup(extra):
         "GAMEOFTHRONESQUOTES_TEST_AUTHOR_ENTID": idmap,
         "GAMEOFTHRONESQUOTES_TEST_LIVE": "FALSE",
         "GAMEOFTHRONESQUOTES_TEST_EXPLAIN": "FALSE",
-        "GAMEOFTHRONESQUOTES_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -106,7 +104,6 @@ def _author_basic_setup(extra):
     if env.get("GAMEOFTHRONESQUOTES_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("GAMEOFTHRONESQUOTES_APIKEY"),
             },
             extra or {},
         ])

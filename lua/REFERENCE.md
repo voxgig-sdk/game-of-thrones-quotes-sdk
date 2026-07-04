@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -96,7 +95,7 @@ same parameters as `direct()`.
 ## AuthorEntity
 
 ```lua
-local author = client:Author(nil)
+local author = client:author(nil)
 ```
 
 ### Fields
@@ -113,7 +112,7 @@ local author = client:Author(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Author():list()
+local results, err = client:author():list()
 ```
 
 ### Common Methods
@@ -149,7 +148,7 @@ Return the entity name.
 ## CharacterEntity
 
 ```lua
-local character = client:Character(nil)
+local character = client:character(nil)
 ```
 
 ### Fields
@@ -168,7 +167,7 @@ local character = client:Character(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Character():list()
+local results, err = client:character():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -176,7 +175,7 @@ local results, err = client:Character():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Character():load({ id = "character_id" })
+local result, err = client:character():load({ id = "character_id" })
 ```
 
 ### Common Methods
@@ -212,7 +211,7 @@ Return the entity name.
 ## HouseEntity
 
 ```lua
-local house = client:House(nil)
+local house = client:house(nil)
 ```
 
 ### Fields
@@ -230,7 +229,7 @@ local house = client:House(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:House():list()
+local results, err = client:house():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -238,7 +237,7 @@ local results, err = client:House():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:House():load({ id = "house_id" })
+local result, err = client:house():load({ id = "house_id" })
 ```
 
 ### Common Methods
@@ -274,7 +273,7 @@ Return the entity name.
 ## RandomEntity
 
 ```lua
-local random = client:Random(nil)
+local random = client:random(nil)
 ```
 
 ### Fields
@@ -291,7 +290,7 @@ local random = client:Random(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Random():load({ id = "random_id" })
+local result, err = client:random():load({ id = "random_id" })
 ```
 
 ### Common Methods

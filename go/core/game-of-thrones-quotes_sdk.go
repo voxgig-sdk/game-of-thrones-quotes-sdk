@@ -245,21 +245,33 @@ func (sdk *GameOfThronesQuotesSDK) Direct(fetchargs map[string]any) (map[string]
 }
 
 
+// Author returns a Author entity bound to this client.
+// Idiomatic usage: client.Author(nil).List(nil, nil) or
+// client.Author(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *GameOfThronesQuotesSDK) Author(data map[string]any) GameOfThronesQuotesEntity {
 	return NewAuthorEntityFunc(sdk, data)
 }
 
 
+// Character returns a Character entity bound to this client.
+// Idiomatic usage: client.Character(nil).List(nil, nil) or
+// client.Character(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *GameOfThronesQuotesSDK) Character(data map[string]any) GameOfThronesQuotesEntity {
 	return NewCharacterEntityFunc(sdk, data)
 }
 
 
+// House returns a House entity bound to this client.
+// Idiomatic usage: client.House(nil).List(nil, nil) or
+// client.House(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *GameOfThronesQuotesSDK) House(data map[string]any) GameOfThronesQuotesEntity {
 	return NewHouseEntityFunc(sdk, data)
 }
 
 
+// Random returns a Random entity bound to this client.
+// Idiomatic usage: client.Random(nil).List(nil, nil) or
+// client.Random(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *GameOfThronesQuotesSDK) Random(data map[string]any) GameOfThronesQuotesEntity {
 	return NewRandomEntityFunc(sdk, data)
 }

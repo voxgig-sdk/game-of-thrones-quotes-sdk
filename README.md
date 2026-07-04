@@ -10,26 +10,24 @@ This is an unofficial SDK for the Game of Thrones Quotes public API, generated b
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/game-of-thrones-quotes` | `npm install @voxgig-sdk/game-of-thrones-quotes` |
-| Python | `voxgig-sdk-game-of-thrones-quotes` | `pip install voxgig-sdk-game-of-thrones-quotes` |
-| PHP | `voxgig-sdk/game-of-thrones-quotes` | `composer require voxgig-sdk/game-of-thrones-quotes` |
-| Golang | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go` | `go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go` |
-| Ruby | `voxgig-sdk-game-of-thrones-quotes` | `gem install voxgig-sdk-game-of-thrones-quotes` |
-| Lua | `voxgig-sdk-game-of-thrones-quotes` | `luarocks install voxgig-sdk-game-of-thrones-quotes` |
+| TypeScript | `@voxgig-sdk/game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
+| Python | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
+| PHP | `voxgig-sdk/game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
+| Golang | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go` | `go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go@latest` |
+| Ruby | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
+| Lua | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
 
 ## Quickstart
 
 ### TypeScript
 
 ```ts
-import { GameOfThronesQuotesSDK } from 'game-of-thrones-quotes'
+import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
 
-const client = new GameOfThronesQuotesSDK({
-  apikey: process.env.GAME-OF-THRONES-QUOTES_APIKEY,
-})
+const client = new GameOfThronesQuotesSDK()
 
 // List all authors
-const authors = await client.Author().list()
+const authors = await client.author.list()
 console.log(authors.data)
 ```
 
@@ -71,10 +69,10 @@ The API exposes 4 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Author** |  | `/author/{character}/{count}` |
-| **Character** |  | `/characters` |
-| **House** |  | `/houses` |
-| **Random** |  | `/random/{count}` |
+| **Author** | The Author entity (list). | `/author/{character}/{count}` |
+| **Character** | The Character entity (list, load). | `/characters` |
+| **House** | The House entity (list, load). | `/houses` |
+| **Random** | The Random entity (load). | `/random/{count}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -84,15 +82,12 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
-import os
 from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 
-client = GameOfThronesQuotesSDK({
-    "apikey": os.environ.get("GAME-OF-THRONES-QUOTES_APIKEY"),
-})
+client = GameOfThronesQuotesSDK()
 
 # List all authors
-authors, err = client.Author().list()
+authors = client.author.list()
 print(authors)
 ```
 
@@ -102,12 +97,10 @@ print(authors)
 <?php
 require_once 'gameofthronesquotes_sdk.php';
 
-$client = new GameOfThronesQuotesSDK([
-    "apikey" => getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
-]);
+$client = new GameOfThronesQuotesSDK();
 
-// List all authors
-[$authors, $err] = $client->Author()->list();
+// List all authors (throws on error)
+$authors = $client->author()->list();
 print_r($authors);
 ```
 
@@ -116,9 +109,7 @@ print_r($authors);
 ```go
 import sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go"
 
-client := sdk.NewGameOfThronesQuotesSDK(map[string]any{
-    "apikey": os.Getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
-})
+client := sdk.New()
 
 // List all authors
 authors, err := client.Author(nil).List(nil, nil)
@@ -130,12 +121,10 @@ fmt.Println(authors)
 ```ruby
 require_relative "GameOfThronesQuotes_sdk"
 
-client = GameOfThronesQuotesSDK.new({
-  "apikey" => ENV["GAME-OF-THRONES-QUOTES_APIKEY"],
-})
+client = GameOfThronesQuotesSDK.new
 
 # List all authors
-authors, err = client.Author().list
+authors = client.author.list
 puts authors
 ```
 
@@ -144,12 +133,10 @@ puts authors
 ```lua
 local sdk = require("game-of-thrones-quotes_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
-})
+local client = sdk.new()
 
 -- List all authors
-local authors, err = client:Author():list()
+local authors, err = client:author():list()
 print(authors)
 ```
 
@@ -162,7 +149,7 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = GameOfThronesQuotesSDK.test()
-const result = await client.Author().load({ id: 'test01' })
+const result = await client.author.load({ id: 'test01' })
 // result.ok === true, result.data contains mock data
 ```
 
@@ -170,14 +157,14 @@ const result = await client.Author().load({ id: 'test01' })
 
 ```python
 client = GameOfThronesQuotesSDK.test()
-result, err = client.Author().load({"id": "test01"})
+result = client.author.load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
 $client = GameOfThronesQuotesSDK::test();
-[$result, $err] = $client->Author()->load(["id" => "test01"]);
+$result = $client->author()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -193,14 +180,14 @@ result, err := client.Author(nil).Load(
 
 ```ruby
 client = GameOfThronesQuotesSDK.test
-result, err = client.Author().load({ "id" => "test01" })
+result = client.author.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Author():load({ id = "test01" })
+local result, err = client:author():load({ id = "test01" })
 ```
 
 ## How it works
@@ -253,7 +240,7 @@ console.log(result.data)
 
 **Python:**
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
@@ -262,7 +249,7 @@ result, err = client.direct({
 
 **PHP:**
 ```php
-[$result, $err] = $client->direct([
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
@@ -280,7 +267,7 @@ result, err := client.Direct(map[string]any{
 
 **Ruby:**
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },

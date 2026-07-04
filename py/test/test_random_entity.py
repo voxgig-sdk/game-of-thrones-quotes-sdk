@@ -49,8 +49,7 @@ class TestRandomEntity:
         # LOAD
         random_ref01_ent = client.Random(None)
         random_ref01_match_dt0 = {}
-        random_ref01_data_dt0_loaded, err = random_ref01_ent.load(random_ref01_match_dt0, None)
-        assert err is None
+        random_ref01_data_dt0_loaded = random_ref01_ent.load(random_ref01_match_dt0, None)
         assert random_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _random_basic_setup(extra):
         "GAMEOFTHRONESQUOTES_TEST_RANDOM_ENTID": idmap,
         "GAMEOFTHRONESQUOTES_TEST_LIVE": "FALSE",
         "GAMEOFTHRONESQUOTES_TEST_EXPLAIN": "FALSE",
-        "GAMEOFTHRONESQUOTES_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _random_basic_setup(extra):
     if env.get("GAMEOFTHRONESQUOTES_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("GAMEOFTHRONESQUOTES_APIKEY"),
             },
             extra or {},
         ])

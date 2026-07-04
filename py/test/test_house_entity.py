@@ -50,14 +50,12 @@ class TestHouseEntity:
         house_ref01_ent = client.House(None)
         house_ref01_match = {}
 
-        house_ref01_list_result, err = house_ref01_ent.list(house_ref01_match, None)
-        assert err is None
+        house_ref01_list_result = house_ref01_ent.list(house_ref01_match, None)
         assert isinstance(house_ref01_list_result, list)
 
         # LOAD
         house_ref01_match_dt0 = {}
-        house_ref01_data_dt0_loaded, err = house_ref01_ent.load(house_ref01_match_dt0, None)
-        assert err is None
+        house_ref01_data_dt0_loaded = house_ref01_ent.load(house_ref01_match_dt0, None)
         assert house_ref01_data_dt0_loaded is not None
 
 
@@ -98,7 +96,6 @@ def _house_basic_setup(extra):
         "GAMEOFTHRONESQUOTES_TEST_HOUSE_ENTID": idmap,
         "GAMEOFTHRONESQUOTES_TEST_LIVE": "FALSE",
         "GAMEOFTHRONESQUOTES_TEST_EXPLAIN": "FALSE",
-        "GAMEOFTHRONESQUOTES_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -109,7 +106,6 @@ def _house_basic_setup(extra):
     if env.get("GAMEOFTHRONESQUOTES_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("GAMEOFTHRONESQUOTES_APIKEY"),
             },
             extra or {},
         ])

@@ -50,14 +50,12 @@ class HouseEntityTest extends TestCase
         $house_ref01_ent = $client->House(null);
         $house_ref01_match = [];
 
-        [$house_ref01_list_result, $err] = $house_ref01_ent->list($house_ref01_match, null);
-        $this->assertNull($err);
+        $house_ref01_list_result = $house_ref01_ent->list($house_ref01_match, null);
         $this->assertIsArray($house_ref01_list_result);
 
         // LOAD
         $house_ref01_match_dt0 = [];
-        [$house_ref01_data_dt0_loaded, $err] = $house_ref01_ent->load($house_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $house_ref01_data_dt0_loaded = $house_ref01_ent->load($house_ref01_match_dt0, null);
         $this->assertNotNull($house_ref01_data_dt0_loaded);
 
     }
@@ -92,7 +90,6 @@ function house_basic_setup($extra)
         "GAMEOFTHRONESQUOTES_TEST_HOUSE_ENTID" => $idmap,
         "GAMEOFTHRONESQUOTES_TEST_LIVE" => "FALSE",
         "GAMEOFTHRONESQUOTES_TEST_EXPLAIN" => "FALSE",
-        "GAMEOFTHRONESQUOTES_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -104,7 +101,6 @@ function house_basic_setup($extra)
     if ($env["GAMEOFTHRONESQUOTES_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["GAMEOFTHRONESQUOTES_APIKEY"],
             ],
             $extra ?? [],
         ]);

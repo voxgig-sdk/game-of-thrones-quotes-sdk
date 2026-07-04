@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -146,7 +145,7 @@ Alias for `GameOfThronesQuotesSDK.test()`.
 ## AuthorEntity
 
 ```ts
-const author = client.Author()
+const author = client.author
 ```
 
 ### Fields
@@ -163,7 +162,7 @@ const author = client.Author()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Author().list()
+const results = await client.author.list()
 ```
 
 ### Common Methods
@@ -197,7 +196,7 @@ Return a copy of the entity options.
 ## CharacterEntity
 
 ```ts
-const character = client.Character()
+const character = client.character
 ```
 
 ### Fields
@@ -216,7 +215,7 @@ const character = client.Character()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Character().list()
+const results = await client.character.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -224,7 +223,7 @@ const results = await client.Character().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Character().load({ id: 'character_id' })
+const result = await client.character.load({ id: 'character_id' })
 ```
 
 ### Common Methods
@@ -258,7 +257,7 @@ Return a copy of the entity options.
 ## HouseEntity
 
 ```ts
-const house = client.House()
+const house = client.house
 ```
 
 ### Fields
@@ -276,7 +275,7 @@ const house = client.House()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.House().list()
+const results = await client.house.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -284,7 +283,7 @@ const results = await client.House().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.House().load({ id: 'house_id' })
+const result = await client.house.load({ id: 'house_id' })
 ```
 
 ### Common Methods
@@ -318,7 +317,7 @@ Return a copy of the entity options.
 ## RandomEntity
 
 ```ts
-const random = client.Random()
+const random = client.random
 ```
 
 ### Fields
@@ -335,7 +334,7 @@ const random = client.Random()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Random().load({ id: 'random_id' })
+const result = await client.random.load({ id: 'random_id' })
 ```
 
 ### Common Methods

@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "https://api.gameofthronesquotes.xyz/v1",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },
@@ -63,6 +60,7 @@ local function make_config()
                       ["orig"] = "character",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                     {
                       ["active"] = true,
@@ -72,6 +70,7 @@ local function make_config()
                       ["orig"] = "count",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
+                      ["index$"] = 1,
                     },
                   },
                 },
@@ -177,6 +176,7 @@ local function make_config()
                       ["orig"] = "character",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                   },
                 },
@@ -274,6 +274,7 @@ local function make_config()
                       ["orig"] = "house",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                   },
                 },
@@ -342,6 +343,7 @@ local function make_config()
                       ["orig"] = "count",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
+                      ["index$"] = 0,
                     },
                   },
                 },

@@ -9,12 +9,9 @@ The Lua SDK for the GameOfThronesQuotes API — an entity-oriented client using 
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-game-of-thrones-quotes
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("game-of-thrones-quotes_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("GAME-OF-THRONES-QUOTES_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List authors
 
 ```lua
-local result, err = client:Author():list()
+local result, err = client:author():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -93,7 +88,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:GameOfThronesQuotes():load({ id = "test01" })
+local result, err = client:author():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -126,8 +121,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-GAME-OF-THRONES-QUOTES_TEST_LIVE=TRUE
-GAME-OF-THRONES-QUOTES_APIKEY=<your-key>
+GAME_OF_THRONES_QUOTES_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -150,7 +144,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -267,7 +260,7 @@ API path: `/random/{count}`
 
 ### Author
 
-Create an instance: `const author = client.Author()`
+Create an instance: `const author = client.author`
 
 #### Operations
 
@@ -285,13 +278,13 @@ Create an instance: `const author = client.Author()`
 #### Example: List
 
 ```ts
-const authors = await client.Author().list()
+const authors = await client.author.list()
 ```
 
 
 ### Character
 
-Create an instance: `const character = client.Character()`
+Create an instance: `const character = client.character`
 
 #### Operations
 
@@ -312,19 +305,19 @@ Create an instance: `const character = client.Character()`
 #### Example: Load
 
 ```ts
-const character = await client.Character().load({ id: 'character_id' })
+const character = await client.character.load({ id: 'character_id' })
 ```
 
 #### Example: List
 
 ```ts
-const characters = await client.Character().list()
+const characters = await client.character.list()
 ```
 
 
 ### House
 
-Create an instance: `const house = client.House()`
+Create an instance: `const house = client.house`
 
 #### Operations
 
@@ -344,19 +337,19 @@ Create an instance: `const house = client.House()`
 #### Example: Load
 
 ```ts
-const house = await client.House().load({ id: 'house_id' })
+const house = await client.house.load({ id: 'house_id' })
 ```
 
 #### Example: List
 
 ```ts
-const houses = await client.House().list()
+const houses = await client.house.list()
 ```
 
 
 ### Random
 
-Create an instance: `const random = client.Random()`
+Create an instance: `const random = client.random`
 
 #### Operations
 
@@ -374,7 +367,7 @@ Create an instance: `const random = client.Random()`
 #### Example: Load
 
 ```ts
-const random = await client.Random().load({ id: 'random_id' })
+const random = await client.random.load({ id: 'random_id' })
 ```
 
 
@@ -449,11 +442,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local author = client:author()
+author:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- author:data_get() now returns the loaded author data
+-- author:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
