@@ -24,6 +24,10 @@
 ---@field id string
 
 ---@class CharacterListMatch
+---@field house? table
+---@field name? string
+---@field quote? table
+---@field slug? string
 
 ---@class House
 ---@field member? table
@@ -34,6 +38,9 @@
 ---@field id string
 
 ---@class HouseListMatch
+---@field member? table
+---@field name? string
+---@field slug? string
 
 ---@class Random
 ---@field character? table

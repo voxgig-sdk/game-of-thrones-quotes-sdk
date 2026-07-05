@@ -8,7 +8,7 @@ Complete API reference for the GameOfThronesQuotes Python SDK.
 ### Constructor
 
 ```python
-from game-of-thrones-quotes_sdk import GameOfThronesQuotesSDK
+from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 
 client = GameOfThronesQuotesSDK(options)
 ```
@@ -99,17 +99,17 @@ author = client.Author()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `dict` | No |  |
+| `sentence` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Author().list({})
+results = client.Author().list()
 for author in results:
     print(author)
 ```
@@ -153,19 +153,19 @@ character = client.Character()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `house` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `quote` | ``$ARRAY`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `house` | `dict` | No |  |
+| `name` | `str` | No |  |
+| `quote` | `list` | No |  |
+| `slug` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Character().list({})
+results = client.Character().list()
 for character in results:
     print(character)
 ```
@@ -217,18 +217,18 @@ house = client.House()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `member` | `list` | No |  |
+| `name` | `str` | No |  |
+| `slug` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.House().list({})
+results = client.House().list()
 for house in results:
     print(house)
 ```
@@ -280,8 +280,8 @@ random = client.Random()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `dict` | No |  |
+| `sentence` | `str` | No |  |
 
 ### Operations
 

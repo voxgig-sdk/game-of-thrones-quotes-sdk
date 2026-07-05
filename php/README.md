@@ -4,6 +4,8 @@
 
 The PHP SDK for the GameOfThronesQuotes API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Author()` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -36,10 +38,41 @@ try {
     // list() returns an array of Author records — iterate directly.
     $authors = $client->Author()->list();
     foreach ($authors as $item) {
-        echo $item["id"] . " " . $item["name"] . "\n";
+        echo $item["character"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $authors = $client->Author()->list();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -63,7 +96,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -84,16 +120,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = GameOfThronesQuotesSDK::test([
-    "entity" => ["author" => ["test01" => ["id" => "test01"]]],
-]);
+$client = GameOfThronesQuotesSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$author = $client->Author()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$author = $client->Author()->list();
 print_r($author);
 ```
 
@@ -185,10 +218,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -282,8 +312,8 @@ Create an instance: `$author = $client->Author();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `character` | ``$OBJECT`` |  |
-| `sentence` | ``$STRING`` |  |
+| `character` | `array` |  |
+| `sentence` | `string` |  |
 
 #### Example: List
 
@@ -308,10 +338,10 @@ Create an instance: `$character = $client->Character();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `house` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `quote` | ``$ARRAY`` |  |
-| `slug` | ``$STRING`` |  |
+| `house` | `array` |  |
+| `name` | `string` |  |
+| `quote` | `array` |  |
+| `slug` | `string` |  |
 
 #### Example: Load
 
@@ -343,9 +373,9 @@ Create an instance: `$house = $client->House();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `member` | ``$ARRAY`` |  |
-| `name` | ``$STRING`` |  |
-| `slug` | ``$STRING`` |  |
+| `member` | `array` |  |
+| `name` | `string` |  |
+| `slug` | `string` |  |
 
 #### Example: Load
 
@@ -376,8 +406,8 @@ Create an instance: `$random = $client->Random();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `character` | ``$OBJECT`` |  |
-| `sentence` | ``$STRING`` |  |
+| `character` | `array` |  |
+| `sentence` | `string` |  |
 
 #### Example: Load
 
@@ -387,12 +417,16 @@ $random = $client->Random()->load(["id" => "random_id"]);
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -409,8 +443,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -454,15 +489,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $author = $client->Author();
-$author->load(["id" => "example_id"]);
+$author->list();
 
-// $author->dataGet() now returns the loaded author data
-// $author->matchGet() returns the last match criteria
+// $author->data_get() now returns the author data from the last list
+// $author->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

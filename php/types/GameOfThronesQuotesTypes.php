@@ -41,7 +41,7 @@ class CharacterLoadMatch
     public string $id;
 }
 
-/** Match filter for Character#list (any subset of Character fields). */
+/** Request payload for Character#list. */
 class CharacterListMatch
 {
     public ?array $house = null;
@@ -64,7 +64,7 @@ class HouseLoadMatch
     public string $id;
 }
 
-/** Match filter for House#list (any subset of House fields). */
+/** Request payload for House#list. */
 class HouseListMatch
 {
     public ?array $member = null;

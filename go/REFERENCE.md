@@ -109,8 +109,8 @@ author := client.Author(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `map[string]any` | No |  |
+| `sentence` | `string` | No |  |
 
 ### Operations
 
@@ -156,10 +156,10 @@ character := client.Character(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `house` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `quote` | ``$ARRAY`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `house` | `map[string]any` | No |  |
+| `name` | `string` | No |  |
+| `quote` | `[]any` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 
@@ -213,9 +213,9 @@ house := client.House(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `member` | `[]any` | No |  |
+| `name` | `string` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 
@@ -269,8 +269,8 @@ random := client.Random(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `map[string]any` | No |  |
+| `sentence` | `string` | No |  |
 
 ### Operations
 

@@ -152,8 +152,8 @@ const author = client.Author()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `Record<string, any>` | No |  |
+| `sentence` | `string` | No |  |
 
 ### Operations
 
@@ -203,10 +203,10 @@ const character = client.Character()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `house` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `quote` | ``$ARRAY`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `house` | `Record<string, any>` | No |  |
+| `name` | `string` | No |  |
+| `quote` | `any[]` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 
@@ -264,9 +264,9 @@ const house = client.House()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `member` | `any[]` | No |  |
+| `name` | `string` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 
@@ -324,8 +324,8 @@ const random = client.Random()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `Record<string, any>` | No |  |
+| `sentence` | `string` | No |  |
 
 ### Operations
 
@@ -334,7 +334,7 @@ const random = client.Random()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Random().load({ id: 'random_id' })
+const result = await client.Random().load({ id: 1 })
 ```
 
 ### Common Methods

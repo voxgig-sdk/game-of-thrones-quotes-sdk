@@ -8,7 +8,7 @@ Complete API reference for the GameOfThronesQuotes Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'game-of-thrones-quotes_sdk'
+require_relative 'GameOfThronesQuotes_sdk'
 
 client = GameOfThronesQuotesSDK.new(options)
 ```
@@ -105,17 +105,17 @@ author = client.Author
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `Hash` | No |  |
+| `sentence` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Author.list(nil)
+results = client.Author.list
 ```
 
 ### Common Methods
@@ -158,19 +158,19 @@ character = client.Character
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `house` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `quote` | ``$ARRAY`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `house` | `Hash` | No |  |
+| `name` | `String` | No |  |
+| `quote` | `Array` | No |  |
+| `slug` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Character.list(nil)
+results = client.Character.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -221,18 +221,18 @@ house = client.House
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `member` | `Array` | No |  |
+| `name` | `String` | No |  |
+| `slug` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.House.list(nil)
+results = client.House.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -283,8 +283,8 @@ random = client.Random
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `Hash` | No |  |
+| `sentence` | `String` | No |  |
 
 ### Operations
 

@@ -26,7 +26,12 @@ export interface CharacterLoadMatch {
   id: string
 }
 
-export type CharacterListMatch = Partial<Character>
+export interface CharacterListMatch {
+  house?: Record<string, any>
+  name?: string
+  quote?: any[]
+  slug?: string
+}
 
 export interface House {
   member?: any[]
@@ -38,7 +43,11 @@ export interface HouseLoadMatch {
   id: string
 }
 
-export type HouseListMatch = Partial<House>
+export interface HouseListMatch {
+  member?: any[]
+  name?: string
+  slug?: string
+}
 
 export interface Random {
   character?: Record<string, any>

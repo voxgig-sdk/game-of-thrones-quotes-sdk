@@ -102,8 +102,8 @@ local author = client:Author(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `table` | No |  |
+| `sentence` | `string` | No |  |
 
 ### Operations
 
@@ -155,10 +155,10 @@ local character = client:Character(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `house` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `quote` | ``$ARRAY`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `house` | `table` | No |  |
+| `name` | `string` | No |  |
+| `quote` | `table` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 
@@ -218,9 +218,9 @@ local house = client:House(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | ``$ARRAY`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
+| `member` | `table` | No |  |
+| `name` | `string` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 
@@ -280,8 +280,8 @@ local random = client:Random(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `character` | ``$OBJECT`` | No |  |
-| `sentence` | ``$STRING`` | No |  |
+| `character` | `table` | No |  |
+| `sentence` | `string` | No |  |
 
 ### Operations
 

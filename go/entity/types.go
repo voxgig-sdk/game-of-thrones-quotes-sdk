@@ -33,8 +33,7 @@ type CharacterLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// CharacterListMatch mirrors the character fields as an all-optional match
-// filter (Go analog of Partial<Character>).
+// CharacterListMatch is the typed request payload for Character.ListTyped.
 type CharacterListMatch struct {
 	House *map[string]any `json:"house,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -54,8 +53,7 @@ type HouseLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// HouseListMatch mirrors the house fields as an all-optional match
-// filter (Go analog of Partial<House>).
+// HouseListMatch is the typed request payload for House.ListTyped.
 type HouseListMatch struct {
 	Member *[]any `json:"member,omitempty"`
 	Name *string `json:"name,omitempty"`

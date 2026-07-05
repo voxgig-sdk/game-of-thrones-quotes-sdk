@@ -221,25 +221,25 @@ class GameOfThronesQuotesSDK:
 
 
     def Author(self, data=None) -> "AuthorEntity":
-        """Entity factory: client.Author().list({}) / client.Author().load({"id": ...})."""
+        """Entity factory: client.Author().list() / client.Author().load({"id": ...})."""
         from entity.author_entity import AuthorEntity
         return AuthorEntity(self, data)
 
 
     def Character(self, data=None) -> "CharacterEntity":
-        """Entity factory: client.Character().list({}) / client.Character().load({"id": ...})."""
+        """Entity factory: client.Character().list() / client.Character().load({"id": ...})."""
         from entity.character_entity import CharacterEntity
         return CharacterEntity(self, data)
 
 
     def House(self, data=None) -> "HouseEntity":
-        """Entity factory: client.House().list({}) / client.House().load({"id": ...})."""
+        """Entity factory: client.House().list() / client.House().load({"id": ...})."""
         from entity.house_entity import HouseEntity
         return HouseEntity(self, data)
 
 
     def Random(self, data=None) -> "RandomEntity":
-        """Entity factory: client.Random().list({}) / client.Random().load({"id": ...})."""
+        """Entity factory: client.Random().list() / client.Random().load({"id": ...})."""
         from entity.random_entity import RandomEntity
         return RandomEntity(self, data)
 

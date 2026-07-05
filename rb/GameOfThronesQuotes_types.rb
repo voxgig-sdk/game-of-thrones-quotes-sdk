@@ -64,7 +64,7 @@ CharacterLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Character#list (any subset of Character fields).
+# Request payload for Character#list.
 #
 # @!attribute [rw] house
 #   @return [Hash, nil]
@@ -111,7 +111,7 @@ HouseLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for House#list (any subset of House fields).
+# Request payload for House#list.
 #
 # @!attribute [rw] member
 #   @return [Array, nil]
