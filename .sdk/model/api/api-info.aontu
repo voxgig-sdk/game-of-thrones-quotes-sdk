@@ -15,9 +15,9 @@ main: {
           url: "https://api.gameofthronesquotes.xyz/v1"
         }
       ]
+      summary: "A free API to retrieve quotes from Game of Thrones."
       title: "Game of Thrones Quotes API"
       version: "1.0.0"
+      website: "https://gameofthronesquotes.xyz"
     }
   }
-}
-

@@ -393,7 +393,7 @@ Create an instance: `local random = client:Random(nil)`
 #### Example: Load
 
 ```lua
-local random, err = client:Random():load({ id = "random_id" })
+local random, err = client:Random():load({ id = 1 })
 ```
 
 

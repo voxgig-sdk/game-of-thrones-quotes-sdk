@@ -290,7 +290,7 @@ local random = client:Random(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Random():load({ id = "random_id" })
+local result, err = client:Random():load({ id = 1 })
 ```
 
 ### Common Methods

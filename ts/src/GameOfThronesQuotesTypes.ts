@@ -55,6 +55,6 @@ export interface Random {
 }
 
 export interface RandomLoadMatch {
-  id: number
+  id?: number
 }
 

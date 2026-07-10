@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -633,14 +630,17 @@
           "url": "https://gameofthronesquotes.xyz/"
         },
         "description": "A free API to retrieve quotes from Game of Thrones. Users can retrieve random quotes, quotes by specific characters, and information about houses and their members.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://api.gameofthronesquotes.xyz/v1"
           }
         ],
+        "summary": "A free API to retrieve quotes from Game of Thrones.",
         "title": "Game of Thrones Quotes API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://gameofthronesquotes.xyz"
       },
       "option": {},
       "target": {
@@ -693,6 +693,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -743,6 +746,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

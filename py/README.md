@@ -403,7 +403,7 @@ Create an instance: `random = client.Random()`
 #### Example: Load
 
 ```python
-random = client.Random().load({"id": "random_id"})
+random = client.Random().load({"id": 1})
 ```
 
 

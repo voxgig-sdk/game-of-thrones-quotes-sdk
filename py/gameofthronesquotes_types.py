@@ -65,5 +65,5 @@ class Random(TypedDict, total=False):
     sentence: str
 
 
-class RandomLoadMatch(TypedDict):
+class RandomLoadMatch(TypedDict, total=False):
     id: int

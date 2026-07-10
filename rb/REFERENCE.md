@@ -293,7 +293,7 @@ random = client.Random
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Random.load({ "id" => "random_id" })
+result = client.Random.load({ "id" => 1 })
 ```
 
 ### Common Methods

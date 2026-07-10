@@ -413,7 +413,7 @@ Create an instance: `$random = $client->Random();`
 
 ```php
 // load() returns the bare Random record (throws on error).
-$random = $client->Random()->load(["id" => "random_id"]);
+$random = $client->Random()->load(["id" => 1]);
 ```
 
 

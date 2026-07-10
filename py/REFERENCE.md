@@ -290,7 +290,7 @@ random = client.Random()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Random().load({"id": "random_id"})
+result = client.Random().load({"id": 1})
 ```
 
 ### Common Methods

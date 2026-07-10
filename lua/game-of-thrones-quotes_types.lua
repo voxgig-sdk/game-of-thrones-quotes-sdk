@@ -47,7 +47,7 @@
 ---@field sentence? string
 
 ---@class RandomLoadMatch
----@field id number
+---@field id? number
 
 local M = {}
 

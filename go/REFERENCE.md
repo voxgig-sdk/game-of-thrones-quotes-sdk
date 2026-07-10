@@ -103,6 +103,7 @@ same parameters as `Direct()`.
 
 ```go
 author := client.Author(nil)
+fmt.Println(author.GetName()) // "author"
 ```
 
 ### Fields
@@ -120,6 +121,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Author(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -150,6 +155,7 @@ Return the entity name.
 
 ```go
 character := client.Character(nil)
+fmt.Println(character.GetName()) // "character"
 ```
 
 ### Fields
@@ -169,6 +175,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Character(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -177,6 +187,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Character(nil).Load(map[string]any{"id": "character_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -207,6 +221,7 @@ Return the entity name.
 
 ```go
 house := client.House(nil)
+fmt.Println(house.GetName()) // "house"
 ```
 
 ### Fields
@@ -225,6 +240,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.House(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -233,6 +252,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.House(nil).Load(map[string]any{"id": "house_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -263,6 +286,7 @@ Return the entity name.
 
 ```go
 random := client.Random(nil)
+fmt.Println(random.GetName()) // "random"
 ```
 
 ### Fields
@@ -279,7 +303,11 @@ random := client.Random(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Random(nil).Load(map[string]any{"id": "random_id"}, nil)
+result, err := client.Random(nil).Load(map[string]any{"id": 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

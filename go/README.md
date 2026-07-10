@@ -442,7 +442,7 @@ Create an instance: `random := client.Random(nil)`
 #### Example: Load
 
 ```go
-random, err := client.Random(nil).Load(map[string]any{"id": "random_id"}, nil)
+random, err := client.Random(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }

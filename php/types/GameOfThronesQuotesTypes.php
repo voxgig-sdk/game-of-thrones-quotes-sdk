@@ -82,6 +82,6 @@ class Random
 /** Request payload for Random#load. */
 class RandomLoadMatch
 {
-    public int $id;
+    public ?int $id = null;
 }
 
