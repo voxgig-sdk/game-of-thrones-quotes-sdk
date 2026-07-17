@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- GameOfThronesQuotes SDK exists test
 
 local sdk = require("game-of-thrones-quotes_sdk")
 
