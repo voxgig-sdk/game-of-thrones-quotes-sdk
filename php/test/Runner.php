@@ -43,8 +43,8 @@ class GameOfThronesQuotesTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('GAMEOFTHRONESQUOTES_TEST_LIVE');
-        $override = self::getenv('GAMEOFTHRONESQUOTES_TEST_OVERRIDE');
+        $live = self::getenv('GAME_OF_THRONES_QUOTES_TEST_LIVE');
+        $override = self::getenv('GAME_OF_THRONES_QUOTES_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class GameOfThronesQuotesTestRunner
             }
         }
 
-        $explain = self::getenv('GAMEOFTHRONESQUOTES_TEST_EXPLAIN');
+        $explain = self::getenv('GAME_OF_THRONES_QUOTES_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['GAMEOFTHRONESQUOTES_TEST_EXPLAIN'] = $explain;
+            $m['GAME_OF_THRONES_QUOTES_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -3,17 +3,23 @@
     "random": {
       "RANDOM00": {
         "character": {},
-        "sentence": "s15",
+        "name": "s29",
+        "sentence": "s2a",
+        "slug": "s2b",
         "id": "RANDOM00"
       },
       "RANDOM01": {
         "character": {},
-        "sentence": "s29",
+        "name": "s51",
+        "sentence": "s52",
+        "slug": "s53",
         "id": "RANDOM01"
       },
       "RANDOM02": {
         "character": {},
-        "sentence": "s3d",
+        "name": "s79",
+        "sentence": "s7a",
+        "slug": "s7b",
         "id": "RANDOM02"
       }
     }
@@ -22,7 +28,9 @@
     "random": {
       "random_ref01": {
         "character": {},
-        "sentence": "s51"
+        "name": "sa1",
+        "sentence": "sa2",
+        "slug": "sa3"
       }
     }
   }

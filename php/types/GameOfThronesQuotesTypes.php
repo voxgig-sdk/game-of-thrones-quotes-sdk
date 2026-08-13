@@ -31,7 +31,7 @@ class Character
 {
     public ?array $house = null;
     public ?string $name = null;
-    public ?array $quote = null;
+    public ?array $quotes = null;
     public ?string $slug = null;
 }
 
@@ -46,14 +46,14 @@ class CharacterListMatch
 {
     public ?array $house = null;
     public ?string $name = null;
-    public ?array $quote = null;
+    public ?array $quotes = null;
     public ?string $slug = null;
 }
 
 /** House entity data model. */
 class House
 {
-    public ?array $member = null;
+    public ?array $members = null;
     public ?string $name = null;
     public ?string $slug = null;
 }
@@ -67,7 +67,7 @@ class HouseLoadMatch
 /** Request payload for House#list. */
 class HouseListMatch
 {
-    public ?array $member = null;
+    public ?array $members = null;
     public ?string $name = null;
     public ?string $slug = null;
 }
@@ -76,7 +76,9 @@ class HouseListMatch
 class Random
 {
     public ?array $character = null;
+    public ?string $name = null;
     public ?string $sentence = null;
+    public ?string $slug = null;
 }
 
 /** Request payload for Random#load. */

@@ -23,8 +23,8 @@ module GameOfThronesQuotesTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("GAMEOFTHRONESQUOTES_TEST_LIVE")
-    override = getenv("GAMEOFTHRONESQUOTES_TEST_OVERRIDE")
+    live = getenv("GAME_OF_THRONES_QUOTES_TEST_LIVE")
+    override = getenv("GAME_OF_THRONES_QUOTES_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module GameOfThronesQuotesTestRunner
       end
     end
 
-    explain = getenv("GAMEOFTHRONESQUOTES_TEST_EXPLAIN")
-    m["GAMEOFTHRONESQUOTES_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("GAME_OF_THRONES_QUOTES_TEST_EXPLAIN")
+    m["GAME_OF_THRONES_QUOTES_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from gameofthronesquotes_sdk.utility.voxgig_struct import voxgig_struct as vs
 from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
-from core import helpers
+from gameofthronesquotes_sdk.core import helpers
 from test import runner
 
 
@@ -102,11 +102,11 @@ def _house_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "GAMEOFTHRONESQUOTES_TEST_HOUSE_ENTID": {},
-        "GAMEOFTHRONESQUOTES_TEST_LIVE": "FALSE",
+        "GAME_OF_THRONES_QUOTES_TEST_HOUSE_ENTID": {},
+        "GAME_OF_THRONES_QUOTES_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("GAMEOFTHRONESQUOTES_TEST_LIVE") == "TRUE"
+    live = env.get("GAME_OF_THRONES_QUOTES_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

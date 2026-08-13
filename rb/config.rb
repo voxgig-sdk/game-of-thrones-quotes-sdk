@@ -75,6 +75,7 @@ module GameOfThronesQuotesConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/author/{character}/{count}",
                   "parts" => [
@@ -124,7 +125,7 @@ module GameOfThronesQuotesConfig
             },
             {
               "active" => true,
-              "name" => "quote",
+              "name" => "quotes",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 2,
@@ -146,6 +147,7 @@ module GameOfThronesQuotesConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/characters",
                   "parts" => [
@@ -181,6 +183,7 @@ module GameOfThronesQuotesConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/character/{character}",
                   "parts" => [
@@ -215,7 +218,7 @@ module GameOfThronesQuotesConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "member",
+              "name" => "members",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 0,
@@ -244,6 +247,7 @@ module GameOfThronesQuotesConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/houses",
                   "parts" => [
@@ -279,6 +283,7 @@ module GameOfThronesQuotesConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/house/{house}",
                   "parts" => [
@@ -320,10 +325,24 @@ module GameOfThronesQuotesConfig
             },
             {
               "active" => true,
-              "name" => "sentence",
+              "name" => "name",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 1,
+            },
+            {
+              "active" => true,
+              "name" => "sentence",
+              "req" => false,
+              "type" => "`$STRING`",
+              "index$" => 2,
+            },
+            {
+              "active" => true,
+              "name" => "slug",
+              "req" => false,
+              "type" => "`$STRING`",
+              "index$" => 3,
             },
           ],
           "name" => "random",
@@ -348,6 +367,7 @@ module GameOfThronesQuotesConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/random/{count}",
                   "parts" => [
@@ -373,6 +393,7 @@ module GameOfThronesQuotesConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/random",
                   "parts" => [
@@ -381,7 +402,7 @@ module GameOfThronesQuotesConfig
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.character`",
                   },
                   "index$" => 1,
                 },

@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ GameOfThronesQuotesUtility.registrar = ->(u) {
   u.prepare_params = GameOfThronesQuotesUtilities::PrepareParams
   u.prepare_path = GameOfThronesQuotesUtilities::PreparePath
   u.prepare_query = GameOfThronesQuotesUtilities::PrepareQuery
+  u.graphql_body = GameOfThronesQuotesUtilities::GraphqlBody
+  u.graphql_errors = GameOfThronesQuotesUtilities::GraphqlErrors
   u.result_basic = GameOfThronesQuotesUtilities::ResultBasic
   u.result_body = GameOfThronesQuotesUtilities::ResultBody
   u.result_headers = GameOfThronesQuotesUtilities::ResultHeaders

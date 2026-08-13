@@ -68,11 +68,11 @@ function random_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["GAMEOFTHRONESQUOTES_TEST_RANDOM_ENTID"] = {},
-    ["GAMEOFTHRONESQUOTES_TEST_LIVE"] = "FALSE",
+    ["GAME_OF_THRONES_QUOTES_TEST_RANDOM_ENTID"] = {},
+    ["GAME_OF_THRONES_QUOTES_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE"
+  local live = env["GAME_OF_THRONES_QUOTES_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'GameOfThronesQuotes',
   }
 
 
@@ -110,6 +110,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/author/{character}/{count}",
               "parts": [
@@ -159,7 +160,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "quote",
+          "name": "quotes",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 2
@@ -181,6 +182,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/characters",
               "parts": [
@@ -216,6 +218,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/character/{character}",
               "parts": [
@@ -250,7 +253,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "member",
+          "name": "members",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 0
@@ -279,6 +282,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/houses",
               "parts": [
@@ -314,6 +318,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/house/{house}",
               "parts": [
@@ -355,10 +360,24 @@ class Config {
         },
         {
           "active": true,
-          "name": "sentence",
+          "name": "name",
           "req": false,
           "type": "`$STRING`",
           "index$": 1
+        },
+        {
+          "active": true,
+          "name": "sentence",
+          "req": false,
+          "type": "`$STRING`",
+          "index$": 2
+        },
+        {
+          "active": true,
+          "name": "slug",
+          "req": false,
+          "type": "`$STRING`",
+          "index$": 3
         }
       ],
       "name": "random",
@@ -383,6 +402,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/random/{count}",
               "parts": [
@@ -408,6 +428,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/random",
               "parts": [
@@ -416,7 +437,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.character`"
               },
               "index$": 1
             }

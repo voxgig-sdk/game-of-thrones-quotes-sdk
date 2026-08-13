@@ -54,7 +54,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local authors, err = client:Author():list()
+local random, err = client:Random():load()
 if err then error(err) end
 ```
 
@@ -112,7 +112,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Author():list()
+local result, err = client:Random():load({ id = "test01" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -223,9 +223,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local author, err = client:Author():load()
+    local character, err = client:Character():load({ id = "example_id" })
     if err then error(err) end
-    -- author is the loaded record
+    -- character is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -249,7 +249,7 @@ API path: `/author/{character}/{count}`
 | --- | --- |
 | `house` |  |
 | `name` |  |
-| `quote` |  |
+| `quotes` |  |
 | `slug` |  |
 
 Operations: List, Load.
@@ -260,7 +260,7 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `member` |  |
+| `members` |  |
 | `name` |  |
 | `slug` |  |
 
@@ -273,7 +273,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
+| `name` |  |
 | `sentence` |  |
+| `slug` |  |
 
 Operations: Load.
 
@@ -325,7 +327,7 @@ Create an instance: `local character = client:Character(nil)`
 | --- | --- | --- |
 | `house` | `table` |  |
 | `name` | `string` |  |
-| `quote` | `table` |  |
+| `quotes` | `table` |  |
 | `slug` | `string` |  |
 
 #### Example: Load
@@ -356,7 +358,7 @@ Create an instance: `local house = client:House(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `member` | `table` |  |
+| `members` | `table` |  |
 | `name` | `string` |  |
 | `slug` | `string` |  |
 
@@ -388,7 +390,9 @@ Create an instance: `local random = client:Random(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `table` |  |
+| `name` | `string` |  |
 | `sentence` | `string` |  |
+| `slug` | `string` |  |
 
 #### Example: Load
 
@@ -469,15 +473,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local author = client:Author()
-author:list()
+local random = client:Random()
+random:load()
 
--- author:data_get() now returns the author data from the last list
--- author:match_get() returns the last match criteria
+-- random:data_get() now returns the random data from the last load
+-- random:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

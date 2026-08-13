@@ -159,7 +159,7 @@ $character = $client->Character();
 | --- | --- | --- | --- |
 | `house` | `array` | No |  |
 | `name` | `string` | No |  |
-| `quote` | `array` | No |  |
+| `quotes` | `array` | No |  |
 | `slug` | `string` | No |  |
 
 ### Operations
@@ -220,7 +220,7 @@ $house = $client->House();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | `array` | No |  |
+| `members` | `array` | No |  |
 | `name` | `string` | No |  |
 | `slug` | `string` | No |  |
 
@@ -283,7 +283,9 @@ $random = $client->Random();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `array` | No |  |
+| `name` | `string` | No |  |
 | `sentence` | `string` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 

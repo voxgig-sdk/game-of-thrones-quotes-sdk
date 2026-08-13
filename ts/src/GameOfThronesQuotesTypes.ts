@@ -18,7 +18,7 @@ export interface AuthorListMatch {
 export interface Character {
   house?: Record<string, any>
   name?: string
-  quote?: any[]
+  quotes?: any[]
   slug?: string
 }
 
@@ -29,12 +29,12 @@ export interface CharacterLoadMatch {
 export interface CharacterListMatch {
   house?: Record<string, any>
   name?: string
-  quote?: any[]
+  quotes?: any[]
   slug?: string
 }
 
 export interface House {
-  member?: any[]
+  members?: any[]
   name?: string
   slug?: string
 }
@@ -44,14 +44,16 @@ export interface HouseLoadMatch {
 }
 
 export interface HouseListMatch {
-  member?: any[]
+  members?: any[]
   name?: string
   slug?: string
 }
 
 export interface Random {
   character?: Record<string, any>
+  name?: string
   sentence?: string
+  slug?: string
 }
 
 export interface RandomLoadMatch {

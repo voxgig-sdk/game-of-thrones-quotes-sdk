@@ -2,19 +2,19 @@
   "existing": {
     "house": {
       "HOUSE00": {
-        "member": [],
+        "members": [],
         "name": "s1f",
         "slug": "s20",
         "id": "HOUSE00"
       },
       "HOUSE01": {
-        "member": [],
+        "members": [],
         "name": "s3d",
         "slug": "s3e",
         "id": "HOUSE01"
       },
       "HOUSE02": {
-        "member": [],
+        "members": [],
         "name": "s5b",
         "slug": "s5c",
         "id": "HOUSE02"
@@ -24,7 +24,7 @@
   "new": {
     "house": {
       "house_ref01": {
-        "member": [],
+        "members": [],
         "name": "s79",
         "slug": "s7a"
       }

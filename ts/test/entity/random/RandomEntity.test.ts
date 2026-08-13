@@ -26,8 +26,8 @@ import {
 describe('RandomEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when GAMEOFTHRONESQUOTES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('GAMEOFTHRONESQUOTES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when GAME_OF_THRONES_QUOTES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('GAME_OF_THRONES_QUOTES_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = GameOfThronesQuotesSDK.test()

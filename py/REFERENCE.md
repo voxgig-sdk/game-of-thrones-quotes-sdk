@@ -109,7 +109,7 @@ author = client.Author()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Author().list()
+results = client.Author().list({"character": "example", "count": 1})
 for author in results:
     print(author)
 ```
@@ -155,7 +155,7 @@ character = client.Character()
 | --- | --- | --- | --- |
 | `house` | `dict` | No |  |
 | `name` | `str` | No |  |
-| `quote` | `list` | No |  |
+| `quotes` | `list` | No |  |
 | `slug` | `str` | No |  |
 
 ### Operations
@@ -217,7 +217,7 @@ house = client.House()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | `list` | No |  |
+| `members` | `list` | No |  |
 | `name` | `str` | No |  |
 | `slug` | `str` | No |  |
 
@@ -281,7 +281,9 @@ random = client.Random()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `dict` | No |  |
+| `name` | `str` | No |  |
 | `sentence` | `str` | No |  |
+| `slug` | `str` | No |  |
 
 ### Operations
 

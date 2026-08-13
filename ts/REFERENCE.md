@@ -162,7 +162,7 @@ const author = client.Author()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Author().list()
+const results = await client.Author().list({ character: "example", count: 1 })
 ```
 
 ### Common Methods
@@ -205,7 +205,7 @@ const character = client.Character()
 | --- | --- | --- | --- |
 | `house` | `Record<string, any>` | No |  |
 | `name` | `string` | No |  |
-| `quote` | `any[]` | No |  |
+| `quotes` | `any[]` | No |  |
 | `slug` | `string` | No |  |
 
 ### Operations
@@ -264,7 +264,7 @@ const house = client.House()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | `any[]` | No |  |
+| `members` | `any[]` | No |  |
 | `name` | `string` | No |  |
 | `slug` | `string` | No |  |
 
@@ -325,7 +325,9 @@ const random = client.Random()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `Record<string, any>` | No |  |
+| `name` | `string` | No |  |
 | `sentence` | `string` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 

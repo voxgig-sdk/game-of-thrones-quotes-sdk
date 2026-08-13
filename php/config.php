@@ -80,6 +80,7 @@ class GameOfThronesQuotesConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/author/{character}/{count}',
                   'parts' => [
@@ -129,7 +130,7 @@ class GameOfThronesQuotesConfig
             ],
             [
               'active' => true,
-              'name' => 'quote',
+              'name' => 'quotes',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 2,
@@ -151,6 +152,7 @@ class GameOfThronesQuotesConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/characters',
                   'parts' => [
@@ -186,6 +188,7 @@ class GameOfThronesQuotesConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/character/{character}',
                   'parts' => [
@@ -220,7 +223,7 @@ class GameOfThronesQuotesConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'member',
+              'name' => 'members',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 0,
@@ -249,6 +252,7 @@ class GameOfThronesQuotesConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/houses',
                   'parts' => [
@@ -284,6 +288,7 @@ class GameOfThronesQuotesConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/house/{house}',
                   'parts' => [
@@ -325,10 +330,24 @@ class GameOfThronesQuotesConfig
             ],
             [
               'active' => true,
-              'name' => 'sentence',
+              'name' => 'name',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
+            ],
+            [
+              'active' => true,
+              'name' => 'sentence',
+              'req' => false,
+              'type' => '`$STRING`',
+              'index$' => 2,
+            ],
+            [
+              'active' => true,
+              'name' => 'slug',
+              'req' => false,
+              'type' => '`$STRING`',
+              'index$' => 3,
             ],
           ],
           'name' => 'random',
@@ -353,6 +372,7 @@ class GameOfThronesQuotesConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/random/{count}',
                   'parts' => [
@@ -378,6 +398,7 @@ class GameOfThronesQuotesConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/random',
                   'parts' => [
@@ -386,7 +407,7 @@ class GameOfThronesQuotesConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.character`',
                   ],
                   'index$' => 1,
                 ],

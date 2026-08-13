@@ -62,8 +62,8 @@ function makeCtrl(explain: boolean) {
 // Overrides configuration values with environment variables if available
 function envOverride(m: Record<string, any>) {
   if (
-    'TRUE' === process.env.GAMEOFTHRONESQUOTES_TEST_LIVE ||
-    'TRUE' === process.env.GAMEOFTHRONESQUOTES_TEST_OVERRIDE
+    'TRUE' === process.env.GAME_OF_THRONES_QUOTES_TEST_LIVE ||
+    'TRUE' === process.env.GAME_OF_THRONES_QUOTES_TEST_OVERRIDE
   ) {
     Object.entries(m).map(n => {
       let envval = process.env[n[0]]
@@ -74,7 +74,7 @@ function envOverride(m: Record<string, any>) {
     })
   }
 
-  m.GAMEOFTHRONESQUOTES_TEST_EXPLAIN = process.env.GAMEOFTHRONESQUOTES_TEST_EXPLAIN || m.GAMEOFTHRONESQUOTES_TEST_EXPLAIN
+  m.GAME_OF_THRONES_QUOTES_TEST_EXPLAIN = process.env.GAME_OF_THRONES_QUOTES_TEST_EXPLAIN || m.GAME_OF_THRONES_QUOTES_TEST_EXPLAIN
 
   return m
 }

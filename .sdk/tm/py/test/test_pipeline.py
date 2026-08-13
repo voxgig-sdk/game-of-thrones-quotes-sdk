@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import GameOfThronesQuotesSDK
-from core.error import GameOfThronesQuotesError
-from core.result import GameOfThronesQuotesResult
-from core.response import GameOfThronesQuotesResponse
-from core.spec import GameOfThronesQuotesSpec
-from feature.base_feature import GameOfThronesQuotesBaseFeature
+from projectname_sdk.core.error import GameOfThronesQuotesError
+from projectname_sdk.core.result import GameOfThronesQuotesResult
+from projectname_sdk.core.response import GameOfThronesQuotesResponse
+from projectname_sdk.core.spec import GameOfThronesQuotesSpec
+from projectname_sdk.feature.base_feature import GameOfThronesQuotesBaseFeature
 
 
 def _client():

@@ -16,7 +16,7 @@ main: kit: entity: character: {
       type: "`$STRING`"
     }
     {
-      name: "quote"
+      name: "quotes"
       req: false
       type: "`$ARRAY`"
     }

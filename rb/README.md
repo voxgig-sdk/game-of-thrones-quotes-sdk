@@ -51,9 +51,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  authors = client.Author.list()
+  random = client.Random.load()
 rescue => err
-  warn "list failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -114,14 +114,18 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = GameOfThronesQuotesSDK.test
+client = GameOfThronesQuotesSDK.test({
+  "entity" => { "random" => { "test01" => { "id" => "test01" } } },
+})
 
-# Entity ops return the bare mock record (raises on error).
-author = client.Author.list()
-puts author
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+random = client.Random.load({ "id" => "test01" })
+puts random
 ```
 
 ### Use a custom fetch function
@@ -253,7 +257,7 @@ API path: `/author/{character}/{count}`
 | --- | --- |
 | `house` |  |
 | `name` |  |
-| `quote` |  |
+| `quotes` |  |
 | `slug` |  |
 
 Operations: List, Load.
@@ -264,7 +268,7 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `member` |  |
+| `members` |  |
 | `name` |  |
 | `slug` |  |
 
@@ -277,7 +281,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
+| `name` |  |
 | `sentence` |  |
+| `slug` |  |
 
 Operations: Load.
 
@@ -330,13 +336,13 @@ Create an instance: `character = client.Character`
 | --- | --- | --- |
 | `house` | `Hash` |  |
 | `name` | `String` |  |
-| `quote` | `Array` |  |
+| `quotes` | `Array` |  |
 | `slug` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Character record (raises on error).
+# load returns the ENTITY — call data_get for the Character record (raises on error).
 character = client.Character.load({ "id" => "character_id" })
 ```
 
@@ -363,14 +369,14 @@ Create an instance: `house = client.House`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `member` | `Array` |  |
+| `members` | `Array` |  |
 | `name` | `String` |  |
 | `slug` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare House record (raises on error).
+# load returns the ENTITY — call data_get for the House record (raises on error).
 house = client.House.load({ "id" => "house_id" })
 ```
 
@@ -397,12 +403,14 @@ Create an instance: `random = client.Random`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `Hash` |  |
+| `name` | `String` |  |
 | `sentence` | `String` |  |
+| `slug` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Random record (raises on error).
+# load returns the ENTITY — call data_get for the Random record (raises on error).
 random = client.Random.load({ "id" => 1 })
 ```
 
@@ -479,15 +487,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-author = client.Author
-author.list()
+random = client.Random
+random.load()
 
-# author.data_get now returns the author data from the last list
-# author.match_get returns the last match criteria
+# random.data_get now returns the random data from the last load
+# random.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

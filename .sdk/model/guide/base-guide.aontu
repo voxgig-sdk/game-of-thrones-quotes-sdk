@@ -34,6 +34,7 @@ guide: {
   entity: random: {
     path: "/random": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.character`")|top
     }
     path: "/random/{count}": {
       rename: param: "count": *"id"

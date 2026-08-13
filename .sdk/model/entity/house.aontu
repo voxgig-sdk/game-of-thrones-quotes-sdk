@@ -6,7 +6,7 @@ main: kit: entity: house: {
 
   fields: [
     {
-      name: "member"
+      name: "members"
       req: false
       type: "`$ARRAY`"
     }

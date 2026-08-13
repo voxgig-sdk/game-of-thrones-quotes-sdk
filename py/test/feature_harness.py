@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import GameOfThronesQuotesControl
-from core.error import GameOfThronesQuotesError
-from core.result import GameOfThronesQuotesResult
-from core.spec import GameOfThronesQuotesSpec
+from gameofthronesquotes_sdk.config import make_config
+from gameofthronesquotes_sdk.features import _make_feature
+from gameofthronesquotes_sdk.core.control import GameOfThronesQuotesControl
+from gameofthronesquotes_sdk.core.error import GameOfThronesQuotesError
+from gameofthronesquotes_sdk.core.result import GameOfThronesQuotesResult
+from gameofthronesquotes_sdk.core.spec import GameOfThronesQuotesSpec
 
 
 # True when this SDK was generated with the named feature.

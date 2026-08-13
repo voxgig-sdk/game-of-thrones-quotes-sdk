@@ -160,7 +160,7 @@ character = client.Character
 | --- | --- | --- | --- |
 | `house` | `Hash` | No |  |
 | `name` | `String` | No |  |
-| `quote` | `Array` | No |  |
+| `quotes` | `Array` | No |  |
 | `slug` | `String` | No |  |
 
 ### Operations
@@ -221,7 +221,7 @@ house = client.House
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | `Array` | No |  |
+| `members` | `Array` | No |  |
 | `name` | `String` | No |  |
 | `slug` | `String` | No |  |
 
@@ -284,7 +284,9 @@ random = client.Random
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `Hash` | No |  |
+| `name` | `String` | No |  |
 | `sentence` | `String` | No |  |
+| `slug` | `String` | No |  |
 
 ### Operations
 

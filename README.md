@@ -23,7 +23,7 @@ support (`list`, `load`):
 
 ```ts
 const client = new GameOfThronesQuotesSDK()
-const items = await client.Author().list()
+const items = await client.Author().list({ character: "example", count: 1 })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = GameOfThronesQuotesSDK.test()
-const authors = await client.Author().list()
-// authors is an array of bare Author records populated with mock data
-console.log(authors)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = GameOfThronesQuotesSDK.test({
+  entity: {
+    random: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const random = await client.Random().load({ id: 1 })
+// random is the Random entity, populated with mock data
+// — call random.data() for the record itself
+console.log(random)
 ```
 
 ### Python
 
 ```python
 client = GameOfThronesQuotesSDK.test()
-authors = client.Author().list()
-print(authors)
+random = client.Random().load({"id": "test01"})
+print(random)
 ```
 
 ### PHP
@@ -57,17 +66,17 @@ print(authors)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = GameOfThronesQuotesSDK::test([
-    "entity" => ["author" => ["test01" => []]],
+    "entity" => ["random" => ["test01" => ["id" => "test01"]]],
 ]);
-$authors = $client->Author()->list();
+$random = $client->Random()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Author(nil).List(
-    nil, nil,
+result, err := client.Random(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 ```
 
@@ -76,16 +85,16 @@ result, err := client.Author(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = GameOfThronesQuotesSDK.test({
-  "entity" => { "author" => { "test01" => {} } },
+  "entity" => { "random" => { "test01" => { "id" => "test01" } } },
 })
-authors = client.Author.list()
+random = client.Random.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Author():list()
+local result, err = client:Random():load({ id = "test01" })
 ```
 
 ## Packages
@@ -110,8 +119,8 @@ import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
 
 const client = new GameOfThronesQuotesSDK()
 
-// List all authors (returns Author[])
-const authors = await client.Author().list()
+// List all authors (returns AuthorEntity[] — .data() for the record)
+const authors = await client.Author().list({ character: "example", count: 1 })
 for (const author of authors) {
   console.log(author)
 }
@@ -173,7 +182,7 @@ from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 client = GameOfThronesQuotesSDK()
 
 # List all authors (returns a list, raises on error)
-authors = client.Author().list()
+authors = client.Author().list({"character": "example", "count": 1})
 for author in authors:
     print(author)
 ```
@@ -346,6 +355,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://gameofthronesquotes.xyz/](https://gameofthronesquotes.xyz/)
 

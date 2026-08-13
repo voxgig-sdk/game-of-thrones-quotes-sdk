@@ -68,12 +68,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-authors, err := client.Author(nil).List(nil, nil)
+random, err := client.Random(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = authors
+_ = random
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -137,13 +137,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-author, err := client.Author(nil).List(
-    nil, nil,
+random, err := client.Random(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(author) // the returned mock data
+fmt.Println(random) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -278,7 +278,7 @@ API path: `/author/{character}/{count}`
 | --- | --- |
 | `"house"` |  |
 | `"name"` |  |
-| `"quote"` |  |
+| `"quotes"` |  |
 | `"slug"` |  |
 
 Operations: List, Load.
@@ -289,7 +289,7 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `"member"` |  |
+| `"members"` |  |
 | `"name"` |  |
 | `"slug"` |  |
 
@@ -302,7 +302,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `"character"` |  |
+| `"name"` |  |
 | `"sentence"` |  |
+| `"slug"` |  |
 
 Operations: Load.
 
@@ -358,7 +360,7 @@ Create an instance: `character := client.Character(nil)`
 | --- | --- | --- |
 | `house` | `map[string]any` |  |
 | `name` | `string` |  |
-| `quote` | `[]any` |  |
+| `quotes` | `[]any` |  |
 | `slug` | `string` |  |
 
 #### Example: Load
@@ -397,7 +399,7 @@ Create an instance: `house := client.House(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `member` | `[]any` |  |
+| `members` | `[]any` |  |
 | `name` | `string` |  |
 | `slug` | `string` |  |
 
@@ -437,7 +439,9 @@ Create an instance: `random := client.Random(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `map[string]any` |  |
+| `name` | `string` |  |
 | `sentence` | `string` |  |
+| `slug` | `string` |  |
 
 #### Example: Load
 
@@ -519,15 +523,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `List`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-author := client.Author(nil)
-author.List(nil, nil)
+random := client.Random(nil)
+random.Load(nil, nil)
 
-// author.Data() now returns the author data from the last list
-// author.Match() returns the last match criteria
+// random.Data() now returns the random data from the last load
+// random.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

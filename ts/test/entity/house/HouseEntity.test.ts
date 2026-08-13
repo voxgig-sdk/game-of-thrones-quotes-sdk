@@ -26,8 +26,8 @@ import {
 describe('HouseEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when GAMEOFTHRONESQUOTES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('GAMEOFTHRONESQUOTES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when GAME_OF_THRONES_QUOTES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('GAME_OF_THRONES_QUOTES_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = GameOfThronesQuotesSDK.test()
@@ -63,7 +63,7 @@ describe('HouseEntity', async () => {
     const house_ref01_ent = client.House()
     const house_ref01_match: any = {}
 
-    const house_ref01_list = await house_ref01_ent.list(house_ref01_match)
+    const house_ref01_list = (await house_ref01_ent.list(house_ref01_match)).map((e: any) => e.data())
 
 
 

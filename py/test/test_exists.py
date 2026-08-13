@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# GameOfThronesQuotes SDK exists test
 
 import pytest
 from gameofthronesquotes_sdk import GameOfThronesQuotesSDK

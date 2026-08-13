@@ -119,11 +119,11 @@ function character_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "GAMEOFTHRONESQUOTES_TEST_CHARACTER_ENTID" => [],
-        "GAMEOFTHRONESQUOTES_TEST_LIVE" => "FALSE",
+        "GAME_OF_THRONES_QUOTES_TEST_CHARACTER_ENTID" => [],
+        "GAME_OF_THRONES_QUOTES_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["GAMEOFTHRONESQUOTES_TEST_LIVE"] === "TRUE";
+    $live = $env["GAME_OF_THRONES_QUOTES_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

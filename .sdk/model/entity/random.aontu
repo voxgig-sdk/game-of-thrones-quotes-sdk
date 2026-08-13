@@ -11,7 +11,17 @@ main: kit: entity: random: {
       type: "`$OBJECT`"
     }
     {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "sentence"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "slug"
       req: false
       type: "`$STRING`"
     }
@@ -64,7 +74,7 @@ main: kit: entity: random: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.character`"
           }
         }
       ]

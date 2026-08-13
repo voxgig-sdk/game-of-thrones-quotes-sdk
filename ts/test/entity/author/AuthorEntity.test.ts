@@ -26,8 +26,8 @@ import {
 describe('AuthorEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when GAMEOFTHRONESQUOTES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('GAMEOFTHRONESQUOTES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when GAME_OF_THRONES_QUOTES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('GAME_OF_THRONES_QUOTES_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = GameOfThronesQuotesSDK.test()
@@ -65,7 +65,7 @@ describe('AuthorEntity', async () => {
     author_ref01_match['character'] = setup.idmap['character01']
     author_ref01_match['count'] = setup.idmap['count01']
 
-    const author_ref01_list = await author_ref01_ent.list(author_ref01_match)
+    const author_ref01_list = (await author_ref01_ent.list(author_ref01_match)).map((e: any) => e.data())
 
 
   })

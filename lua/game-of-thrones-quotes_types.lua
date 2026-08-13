@@ -17,7 +17,7 @@
 ---@class Character
 ---@field house? table
 ---@field name? string
----@field quote? table
+---@field quotes? table
 ---@field slug? string
 
 ---@class CharacterLoadMatch
@@ -26,11 +26,11 @@
 ---@class CharacterListMatch
 ---@field house? table
 ---@field name? string
----@field quote? table
+---@field quotes? table
 ---@field slug? string
 
 ---@class House
----@field member? table
+---@field members? table
 ---@field name? string
 ---@field slug? string
 
@@ -38,13 +38,15 @@
 ---@field id string
 
 ---@class HouseListMatch
----@field member? table
+---@field members? table
 ---@field name? string
 ---@field slug? string
 
 ---@class Random
 ---@field character? table
+---@field name? string
 ---@field sentence? string
+---@field slug? string
 
 ---@class RandomLoadMatch
 ---@field id? number

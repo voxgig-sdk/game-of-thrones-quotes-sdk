@@ -43,7 +43,7 @@ error — iterate it directly.
 
 ```python
 try:
-    authors = client.Author().list()
+    authors = client.Author().list({"character": "example", "count": 1})
     for author in authors:
         print(author)
 except Exception as err:
@@ -57,10 +57,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    authors = client.Author().list()
-    print(authors)
+    random = client.Random().load()
+    print(random)
 except Exception as err:
-    print(f"list failed: {err}")
+    print(f"load failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -124,9 +124,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = GameOfThronesQuotesSDK.test()
 
-# Entity ops return the bare record and raise on error.
-author = client.Author().list()
-# author contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+random = client.Random().load({"id": "test01"})
+# random contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -224,7 +225,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -259,7 +260,7 @@ API path: `/author/{character}/{count}`
 | --- | --- |
 | `house` |  |
 | `name` |  |
-| `quote` |  |
+| `quotes` |  |
 | `slug` |  |
 
 Operations: List, Load.
@@ -270,7 +271,7 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `member` |  |
+| `members` |  |
 | `name` |  |
 | `slug` |  |
 
@@ -283,7 +284,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
+| `name` |  |
 | `sentence` |  |
+| `slug` |  |
 
 Operations: Load.
 
@@ -314,7 +317,7 @@ Create an instance: `author = client.Author()`
 #### Example: List
 
 ```python
-authors = client.Author().list()
+authors = client.Author().list({"character": "example", "count": 1})
 ```
 
 
@@ -335,7 +338,7 @@ Create an instance: `character = client.Character()`
 | --- | --- | --- |
 | `house` | `dict` |  |
 | `name` | `str` |  |
-| `quote` | `list` |  |
+| `quotes` | `list` |  |
 | `slug` | `str` |  |
 
 #### Example: Load
@@ -366,7 +369,7 @@ Create an instance: `house = client.House()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `member` | `list` |  |
+| `members` | `list` |  |
 | `name` | `str` |  |
 | `slug` | `str` |  |
 
@@ -398,7 +401,9 @@ Create an instance: `random = client.Random()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `dict` |  |
+| `name` | `str` |  |
 | `sentence` | `str` |  |
+| `slug` | `str` |  |
 
 #### Example: Load
 
@@ -478,15 +483,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-author = client.Author()
-author.list()
+random = client.Random()
+random.load()
 
-# author.data_get() now returns the author data from the last list
-# author.match_get() returns the last match criteria
+# random.data_get() now returns the random data from the last load
+# random.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -35,10 +35,12 @@ const client = new GameOfThronesQuotesSDK()
 
 ### 2. List author records
 
-`list()` resolves to an array of Author objects — iterate it directly:
+`list()` resolves to an array of Author ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
-const authors = await client.Author().list()
+const authors = await client.Author().list({ character: "example", count: 1 })
 
 for (const author of authors) {
   console.log(author)
@@ -52,10 +54,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const authors = await client.Author().list()
-  console.log(authors)
+  const random = await client.Random().load()
+  console.log(random)
 } catch (err) {
-  console.error('list failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -119,9 +121,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = GameOfThronesQuotesSDK.test()
 
-const author = await client.Author().list()
-// author is a bare entity populated with mock response data
-console.log(author)
+const random = await client.Random().load({ id: 1 })
+// random is the entity, populated with mock response data
+// — call random.data() for the record itself
+console.log(random)
 ```
 
 You can also use the instance method:
@@ -136,10 +139,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Author()
+const entity = client.Random()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.load({ id: 1 })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -302,7 +305,7 @@ API path: `/author/{character}/{count}`
 | --- | --- |
 | `house` |  |
 | `name` |  |
-| `quote` |  |
+| `quotes` |  |
 | `slug` |  |
 
 Operations: list, load.
@@ -313,7 +316,7 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `member` |  |
+| `members` |  |
 | `name` |  |
 | `slug` |  |
 
@@ -326,7 +329,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
+| `name` |  |
 | `sentence` |  |
+| `slug` |  |
 
 Operations: load.
 
@@ -357,7 +362,7 @@ Create an instance: `const author = client.Author()`
 #### Example: List
 
 ```ts
-const authors = await client.Author().list()
+const authors = await client.Author().list({ character: "example", count: 1 })
 ```
 
 
@@ -378,7 +383,7 @@ Create an instance: `const character = client.Character()`
 | --- | --- | --- |
 | `house` | `Record<string, any>` |  |
 | `name` | `string` |  |
-| `quote` | `any[]` |  |
+| `quotes` | `any[]` |  |
 | `slug` | `string` |  |
 
 #### Example: Load
@@ -409,7 +414,7 @@ Create an instance: `const house = client.House()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `member` | `any[]` |  |
+| `members` | `any[]` |  |
 | `name` | `string` |  |
 | `slug` | `string` |  |
 
@@ -441,7 +446,9 @@ Create an instance: `const random = client.Random()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `Record<string, any>` |  |
+| `name` | `string` |  |
 | `sentence` | `string` |  |
+| `slug` | `string` |  |
 
 #### Example: Load
 
@@ -514,16 +521,16 @@ import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const author = client.Author()
-await author.list()
+const random = client.Random()
+await random.load()
 
-// author.data() now returns the author data from the last `list`
-// author.match() returns the last match criteria
+// random.data() now returns the random data from the last `load`
+// random.match() returns { id: 1 }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

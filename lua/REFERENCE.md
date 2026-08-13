@@ -157,7 +157,7 @@ local character = client:Character(nil)
 | --- | --- | --- | --- |
 | `house` | `table` | No |  |
 | `name` | `string` | No |  |
-| `quote` | `table` | No |  |
+| `quotes` | `table` | No |  |
 | `slug` | `string` | No |  |
 
 ### Operations
@@ -218,7 +218,7 @@ local house = client:House(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | `table` | No |  |
+| `members` | `table` | No |  |
 | `name` | `string` | No |  |
 | `slug` | `string` | No |  |
 
@@ -281,7 +281,9 @@ local random = client:Random(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `table` | No |  |
+| `name` | `string` | No |  |
 | `sentence` | `string` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 

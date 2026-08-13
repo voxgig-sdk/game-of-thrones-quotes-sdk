@@ -4,21 +4,21 @@
       "CHARACTER00": {
         "house": {},
         "name": "s29",
-        "quote": [],
+        "quotes": [],
         "slug": "s2b",
         "id": "CHARACTER00"
       },
       "CHARACTER01": {
         "house": {},
         "name": "s51",
-        "quote": [],
+        "quotes": [],
         "slug": "s53",
         "id": "CHARACTER01"
       },
       "CHARACTER02": {
         "house": {},
         "name": "s79",
-        "quote": [],
+        "quotes": [],
         "slug": "s7b",
         "id": "CHARACTER02"
       }
@@ -29,7 +29,7 @@
       "character_ref01": {
         "house": {},
         "name": "sa1",
-        "quote": [],
+        "quotes": [],
         "slug": "sa3"
       }
     }

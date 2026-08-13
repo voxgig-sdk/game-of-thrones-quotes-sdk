@@ -74,6 +74,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/author/{character}/{count}",
                 ["parts"] = {
@@ -123,7 +124,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "quote",
+            ["name"] = "quotes",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 2,
@@ -145,6 +146,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/characters",
                 ["parts"] = {
@@ -180,6 +182,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/character/{character}",
                 ["parts"] = {
@@ -214,7 +217,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "member",
+            ["name"] = "members",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
@@ -243,6 +246,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/houses",
                 ["parts"] = {
@@ -278,6 +282,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/house/{house}",
                 ["parts"] = {
@@ -319,10 +324,24 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "sentence",
+            ["name"] = "name",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 1,
+          },
+          {
+            ["active"] = true,
+            ["name"] = "sentence",
+            ["req"] = false,
+            ["type"] = "`$STRING`",
+            ["index$"] = 2,
+          },
+          {
+            ["active"] = true,
+            ["name"] = "slug",
+            ["req"] = false,
+            ["type"] = "`$STRING`",
+            ["index$"] = 3,
           },
         },
         ["name"] = "random",
@@ -347,6 +366,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/random/{count}",
                 ["parts"] = {
@@ -372,6 +392,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/random",
                 ["parts"] = {
@@ -380,7 +401,7 @@ local function make_config()
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.character`",
                 },
                 ["index$"] = 1,
               },

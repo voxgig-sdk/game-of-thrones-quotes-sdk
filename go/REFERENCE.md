@@ -164,7 +164,7 @@ fmt.Println(character.GetName()) // "character"
 | --- | --- | --- | --- |
 | `house` | `map[string]any` | No |  |
 | `name` | `string` | No |  |
-| `quote` | `[]any` | No |  |
+| `quotes` | `[]any` | No |  |
 | `slug` | `string` | No |  |
 
 ### Operations
@@ -228,7 +228,7 @@ fmt.Println(house.GetName()) // "house"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `member` | `[]any` | No |  |
+| `members` | `[]any` | No |  |
 | `name` | `string` | No |  |
 | `slug` | `string` | No |  |
 
@@ -294,7 +294,9 @@ fmt.Println(random.GetName()) // "random"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `map[string]any` | No |  |
+| `name` | `string` | No |  |
 | `sentence` | `string` | No |  |
+| `slug` | `string` | No |  |
 
 ### Operations
 

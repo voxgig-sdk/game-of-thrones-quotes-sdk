@@ -55,9 +55,10 @@ func TestAuthorDirect(t *testing.T) {
 			"params": params,
 		})
 		if setup.live {
-			// Live mode is lenient: synthetic IDs frequently 4xx and the
-			// list-response shape varies wildly across public APIs. Skip
-			// rather than fail when the call doesn't return a usable list.
+			// Live-mode leniency is a model decision
+			// (main.kit.test.live.strict): synthetic IDs 4xx constantly
+			// against an arbitrary public API, so the default SKIPS here.
+			// A project that owns its test server sets strict and FAILS.
 			if err != nil {
 				t.Skipf("list call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -124,11 +125,11 @@ func authorDirectSetup(mockres any) *authorDirectSetupResult {
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"GAMEOFTHRONESQUOTES_TEST_AUTHOR_ENTID": map[string]any{},
-		"GAMEOFTHRONESQUOTES_TEST_LIVE":    "FALSE",
+		"GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID": map[string]any{},
+		"GAME_OF_THRONES_QUOTES_TEST_LIVE":    "FALSE",
 	})
 
-	live := env["GAMEOFTHRONESQUOTES_TEST_LIVE"] == "TRUE"
+	live := env["GAME_OF_THRONES_QUOTES_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
@@ -136,7 +137,7 @@ func authorDirectSetup(mockres any) *authorDirectSetupResult {
 		client := sdk.NewGameOfThronesQuotesSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["GAMEOFTHRONESQUOTES_TEST_AUTHOR_ENTID"]; ok {
+		if entidRaw, ok := env["GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
