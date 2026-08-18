@@ -57,7 +57,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    random = client.Random().load()
+    random = client.Random().load({"id": 1})
     print(random)
 except Exception as err:
     print(f"load failed: {err}")
@@ -488,7 +488,7 @@ stores the returned data and match criteria internally.
 
 ```python
 random = client.Random()
-random.load()
+random.load({"id": 1})
 
 # random.data_get() now returns the random data from the last load
 # random.match_get() returns the last match criteria

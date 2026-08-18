@@ -54,7 +54,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local random, err = client:Random():load()
+local random, err = client:Random():load({ id = 1 })
 if err then error(err) end
 ```
 
@@ -478,7 +478,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local random = client:Random()
-random:load()
+random:load({ id = 1 })
 
 -- random:data_get() now returns the random data from the last load
 -- random:match_get() returns the last match criteria

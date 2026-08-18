@@ -15,7 +15,7 @@ require_relative "../GameOfThronesQuotes_sdk"
 module GameOfThronesQuotesFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = GameOfThronesQuotesConfig.make_config["feature"]
+    f = GameOfThronesQuotesConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

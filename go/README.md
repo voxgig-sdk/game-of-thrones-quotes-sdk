@@ -68,7 +68,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-random, err := client.Random(nil).Load(nil, nil)
+random, err := client.Random(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     // handle err
     return
@@ -528,7 +528,7 @@ stores the returned data and match criteria internally.
 
 ```go
 random := client.Random(nil)
-random.Load(nil, nil)
+random.Load(map[string]any{"id": 1}, nil)
 
 // random.Data() now returns the random data from the last load
 // random.Match() returns the last match criteria

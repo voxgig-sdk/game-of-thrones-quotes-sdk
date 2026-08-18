@@ -40,7 +40,7 @@ class GameOfThronesQuotesSDK
         $utility = new GameOfThronesQuotesUtility();
         $this->_utility = $utility;
 
-        $config = GameOfThronesQuotesConfig::make_config();
+        $config = GameOfThronesQuotesConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

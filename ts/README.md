@@ -54,7 +54,7 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const random = await client.Random().load()
+  const random = await client.Random().load({ id: 1 })
   console.log(random)
 } catch (err) {
   console.error('load failed:', err)
@@ -527,7 +527,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const random = client.Random()
-await random.load()
+await random.load({ id: 1 })
 
 // random.data() now returns the random data from the last `load`
 // random.match() returns { id: 1 }

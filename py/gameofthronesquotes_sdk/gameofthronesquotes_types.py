@@ -67,5 +67,5 @@ class Random(TypedDict, total=False):
     slug: str
 
 
-class RandomLoadMatch(TypedDict, total=False):
+class RandomLoadMatch(TypedDict):
     id: int

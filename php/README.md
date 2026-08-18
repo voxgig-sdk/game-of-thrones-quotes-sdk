@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $random = $client->Random()->load();
+    $random = $client->Random()->load(["id" => 1]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -502,7 +502,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $random = $client->Random();
-$random->load();
+$random->load(["id" => 1]);
 
 // $random->data_get() now returns the random data from the last load
 // $random->match_get() returns the last match criteria

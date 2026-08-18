@@ -152,7 +152,7 @@ RandomType = Struct.new(
 # Request payload for Random#load.
 #
 # @!attribute [rw] id
-#   @return [Integer, nil]
+#   @return [Integer]
 RandomLoadMatch = Struct.new(
   :id,
   keyword_init: true
