@@ -33,6 +33,9 @@ class GameOfThronesQuotesConfig
         return [
             "main" => [
                 "name" => "GameOfThronesQuotes",
+                "slug" => "game-of-thrones-quotes",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -62,6 +65,7 @@ class GameOfThronesQuotesConfig
             ],
             [
               'name' => 'sentence',
+              'short' => 'The quote text',
               'type' => '`$STRING`',
             ],
           ],
@@ -130,14 +134,17 @@ class GameOfThronesQuotesConfig
             ],
             [
               'name' => 'name',
+              'short' => 'Full name of the character',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'quotes',
+              'short' => 'Quotes by this character',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'slug',
+              'short' => 'URL-friendly identifier for the character',
               'type' => '`$STRING`',
             ],
           ],
@@ -213,14 +220,17 @@ class GameOfThronesQuotesConfig
           'fields' => [
             [
               'name' => 'members',
+              'short' => 'Members belonging to this house',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'name',
+              'short' => 'Full name of the house',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'slug',
+              'short' => 'URL-friendly identifier for the house',
               'type' => '`$STRING`',
             ],
           ],
@@ -300,14 +310,17 @@ class GameOfThronesQuotesConfig
             ],
             [
               'name' => 'name',
+              'short' => 'Full name of the character',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'sentence',
+              'short' => 'The quote text',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'slug',
+              'short' => 'URL-friendly identifier for the character',
               'type' => '`$STRING`',
             ],
           ],

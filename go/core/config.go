@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "GameOfThronesQuotes",
+			"slug": "game-of-thrones-quotes",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -40,6 +43,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "sentence",
+						"short": "The quote text",
 						"type": "`$STRING`",
 					},
 				},
@@ -108,14 +112,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Full name of the character",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "quotes",
+						"short": "Quotes by this character",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "slug",
+						"short": "URL-friendly identifier for the character",
 						"type": "`$STRING`",
 					},
 				},
@@ -191,14 +198,17 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "members",
+						"short": "Members belonging to this house",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Full name of the house",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "slug",
+						"short": "URL-friendly identifier for the house",
 						"type": "`$STRING`",
 					},
 				},
@@ -278,14 +288,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Full name of the character",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "sentence",
+						"short": "The quote text",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "slug",
+						"short": "URL-friendly identifier for the character",
 						"type": "`$STRING`",
 					},
 				},

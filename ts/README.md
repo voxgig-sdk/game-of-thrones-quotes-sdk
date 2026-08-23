@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -293,7 +293,7 @@ The `prepare()` method returns:
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `sentence` |  |
+| `sentence` | The quote text |
 
 Operations: list.
 
@@ -304,9 +304,9 @@ API path: `/author/{character}/{count}`
 | Field | Description |
 | --- | --- |
 | `house` |  |
-| `name` |  |
-| `quotes` |  |
-| `slug` |  |
+| `name` | Full name of the character |
+| `quotes` | Quotes by this character |
+| `slug` | URL-friendly identifier for the character |
 
 Operations: list, load.
 
@@ -316,9 +316,9 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `members` |  |
-| `name` |  |
-| `slug` |  |
+| `members` | Members belonging to this house |
+| `name` | Full name of the house |
+| `slug` | URL-friendly identifier for the house |
 
 Operations: list, load.
 
@@ -329,9 +329,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `name` |  |
-| `sentence` |  |
-| `slug` |  |
+| `name` | Full name of the character |
+| `sentence` | The quote text |
+| `slug` | URL-friendly identifier for the character |
 
 Operations: load.
 
@@ -357,7 +357,7 @@ Create an instance: `const author = client.Author()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `Record<string, any>` |  |
-| `sentence` | `string` |  |
+| `sentence` | `string` | The quote text |
 
 #### Example: List
 
@@ -382,9 +382,9 @@ Create an instance: `const character = client.Character()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `house` | `Record<string, any>` |  |
-| `name` | `string` |  |
-| `quotes` | `any[]` |  |
-| `slug` | `string` |  |
+| `name` | `string` | Full name of the character |
+| `quotes` | `any[]` | Quotes by this character |
+| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 
@@ -414,9 +414,9 @@ Create an instance: `const house = client.House()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `members` | `any[]` |  |
-| `name` | `string` |  |
-| `slug` | `string` |  |
+| `members` | `any[]` | Members belonging to this house |
+| `name` | `string` | Full name of the house |
+| `slug` | `string` | URL-friendly identifier for the house |
 
 #### Example: Load
 
@@ -446,9 +446,9 @@ Create an instance: `const random = client.Random()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `Record<string, any>` |  |
-| `name` | `string` |  |
-| `sentence` | `string` |  |
-| `slug` | `string` |  |
+| `name` | `string` | Full name of the character |
+| `sentence` | `string` | The quote text |
+| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 

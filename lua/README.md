@@ -237,7 +237,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `sentence` |  |
+| `sentence` | The quote text |
 
 Operations: List.
 
@@ -248,9 +248,9 @@ API path: `/author/{character}/{count}`
 | Field | Description |
 | --- | --- |
 | `house` |  |
-| `name` |  |
-| `quotes` |  |
-| `slug` |  |
+| `name` | Full name of the character |
+| `quotes` | Quotes by this character |
+| `slug` | URL-friendly identifier for the character |
 
 Operations: List, Load.
 
@@ -260,9 +260,9 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `members` |  |
-| `name` |  |
-| `slug` |  |
+| `members` | Members belonging to this house |
+| `name` | Full name of the house |
+| `slug` | URL-friendly identifier for the house |
 
 Operations: List, Load.
 
@@ -273,9 +273,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `name` |  |
-| `sentence` |  |
-| `slug` |  |
+| `name` | Full name of the character |
+| `sentence` | The quote text |
+| `slug` | URL-friendly identifier for the character |
 
 Operations: Load.
 
@@ -301,7 +301,7 @@ Create an instance: `local author = client:Author(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `table` |  |
-| `sentence` | `string` |  |
+| `sentence` | `string` | The quote text |
 
 #### Example: List
 
@@ -326,9 +326,9 @@ Create an instance: `local character = client:Character(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `house` | `table` |  |
-| `name` | `string` |  |
-| `quotes` | `table` |  |
-| `slug` | `string` |  |
+| `name` | `string` | Full name of the character |
+| `quotes` | `table` | Quotes by this character |
+| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 
@@ -358,9 +358,9 @@ Create an instance: `local house = client:House(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `members` | `table` |  |
-| `name` | `string` |  |
-| `slug` | `string` |  |
+| `members` | `table` | Members belonging to this house |
+| `name` | `string` | Full name of the house |
+| `slug` | `string` | URL-friendly identifier for the house |
 
 #### Example: Load
 
@@ -390,9 +390,9 @@ Create an instance: `local random = client:Random(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `table` |  |
-| `name` | `string` |  |
-| `sentence` | `string` |  |
-| `slug` | `string` |  |
+| `name` | `string` | Full name of the character |
+| `sentence` | `string` | The quote text |
+| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 

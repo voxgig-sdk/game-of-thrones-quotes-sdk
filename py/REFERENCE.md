@@ -100,7 +100,7 @@ author = client.Author()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `dict` | No |  |
-| `sentence` | `str` | No |  |
+| `sentence` | `str` | No | The quote text |
 
 ### Operations
 
@@ -154,9 +154,9 @@ character = client.Character()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `house` | `dict` | No |  |
-| `name` | `str` | No |  |
-| `quotes` | `list` | No |  |
-| `slug` | `str` | No |  |
+| `name` | `str` | No | Full name of the character |
+| `quotes` | `list` | No | Quotes by this character |
+| `slug` | `str` | No | URL-friendly identifier for the character |
 
 ### Operations
 
@@ -217,9 +217,9 @@ house = client.House()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `members` | `list` | No |  |
-| `name` | `str` | No |  |
-| `slug` | `str` | No |  |
+| `members` | `list` | No | Members belonging to this house |
+| `name` | `str` | No | Full name of the house |
+| `slug` | `str` | No | URL-friendly identifier for the house |
 
 ### Operations
 
@@ -281,9 +281,9 @@ random = client.Random()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `dict` | No |  |
-| `name` | `str` | No |  |
-| `sentence` | `str` | No |  |
-| `slug` | `str` | No |  |
+| `name` | `str` | No | Full name of the character |
+| `sentence` | `str` | No | The quote text |
+| `slug` | `str` | No | URL-friendly identifier for the character |
 
 ### Operations
 

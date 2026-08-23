@@ -103,7 +103,7 @@ local author = client:Author(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `table` | No |  |
-| `sentence` | `string` | No |  |
+| `sentence` | `string` | No | The quote text |
 
 ### Operations
 
@@ -156,9 +156,9 @@ local character = client:Character(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `house` | `table` | No |  |
-| `name` | `string` | No |  |
-| `quotes` | `table` | No |  |
-| `slug` | `string` | No |  |
+| `name` | `string` | No | Full name of the character |
+| `quotes` | `table` | No | Quotes by this character |
+| `slug` | `string` | No | URL-friendly identifier for the character |
 
 ### Operations
 
@@ -218,9 +218,9 @@ local house = client:House(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `members` | `table` | No |  |
-| `name` | `string` | No |  |
-| `slug` | `string` | No |  |
+| `members` | `table` | No | Members belonging to this house |
+| `name` | `string` | No | Full name of the house |
+| `slug` | `string` | No | URL-friendly identifier for the house |
 
 ### Operations
 
@@ -281,9 +281,9 @@ local random = client:Random(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `table` | No |  |
-| `name` | `string` | No |  |
-| `sentence` | `string` | No |  |
-| `slug` | `string` | No |  |
+| `name` | `string` | No | Full name of the character |
+| `sentence` | `string` | No | The quote text |
+| `slug` | `string` | No | URL-friendly identifier for the character |
 
 ### Operations
 

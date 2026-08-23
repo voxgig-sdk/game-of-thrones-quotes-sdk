@@ -255,7 +255,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `sentence` |  |
+| `sentence` | The quote text |
 
 Operations: List.
 
@@ -266,9 +266,9 @@ API path: `/author/{character}/{count}`
 | Field | Description |
 | --- | --- |
 | `house` |  |
-| `name` |  |
-| `quotes` |  |
-| `slug` |  |
+| `name` | Full name of the character |
+| `quotes` | Quotes by this character |
+| `slug` | URL-friendly identifier for the character |
 
 Operations: List, Load.
 
@@ -278,9 +278,9 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `members` |  |
-| `name` |  |
-| `slug` |  |
+| `members` | Members belonging to this house |
+| `name` | Full name of the house |
+| `slug` | URL-friendly identifier for the house |
 
 Operations: List, Load.
 
@@ -291,9 +291,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `name` |  |
-| `sentence` |  |
-| `slug` |  |
+| `name` | Full name of the character |
+| `sentence` | The quote text |
+| `slug` | URL-friendly identifier for the character |
 
 Operations: Load.
 
@@ -319,7 +319,7 @@ Create an instance: `$author = $client->Author();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `array` |  |
-| `sentence` | `string` |  |
+| `sentence` | `string` | The quote text |
 
 #### Example: List
 
@@ -345,9 +345,9 @@ Create an instance: `$character = $client->Character();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `house` | `array` |  |
-| `name` | `string` |  |
-| `quotes` | `array` |  |
-| `slug` | `string` |  |
+| `name` | `string` | Full name of the character |
+| `quotes` | `array` | Quotes by this character |
+| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 
@@ -379,9 +379,9 @@ Create an instance: `$house = $client->House();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `members` | `array` |  |
-| `name` | `string` |  |
-| `slug` | `string` |  |
+| `members` | `array` | Members belonging to this house |
+| `name` | `string` | Full name of the house |
+| `slug` | `string` | URL-friendly identifier for the house |
 
 #### Example: Load
 
@@ -413,9 +413,9 @@ Create an instance: `$random = $client->Random();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `array` |  |
-| `name` | `string` |  |
-| `sentence` | `string` |  |
-| `slug` | `string` |  |
+| `name` | `string` | Full name of the character |
+| `sentence` | `string` | The quote text |
+| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 

@@ -153,7 +153,7 @@ const author = client.Author()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `Record<string, any>` | No |  |
-| `sentence` | `string` | No |  |
+| `sentence` | `string` | No | The quote text |
 
 ### Operations
 
@@ -204,9 +204,9 @@ const character = client.Character()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `house` | `Record<string, any>` | No |  |
-| `name` | `string` | No |  |
-| `quotes` | `any[]` | No |  |
-| `slug` | `string` | No |  |
+| `name` | `string` | No | Full name of the character |
+| `quotes` | `any[]` | No | Quotes by this character |
+| `slug` | `string` | No | URL-friendly identifier for the character |
 
 ### Operations
 
@@ -264,9 +264,9 @@ const house = client.House()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `members` | `any[]` | No |  |
-| `name` | `string` | No |  |
-| `slug` | `string` | No |  |
+| `members` | `any[]` | No | Members belonging to this house |
+| `name` | `string` | No | Full name of the house |
+| `slug` | `string` | No | URL-friendly identifier for the house |
 
 ### Operations
 
@@ -325,9 +325,9 @@ const random = client.Random()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `Record<string, any>` | No |  |
-| `name` | `string` | No |  |
-| `sentence` | `string` | No |  |
-| `slug` | `string` | No |  |
+| `name` | `string` | No | Full name of the character |
+| `sentence` | `string` | No | The quote text |
+| `slug` | `string` | No | URL-friendly identifier for the character |
 
 ### Operations
 

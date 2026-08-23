@@ -248,7 +248,7 @@ On error, `ok` is `False` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `sentence` |  |
+| `sentence` | The quote text |
 
 Operations: List.
 
@@ -259,9 +259,9 @@ API path: `/author/{character}/{count}`
 | Field | Description |
 | --- | --- |
 | `house` |  |
-| `name` |  |
-| `quotes` |  |
-| `slug` |  |
+| `name` | Full name of the character |
+| `quotes` | Quotes by this character |
+| `slug` | URL-friendly identifier for the character |
 
 Operations: List, Load.
 
@@ -271,9 +271,9 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
-| `members` |  |
-| `name` |  |
-| `slug` |  |
+| `members` | Members belonging to this house |
+| `name` | Full name of the house |
+| `slug` | URL-friendly identifier for the house |
 
 Operations: List, Load.
 
@@ -284,9 +284,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `name` |  |
-| `sentence` |  |
-| `slug` |  |
+| `name` | Full name of the character |
+| `sentence` | The quote text |
+| `slug` | URL-friendly identifier for the character |
 
 Operations: Load.
 
@@ -312,7 +312,7 @@ Create an instance: `author = client.Author()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `dict` |  |
-| `sentence` | `str` |  |
+| `sentence` | `str` | The quote text |
 
 #### Example: List
 
@@ -337,9 +337,9 @@ Create an instance: `character = client.Character()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `house` | `dict` |  |
-| `name` | `str` |  |
-| `quotes` | `list` |  |
-| `slug` | `str` |  |
+| `name` | `str` | Full name of the character |
+| `quotes` | `list` | Quotes by this character |
+| `slug` | `str` | URL-friendly identifier for the character |
 
 #### Example: Load
 
@@ -369,9 +369,9 @@ Create an instance: `house = client.House()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `members` | `list` |  |
-| `name` | `str` |  |
-| `slug` | `str` |  |
+| `members` | `list` | Members belonging to this house |
+| `name` | `str` | Full name of the house |
+| `slug` | `str` | URL-friendly identifier for the house |
 
 #### Example: Load
 
@@ -401,9 +401,9 @@ Create an instance: `random = client.Random()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `dict` |  |
-| `name` | `str` |  |
-| `sentence` | `str` |  |
-| `slug` | `str` |  |
+| `name` | `str` | Full name of the character |
+| `sentence` | `str` | The quote text |
+| `slug` | `str` | URL-friendly identifier for the character |
 
 #### Example: Load
 

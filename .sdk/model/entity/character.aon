@@ -1,0 +1,94 @@
+# Entity: character
+
+main: kit: entity: character: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "house"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Full name of the character"
+      type: "`$STRING`"
+    }
+    {
+      name: "quotes"
+      req: false
+      short: "Quotes by this character"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "slug"
+      req: false
+      short: "URL-friendly identifier for the character"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "character"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/characters"
+          parts: [
+            "characters"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "jon"
+                kind: "param"
+                name: "id"
+                orig: "character"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/character/{character}"
+          parts: [
+            "character"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              character: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

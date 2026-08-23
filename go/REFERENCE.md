@@ -111,7 +111,7 @@ fmt.Println(author.GetName()) // "author"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `map[string]any` | No |  |
-| `sentence` | `string` | No |  |
+| `sentence` | `string` | No | The quote text |
 
 ### Operations
 
@@ -163,9 +163,9 @@ fmt.Println(character.GetName()) // "character"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `house` | `map[string]any` | No |  |
-| `name` | `string` | No |  |
-| `quotes` | `[]any` | No |  |
-| `slug` | `string` | No |  |
+| `name` | `string` | No | Full name of the character |
+| `quotes` | `[]any` | No | Quotes by this character |
+| `slug` | `string` | No | URL-friendly identifier for the character |
 
 ### Operations
 
@@ -228,9 +228,9 @@ fmt.Println(house.GetName()) // "house"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `members` | `[]any` | No |  |
-| `name` | `string` | No |  |
-| `slug` | `string` | No |  |
+| `members` | `[]any` | No | Members belonging to this house |
+| `name` | `string` | No | Full name of the house |
+| `slug` | `string` | No | URL-friendly identifier for the house |
 
 ### Operations
 
@@ -294,9 +294,9 @@ fmt.Println(random.GetName()) // "random"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `map[string]any` | No |  |
-| `name` | `string` | No |  |
-| `sentence` | `string` | No |  |
-| `slug` | `string` | No |  |
+| `name` | `string` | No | Full name of the character |
+| `sentence` | `string` | No | The quote text |
+| `slug` | `string` | No | URL-friendly identifier for the character |
 
 ### Operations
 

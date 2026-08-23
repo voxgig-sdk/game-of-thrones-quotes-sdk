@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "GameOfThronesQuotes",
+            "slug": "game-of-thrones-quotes",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -57,6 +60,7 @@ def make_config():
           },
           {
             "name": "sentence",
+            "short": "The quote text",
             "type": "`$STRING`",
           },
         ],
@@ -125,14 +129,17 @@ def make_config():
           },
           {
             "name": "name",
+            "short": "Full name of the character",
             "type": "`$STRING`",
           },
           {
             "name": "quotes",
+            "short": "Quotes by this character",
             "type": "`$ARRAY`",
           },
           {
             "name": "slug",
+            "short": "URL-friendly identifier for the character",
             "type": "`$STRING`",
           },
         ],
@@ -208,14 +215,17 @@ def make_config():
         "fields": [
           {
             "name": "members",
+            "short": "Members belonging to this house",
             "type": "`$ARRAY`",
           },
           {
             "name": "name",
+            "short": "Full name of the house",
             "type": "`$STRING`",
           },
           {
             "name": "slug",
+            "short": "URL-friendly identifier for the house",
             "type": "`$STRING`",
           },
         ],
@@ -295,14 +305,17 @@ def make_config():
           },
           {
             "name": "name",
+            "short": "Full name of the character",
             "type": "`$STRING`",
           },
           {
             "name": "sentence",
+            "short": "The quote text",
             "type": "`$STRING`",
           },
           {
             "name": "slug",
+            "short": "URL-friendly identifier for the character",
             "type": "`$STRING`",
           },
         ],
