@@ -93,9 +93,13 @@ class CharacterEntityTest extends TestCase
         $this->assertIsArray($character_ref01_list_result);
 
         // LOAD
-        $character_ref01_match_dt0 = [];
+        $character_ref01_match_dt0 = [
+            "id" => $character_ref01_data["id"],
+        ];
         $character_ref01_data_dt0_loaded = $character_ref01_ent->load($character_ref01_match_dt0, null);
-        $this->assertNotNull($character_ref01_data_dt0_loaded);
+        $character_ref01_data_dt0_load_result = Helpers::to_map(is_object($character_ref01_data_dt0_loaded) && method_exists($character_ref01_data_dt0_loaded, 'data_get') ? $character_ref01_data_dt0_loaded->data_get() : $character_ref01_data_dt0_loaded);
+        $this->assertNotNull($character_ref01_data_dt0_load_result);
+        $this->assertEquals($character_ref01_data_dt0_load_result["id"], $character_ref01_data["id"]);
 
     }
 }

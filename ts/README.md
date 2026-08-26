@@ -146,7 +146,7 @@ await entity.load({ id: 1 })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -304,6 +304,7 @@ API path: `/author/{character}/{count}`
 | Field | Description |
 | --- | --- |
 | `house` |  |
+| `id` |  |
 | `name` | Full name of the character |
 | `quotes` | Quotes by this character |
 | `slug` | URL-friendly identifier for the character |
@@ -316,6 +317,7 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `members` | Members belonging to this house |
 | `name` | Full name of the house |
 | `slug` | URL-friendly identifier for the house |
@@ -329,6 +331,7 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
+| `id` |  |
 | `name` | Full name of the character |
 | `sentence` | The quote text |
 | `slug` | URL-friendly identifier for the character |
@@ -382,6 +385,7 @@ Create an instance: `const character = client.Character()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `house` | `Record<string, any>` |  |
+| `id` | `string` |  |
 | `name` | `string` | Full name of the character |
 | `quotes` | `any[]` | Quotes by this character |
 | `slug` | `string` | URL-friendly identifier for the character |
@@ -414,6 +418,7 @@ Create an instance: `const house = client.House()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `members` | `any[]` | Members belonging to this house |
 | `name` | `string` | Full name of the house |
 | `slug` | `string` | URL-friendly identifier for the house |
@@ -446,6 +451,7 @@ Create an instance: `const random = client.Random()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `Record<string, any>` |  |
+| `id` | `string` |  |
 | `name` | `string` | Full name of the character |
 | `sentence` | `string` | The quote text |
 | `slug` | `string` | URL-friendly identifier for the character |

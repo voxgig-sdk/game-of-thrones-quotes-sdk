@@ -37,6 +37,7 @@ def make_config():
         "options": {
           "active": False,
         },
+        "transport": "base",
       },
         },
         "options": {
@@ -128,6 +129,10 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "name": "id",
+            "type": "`$STRING`",
+          },
+          {
             "name": "name",
             "short": "Full name of the character",
             "type": "`$STRING`",
@@ -213,6 +218,10 @@ def make_config():
       },
       "house": {
         "fields": [
+          {
+            "name": "id",
+            "type": "`$STRING`",
+          },
           {
             "name": "members",
             "short": "Members belonging to this house",
@@ -302,6 +311,10 @@ def make_config():
           {
             "name": "character",
             "type": "`$OBJECT`",
+          },
+          {
+            "name": "id",
+            "type": "`$STRING`",
           },
           {
             "name": "name",

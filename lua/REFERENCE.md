@@ -156,6 +156,7 @@ local character = client:Character(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `house` | `table` | No |  |
+| `id` | `string` | No |  |
 | `name` | `string` | No | Full name of the character |
 | `quotes` | `table` | No | Quotes by this character |
 | `slug` | `string` | No | URL-friendly identifier for the character |
@@ -218,6 +219,7 @@ local house = client:House(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `members` | `table` | No | Members belonging to this house |
 | `name` | `string` | No | Full name of the house |
 | `slug` | `string` | No | URL-friendly identifier for the house |
@@ -281,6 +283,7 @@ local random = client:Random(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `table` | No |  |
+| `id` | `string` | No |  |
 | `name` | `string` | No | Full name of the character |
 | `sentence` | `string` | No | The quote text |
 | `slug` | `string` | No | URL-friendly identifier for the character |

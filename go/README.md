@@ -277,6 +277,7 @@ API path: `/author/{character}/{count}`
 | Field | Description |
 | --- | --- |
 | `"house"` |  |
+| `"id"` |  |
 | `"name"` | Full name of the character |
 | `"quotes"` | Quotes by this character |
 | `"slug"` | URL-friendly identifier for the character |
@@ -289,6 +290,7 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 | `"members"` | Members belonging to this house |
 | `"name"` | Full name of the house |
 | `"slug"` | URL-friendly identifier for the house |
@@ -302,6 +304,7 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `"character"` |  |
+| `"id"` |  |
 | `"name"` | Full name of the character |
 | `"sentence"` | The quote text |
 | `"slug"` | URL-friendly identifier for the character |
@@ -359,6 +362,7 @@ Create an instance: `character := client.Character(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `house` | `map[string]any` |  |
+| `id` | `string` |  |
 | `name` | `string` | Full name of the character |
 | `quotes` | `[]any` | Quotes by this character |
 | `slug` | `string` | URL-friendly identifier for the character |
@@ -399,6 +403,7 @@ Create an instance: `house := client.House(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `members` | `[]any` | Members belonging to this house |
 | `name` | `string` | Full name of the house |
 | `slug` | `string` | URL-friendly identifier for the house |
@@ -439,6 +444,7 @@ Create an instance: `random := client.Random(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `map[string]any` |  |
+| `id` | `string` |  |
 | `name` | `string` | Full name of the character |
 | `sentence` | `string` | The quote text |
 | `slug` | `string` | URL-friendly identifier for the character |

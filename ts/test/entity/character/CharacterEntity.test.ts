@@ -66,6 +66,12 @@ describe('CharacterEntity', async () => {
     const character_ref01_list = (await character_ref01_ent.list(character_ref01_match)).map((e: any) => e.data())
 
 
+    // LOAD
+    const character_ref01_match_dt0: any = {}
+    character_ref01_match_dt0.id = character_ref01_data.id
+    const character_ref01_data_dt0 = (await character_ref01_ent.load(character_ref01_match_dt0)).data()
+    assert(character_ref01_data_dt0.id === character_ref01_data.id)
+
 
   })
 })

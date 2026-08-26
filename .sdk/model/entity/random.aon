@@ -11,6 +11,11 @@ main: kit: entity: random: {
       type: "`$OBJECT`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "name"
       req: false
       short: "Full name of the character"
@@ -29,6 +34,11 @@ main: kit: entity: random: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "random"
   op: {

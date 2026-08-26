@@ -39,6 +39,9 @@ AuthorListMatch = Struct.new(
 # @!attribute [rw] house
 #   @return [Hash, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] name
 #   @return [String, nil]
 #
@@ -49,6 +52,7 @@ AuthorListMatch = Struct.new(
 #   @return [String, nil]
 Character = Struct.new(
   :house,
+  :id,
   :name,
   :quotes,
   :slug,
@@ -69,6 +73,9 @@ CharacterLoadMatch = Struct.new(
 # @!attribute [rw] house
 #   @return [Hash, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] name
 #   @return [String, nil]
 #
@@ -79,6 +86,7 @@ CharacterLoadMatch = Struct.new(
 #   @return [String, nil]
 CharacterListMatch = Struct.new(
   :house,
+  :id,
   :name,
   :quotes,
   :slug,
@@ -86,6 +94,9 @@ CharacterListMatch = Struct.new(
 )
 
 # House entity data model.
+#
+# @!attribute [rw] id
+#   @return [String, nil]
 #
 # @!attribute [rw] members
 #   @return [Array, nil]
@@ -96,6 +107,7 @@ CharacterListMatch = Struct.new(
 # @!attribute [rw] slug
 #   @return [String, nil]
 House = Struct.new(
+  :id,
   :members,
   :name,
   :slug,
@@ -113,6 +125,9 @@ HouseLoadMatch = Struct.new(
 
 # Request payload for House#list.
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] members
 #   @return [Array, nil]
 #
@@ -122,6 +137,7 @@ HouseLoadMatch = Struct.new(
 # @!attribute [rw] slug
 #   @return [String, nil]
 HouseListMatch = Struct.new(
+  :id,
   :members,
   :name,
   :slug,
@@ -133,6 +149,9 @@ HouseListMatch = Struct.new(
 # @!attribute [rw] character
 #   @return [Hash, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] name
 #   @return [String, nil]
 #
@@ -143,6 +162,7 @@ HouseListMatch = Struct.new(
 #   @return [String, nil]
 RandomType = Struct.new(
   :character,
+  :id,
   :name,
   :sentence,
   :slug,

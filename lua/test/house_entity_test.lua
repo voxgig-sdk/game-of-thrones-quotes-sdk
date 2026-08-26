@@ -92,10 +92,14 @@ describe("HouseEntity", function()
     assert.is_table(house_ref01_list_result)
 
     -- LOAD
-    local house_ref01_match_dt0 = {}
+    local house_ref01_match_dt0 = {
+      id = house_ref01_data["id"],
+    }
     local house_ref01_data_dt0_loaded, err = house_ref01_ent:load(house_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(house_ref01_data_dt0_loaded)
+    local house_ref01_data_dt0_load_result = helpers.to_map(type(house_ref01_data_dt0_loaded) == 'table' and house_ref01_data_dt0_loaded.data_get and house_ref01_data_dt0_loaded:data_get() or house_ref01_data_dt0_loaded)
+    assert.is_not_nil(house_ref01_data_dt0_load_result)
+    assert.are.equal(house_ref01_data_dt0_load_result["id"], house_ref01_data["id"])
 
   end)
 end)

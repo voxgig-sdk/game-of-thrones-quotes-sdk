@@ -159,6 +159,7 @@ character = client.Character
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `house` | `Hash` | No |  |
+| `id` | `String` | No |  |
 | `name` | `String` | No | Full name of the character |
 | `quotes` | `Array` | No | Quotes by this character |
 | `slug` | `String` | No | URL-friendly identifier for the character |
@@ -221,6 +222,7 @@ house = client.House
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `String` | No |  |
 | `members` | `Array` | No | Members belonging to this house |
 | `name` | `String` | No | Full name of the house |
 | `slug` | `String` | No | URL-friendly identifier for the house |
@@ -284,6 +286,7 @@ random = client.Random
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `Hash` | No |  |
+| `id` | `String` | No |  |
 | `name` | `String` | No | Full name of the character |
 | `sentence` | `String` | No | The quote text |
 | `slug` | `String` | No | URL-friendly identifier for the character |

@@ -66,6 +66,12 @@ describe('HouseEntity', async () => {
     const house_ref01_list = (await house_ref01_ent.list(house_ref01_match)).map((e: any) => e.data())
 
 
+    // LOAD
+    const house_ref01_match_dt0: any = {}
+    house_ref01_match_dt0.id = house_ref01_data.id
+    const house_ref01_data_dt0 = (await house_ref01_ent.load(house_ref01_match_dt0)).data()
+    assert(house_ref01_data_dt0.id === house_ref01_data.id)
+
 
   })
 })

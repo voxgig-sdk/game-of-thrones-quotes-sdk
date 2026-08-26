@@ -3,24 +3,24 @@
     "character": {
       "CHARACTER00": {
         "house": {},
-        "name": "s29",
+        "id": "CHARACTER00",
+        "name": "s34",
         "quotes": [],
-        "slug": "s2b",
-        "id": "CHARACTER00"
+        "slug": "s36"
       },
       "CHARACTER01": {
         "house": {},
-        "name": "s51",
+        "id": "CHARACTER01",
+        "name": "s66",
         "quotes": [],
-        "slug": "s53",
-        "id": "CHARACTER01"
+        "slug": "s68"
       },
       "CHARACTER02": {
         "house": {},
-        "name": "s79",
+        "id": "CHARACTER02",
+        "name": "s98",
         "quotes": [],
-        "slug": "s7b",
-        "id": "CHARACTER02"
+        "slug": "s9a"
       }
     }
   },
@@ -28,9 +28,9 @@
     "character": {
       "character_ref01": {
         "house": {},
-        "name": "sa1",
+        "name": "sca",
         "quotes": [],
-        "slug": "sa3"
+        "slug": "scc"
       }
     }
   }

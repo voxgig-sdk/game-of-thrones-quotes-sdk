@@ -259,6 +259,7 @@ API path: `/author/{character}/{count}`
 | Field | Description |
 | --- | --- |
 | `house` |  |
+| `id` |  |
 | `name` | Full name of the character |
 | `quotes` | Quotes by this character |
 | `slug` | URL-friendly identifier for the character |
@@ -271,6 +272,7 @@ API path: `/characters`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `members` | Members belonging to this house |
 | `name` | Full name of the house |
 | `slug` | URL-friendly identifier for the house |
@@ -284,6 +286,7 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
+| `id` |  |
 | `name` | Full name of the character |
 | `sentence` | The quote text |
 | `slug` | URL-friendly identifier for the character |
@@ -337,6 +340,7 @@ Create an instance: `character = client.Character()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `house` | `dict` |  |
+| `id` | `str` |  |
 | `name` | `str` | Full name of the character |
 | `quotes` | `list` | Quotes by this character |
 | `slug` | `str` | URL-friendly identifier for the character |
@@ -369,6 +373,7 @@ Create an instance: `house = client.House()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `str` |  |
 | `members` | `list` | Members belonging to this house |
 | `name` | `str` | Full name of the house |
 | `slug` | `str` | URL-friendly identifier for the house |
@@ -401,6 +406,7 @@ Create an instance: `random = client.Random()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `dict` |  |
+| `id` | `str` |  |
 | `name` | `str` | Full name of the character |
 | `sentence` | `str` | The quote text |
 | `slug` | `str` | URL-friendly identifier for the character |

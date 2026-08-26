@@ -27,6 +27,7 @@ type AuthorListMatch struct {
 // Character is the typed data model for the character entity.
 type Character struct {
 	House *map[string]any `json:"house,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Quotes *[]any `json:"quotes,omitempty"`
 	Slug *string `json:"slug,omitempty"`
@@ -40,6 +41,7 @@ type CharacterLoadMatch struct {
 // CharacterListMatch is the typed request payload for Character.ListTyped.
 type CharacterListMatch struct {
 	House *map[string]any `json:"house,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Quotes *[]any `json:"quotes,omitempty"`
 	Slug *string `json:"slug,omitempty"`
@@ -47,6 +49,7 @@ type CharacterListMatch struct {
 
 // House is the typed data model for the house entity.
 type House struct {
+	Id *string `json:"id,omitempty"`
 	Members *[]any `json:"members,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Slug *string `json:"slug,omitempty"`
@@ -59,6 +62,7 @@ type HouseLoadMatch struct {
 
 // HouseListMatch is the typed request payload for House.ListTyped.
 type HouseListMatch struct {
+	Id *string `json:"id,omitempty"`
 	Members *[]any `json:"members,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Slug *string `json:"slug,omitempty"`
@@ -67,6 +71,7 @@ type HouseListMatch struct {
 // Random is the typed data model for the random entity.
 type Random struct {
 	Character *map[string]any `json:"character,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Sentence *string `json:"sentence,omitempty"`
 	Slug *string `json:"slug,omitempty"`

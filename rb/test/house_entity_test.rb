@@ -83,9 +83,13 @@ class HouseEntityTest < Minitest::Test
     assert house_ref01_list_result.is_a?(Array)
 
     # LOAD
-    house_ref01_match_dt0 = {}
+    house_ref01_match_dt0 = {
+      "id" => house_ref01_data["id"],
+    }
     house_ref01_data_dt0_loaded = house_ref01_ent.load(house_ref01_match_dt0, nil)
-    assert !house_ref01_data_dt0_loaded.nil?
+    house_ref01_data_dt0_load_result = Helpers.to_map(house_ref01_data_dt0_loaded.respond_to?(:data_get) ? house_ref01_data_dt0_loaded.data_get : house_ref01_data_dt0_loaded)
+    assert !house_ref01_data_dt0_load_result.nil?
+    assert_equal house_ref01_data_dt0_load_result["id"], house_ref01_data["id"]
 
   end
 end

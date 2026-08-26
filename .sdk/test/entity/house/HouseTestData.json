@@ -2,22 +2,22 @@
   "existing": {
     "house": {
       "HOUSE00": {
+        "id": "HOUSE00",
         "members": [],
-        "name": "s1f",
-        "slug": "s20",
-        "id": "HOUSE00"
+        "name": "s2a",
+        "slug": "s2b"
       },
       "HOUSE01": {
+        "id": "HOUSE01",
         "members": [],
-        "name": "s3d",
-        "slug": "s3e",
-        "id": "HOUSE01"
+        "name": "s52",
+        "slug": "s53"
       },
       "HOUSE02": {
+        "id": "HOUSE02",
         "members": [],
-        "name": "s5b",
-        "slug": "s5c",
-        "id": "HOUSE02"
+        "name": "s7a",
+        "slug": "s7b"
       }
     }
   },
@@ -25,8 +25,8 @@
     "house": {
       "house_ref01": {
         "members": [],
-        "name": "s79",
-        "slug": "s7a"
+        "name": "sa2",
+        "slug": "sa3"
       }
     }
   }

@@ -16,6 +16,7 @@ local function make_config()
         ["options"] = {
           ["active"] = false,
         },
+        ["transport"] = "base",
       },
     },
     options = {
@@ -107,6 +108,10 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+          {
             ["name"] = "name",
             ["short"] = "Full name of the character",
             ["type"] = "`$STRING`",
@@ -192,6 +197,10 @@ local function make_config()
       },
       ["house"] = {
         ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
           {
             ["name"] = "members",
             ["short"] = "Members belonging to this house",
@@ -281,6 +290,10 @@ local function make_config()
           {
             ["name"] = "character",
             ["type"] = "`$OBJECT`",
+          },
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "name",

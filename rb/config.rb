@@ -28,6 +28,7 @@ module GameOfThronesQuotesConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -119,6 +120,10 @@ module GameOfThronesQuotesConfig
               "type" => "`$OBJECT`",
             },
             {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+            {
               "name" => "name",
               "short" => "Full name of the character",
               "type" => "`$STRING`",
@@ -204,6 +209,10 @@ module GameOfThronesQuotesConfig
         },
         "house" => {
           "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
             {
               "name" => "members",
               "short" => "Members belonging to this house",
@@ -293,6 +302,10 @@ module GameOfThronesQuotesConfig
             {
               "name" => "character",
               "type" => "`$OBJECT`",
+            },
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
             },
             {
               "name" => "name",

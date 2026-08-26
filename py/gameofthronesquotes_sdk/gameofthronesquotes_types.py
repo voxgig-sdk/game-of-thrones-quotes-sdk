@@ -28,6 +28,7 @@ class AuthorListMatch(TypedDict):
 
 class Character(TypedDict, total=False):
     house: dict
+    id: str
     name: str
     quotes: list
     slug: str
@@ -39,12 +40,14 @@ class CharacterLoadMatch(TypedDict):
 
 class CharacterListMatch(TypedDict, total=False):
     house: dict
+    id: str
     name: str
     quotes: list
     slug: str
 
 
 class House(TypedDict, total=False):
+    id: str
     members: list
     name: str
     slug: str
@@ -55,6 +58,7 @@ class HouseLoadMatch(TypedDict):
 
 
 class HouseListMatch(TypedDict, total=False):
+    id: str
     members: list
     name: str
     slug: str
@@ -62,6 +66,7 @@ class HouseListMatch(TypedDict, total=False):
 
 class Random(TypedDict, total=False):
     character: dict
+    id: str
     name: str
     sentence: str
     slug: str

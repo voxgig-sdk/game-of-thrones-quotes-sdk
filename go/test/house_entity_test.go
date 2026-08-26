@@ -121,13 +121,19 @@ func TestHouseEntity(t *testing.T) {
 		}
 
 		// LOAD
-		houseRef01MatchDt0 := map[string]any{}
+		houseRef01MatchDt0 := map[string]any{
+			"id": houseRef01Data["id"],
+		}
 		houseRef01DataDt0Loaded, err := houseRef01Ent.Load(houseRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if houseRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		houseRef01DataDt0LoadResult := core.ToMapAny(entityData(houseRef01DataDt0Loaded))
+		if houseRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if houseRef01DataDt0LoadResult["id"] != houseRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

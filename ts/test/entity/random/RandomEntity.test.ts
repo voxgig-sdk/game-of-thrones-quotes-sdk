@@ -59,9 +59,12 @@ describe('RandomEntity', async () => {
 
     let random_ref01_data = Object.values(setup.data.existing.random)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const random_ref01_ent = client.Random()
+    const random_ref01_match_dt0: any = {}
+    random_ref01_match_dt0.id = random_ref01_data.id
+    const random_ref01_data_dt0 = (await random_ref01_ent.load(random_ref01_match_dt0)).data()
+    assert(random_ref01_data_dt0.id === random_ref01_data.id)
 
 
   })

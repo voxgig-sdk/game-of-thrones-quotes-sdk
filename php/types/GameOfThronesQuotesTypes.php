@@ -30,6 +30,7 @@ class AuthorListMatch
 class Character
 {
     public ?array $house = null;
+    public ?string $id = null;
     public ?string $name = null;
     public ?array $quotes = null;
     public ?string $slug = null;
@@ -45,6 +46,7 @@ class CharacterLoadMatch
 class CharacterListMatch
 {
     public ?array $house = null;
+    public ?string $id = null;
     public ?string $name = null;
     public ?array $quotes = null;
     public ?string $slug = null;
@@ -53,6 +55,7 @@ class CharacterListMatch
 /** House entity data model. */
 class House
 {
+    public ?string $id = null;
     public ?array $members = null;
     public ?string $name = null;
     public ?string $slug = null;
@@ -67,6 +70,7 @@ class HouseLoadMatch
 /** Request payload for House#list. */
 class HouseListMatch
 {
+    public ?string $id = null;
     public ?array $members = null;
     public ?string $name = null;
     public ?string $slug = null;
@@ -76,6 +80,7 @@ class HouseListMatch
 class Random
 {
     public ?array $character = null;
+    public ?string $id = null;
     public ?string $name = null;
     public ?string $sentence = null;
     public ?string $slug = null;

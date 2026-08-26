@@ -93,9 +93,13 @@ class HouseEntityTest extends TestCase
         $this->assertIsArray($house_ref01_list_result);
 
         // LOAD
-        $house_ref01_match_dt0 = [];
+        $house_ref01_match_dt0 = [
+            "id" => $house_ref01_data["id"],
+        ];
         $house_ref01_data_dt0_loaded = $house_ref01_ent->load($house_ref01_match_dt0, null);
-        $this->assertNotNull($house_ref01_data_dt0_loaded);
+        $house_ref01_data_dt0_load_result = Helpers::to_map(is_object($house_ref01_data_dt0_loaded) && method_exists($house_ref01_data_dt0_loaded, 'data_get') ? $house_ref01_data_dt0_loaded->data_get() : $house_ref01_data_dt0_loaded);
+        $this->assertNotNull($house_ref01_data_dt0_load_result);
+        $this->assertEquals($house_ref01_data_dt0_load_result["id"], $house_ref01_data["id"]);
 
     }
 }

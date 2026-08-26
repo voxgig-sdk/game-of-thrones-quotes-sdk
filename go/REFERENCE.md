@@ -163,6 +163,7 @@ fmt.Println(character.GetName()) // "character"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `house` | `map[string]any` | No |  |
+| `id` | `string` | No |  |
 | `name` | `string` | No | Full name of the character |
 | `quotes` | `[]any` | No | Quotes by this character |
 | `slug` | `string` | No | URL-friendly identifier for the character |
@@ -228,6 +229,7 @@ fmt.Println(house.GetName()) // "house"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `members` | `[]any` | No | Members belonging to this house |
 | `name` | `string` | No | Full name of the house |
 | `slug` | `string` | No | URL-friendly identifier for the house |
@@ -294,6 +296,7 @@ fmt.Println(random.GetName()) // "random"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `map[string]any` | No |  |
+| `id` | `string` | No |  |
 | `name` | `string` | No | Full name of the character |
 | `sentence` | `string` | No | The quote text |
 | `slug` | `string` | No | URL-friendly identifier for the character |

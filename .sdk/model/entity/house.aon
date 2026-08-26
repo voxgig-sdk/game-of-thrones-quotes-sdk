@@ -6,6 +6,11 @@ main: kit: entity: house: {
 
   fields: [
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "members"
       req: false
       short: "Members belonging to this house"
@@ -24,6 +29,11 @@ main: kit: entity: house: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "house"
   op: {

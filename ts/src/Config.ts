@@ -40,7 +40,8 @@ class Config {
      test:     {
       "options": {
         "active": false
-      }
+      },
+      "transport": "base"
     },
 
   }
@@ -148,6 +149,10 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "name": "id",
+          "type": "`$STRING`"
+        },
+        {
           "name": "name",
           "short": "Full name of the character",
           "type": "`$STRING`"
@@ -233,6 +238,10 @@ class Config {
     },
     "house": {
       "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        },
         {
           "name": "members",
           "short": "Members belonging to this house",
@@ -322,6 +331,10 @@ class Config {
         {
           "name": "character",
           "type": "`$OBJECT`"
+        },
+        {
+          "name": "id",
+          "type": "`$STRING`"
         },
         {
           "name": "name",
