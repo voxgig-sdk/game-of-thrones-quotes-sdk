@@ -1,6 +1,14 @@
 # GameOfThronesQuotes SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -95,10 +103,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/author/{character}/{count}",
-                "parts": [
-                  "author",
-                  "{character}",
-                  "{count}",
+                "segments": [
+                  {
+                    "lit": "author",
+                  },
+                  {
+                    "var": "character",
+                  },
+                  {
+                    "var": "count",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -110,6 +124,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "author",
+                  "{character}",
+                  "{count}",
+                ],
               },
             ],
           },
@@ -148,6 +167,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "character",
         "op": {
           "list": {
@@ -159,14 +182,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/characters",
-                "parts": [
-                  "characters",
+                "segments": [
+                  {
+                    "lit": "characters",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "characters",
+                ],
               },
             ],
           },
@@ -190,15 +218,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/character/{character}",
-                "parts": [
-                  "character",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "character": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "character",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -208,6 +240,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "character",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -238,6 +274,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "house",
         "op": {
           "list": {
@@ -249,14 +289,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/houses",
-                "parts": [
-                  "houses",
+                "segments": [
+                  {
+                    "lit": "houses",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "houses",
+                ],
               },
             ],
           },
@@ -280,15 +325,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/house/{house}",
-                "parts": [
-                  "house",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "house": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "house",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -298,6 +347,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "house",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -332,6 +385,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "random",
         "op": {
           "load": {
@@ -354,15 +411,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/random/{count}",
-                "parts": [
-                  "random",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "count": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "random",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -372,20 +433,29 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "random",
+                  "{id}",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/random",
-                "parts": [
-                  "random",
+                "segments": [
+                  {
+                    "lit": "random",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.character`",
                 },
+                "parts": [
+                  "random",
+                ],
               },
             ],
           },

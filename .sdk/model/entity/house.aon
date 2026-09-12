@@ -43,8 +43,10 @@ main: kit: entity: house: {
         {
           method: "GET"
           orig: "/houses"
-          parts: [
-            "houses"
+          segments: [
+            {
+              lit: "houses"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -71,15 +73,19 @@ main: kit: entity: house: {
           }
           method: "GET"
           orig: "/house/{house}"
-          parts: [
-            "house"
-            "{id}"
-          ]
           rename: {
             param: {
               house: "id"
             }
           }
+          segments: [
+            {
+              lit: "house"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

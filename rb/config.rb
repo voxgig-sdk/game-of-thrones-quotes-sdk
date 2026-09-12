@@ -86,10 +86,16 @@ module GameOfThronesQuotesConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/author/{character}/{count}",
-                  "parts" => [
-                    "author",
-                    "{character}",
-                    "{count}",
+                  "segments" => [
+                    {
+                      "lit" => "author",
+                    },
+                    {
+                      "var" => "character",
+                    },
+                    {
+                      "var" => "count",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -101,6 +107,11 @@ module GameOfThronesQuotesConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "author",
+                    "{character}",
+                    "{count}",
+                  ],
                 },
               ],
             },
@@ -139,6 +150,10 @@ module GameOfThronesQuotesConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "character",
           "op" => {
             "list" => {
@@ -150,14 +165,19 @@ module GameOfThronesQuotesConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/characters",
-                  "parts" => [
-                    "characters",
+                  "segments" => [
+                    {
+                      "lit" => "characters",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "characters",
+                  ],
                 },
               ],
             },
@@ -181,15 +201,19 @@ module GameOfThronesQuotesConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/character/{character}",
-                  "parts" => [
-                    "character",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "character" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "character",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -199,6 +223,10 @@ module GameOfThronesQuotesConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "character",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -229,6 +257,10 @@ module GameOfThronesQuotesConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "house",
           "op" => {
             "list" => {
@@ -240,14 +272,19 @@ module GameOfThronesQuotesConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/houses",
-                  "parts" => [
-                    "houses",
+                  "segments" => [
+                    {
+                      "lit" => "houses",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "houses",
+                  ],
                 },
               ],
             },
@@ -271,15 +308,19 @@ module GameOfThronesQuotesConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/house/{house}",
-                  "parts" => [
-                    "house",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "house" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "house",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -289,6 +330,10 @@ module GameOfThronesQuotesConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "house",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -323,6 +368,10 @@ module GameOfThronesQuotesConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "random",
           "op" => {
             "load" => {
@@ -345,15 +394,19 @@ module GameOfThronesQuotesConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/random/{count}",
-                  "parts" => [
-                    "random",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "count" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "random",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -363,20 +416,29 @@ module GameOfThronesQuotesConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "random",
+                    "{id}",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/random",
-                  "parts" => [
-                    "random",
+                  "segments" => [
+                    {
+                      "lit" => "random",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.character`",
                   },
+                  "parts" => [
+                    "random",
+                  ],
                 },
               ],
             },

@@ -46,10 +46,16 @@ main: kit: entity: author: {
           }
           method: "GET"
           orig: "/author/{character}/{count}"
-          parts: [
-            "author"
-            "{character}"
-            "{count}"
+          segments: [
+            {
+              lit: "author"
+            }
+            {
+              var: "character"
+            }
+            {
+              var: "count"
+            }
           ]
           select: {
             exist: [

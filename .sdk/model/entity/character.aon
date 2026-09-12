@@ -48,8 +48,10 @@ main: kit: entity: character: {
         {
           method: "GET"
           orig: "/characters"
-          parts: [
-            "characters"
+          segments: [
+            {
+              lit: "characters"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -76,15 +78,19 @@ main: kit: entity: character: {
           }
           method: "GET"
           orig: "/character/{character}"
-          parts: [
-            "character"
-            "{id}"
-          ]
           rename: {
             param: {
               character: "id"
             }
           }
+          segments: [
+            {
+              lit: "character"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

@@ -60,15 +60,19 @@ main: kit: entity: random: {
           }
           method: "GET"
           orig: "/random/{count}"
-          parts: [
-            "random"
-            "{id}"
-          ]
           rename: {
             param: {
               count: "id"
             }
           }
+          segments: [
+            {
+              lit: "random"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -82,8 +86,10 @@ main: kit: entity: random: {
         {
           method: "GET"
           orig: "/random"
-          parts: [
-            "random"
+          segments: [
+            {
+              lit: "random"
+            }
           ]
           transform: {
             req: "`reqdata`"

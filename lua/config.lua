@@ -74,10 +74,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/author/{character}/{count}",
-                ["parts"] = {
-                  "author",
-                  "{character}",
-                  "{count}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "author",
+                  },
+                  {
+                    ["var"] = "character",
+                  },
+                  {
+                    ["var"] = "count",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -88,6 +94,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "author",
+                  "{character}",
+                  "{count}",
                 },
               },
             },
@@ -127,6 +138,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "character",
         ["op"] = {
           ["list"] = {
@@ -138,13 +153,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/characters",
-                ["parts"] = {
-                  "characters",
+                ["segments"] = {
+                  {
+                    ["lit"] = "characters",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "characters",
                 },
               },
             },
@@ -169,13 +189,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/character/{character}",
-                ["parts"] = {
-                  "character",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["character"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "character",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -186,6 +210,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "character",
+                  "{id}",
                 },
               },
             },
@@ -217,6 +245,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "house",
         ["op"] = {
           ["list"] = {
@@ -228,13 +260,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/houses",
-                ["parts"] = {
-                  "houses",
+                ["segments"] = {
+                  {
+                    ["lit"] = "houses",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "houses",
                 },
               },
             },
@@ -259,13 +296,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/house/{house}",
-                ["parts"] = {
-                  "house",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["house"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "house",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -276,6 +317,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "house",
+                  "{id}",
                 },
               },
             },
@@ -311,6 +356,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "random",
         ["op"] = {
           ["load"] = {
@@ -333,13 +382,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/random/{count}",
-                ["parts"] = {
-                  "random",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["count"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "random",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -351,19 +404,28 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "random",
+                  "{id}",
+                },
               },
               {
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/random",
-                ["parts"] = {
-                  "random",
+                ["segments"] = {
+                  {
+                    ["lit"] = "random",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.character`",
+                },
+                ["parts"] = {
+                  "random",
                 },
               },
             },
