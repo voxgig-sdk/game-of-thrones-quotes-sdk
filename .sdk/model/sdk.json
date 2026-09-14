@@ -1300,7 +1300,7 @@
             "registry": {
               "active": false,
               "name": "npm",
-              "package": "",
+              "package": "@voxgig-sdk/game-of-thrones-quotes-sdk",
               "state": "pending",
               "url": "https://registry.npmjs.org",
               "vault": {

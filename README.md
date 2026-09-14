@@ -105,7 +105,7 @@ local result, err = client:Random():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
+| TypeScript | `@voxgig-sdk/game-of-thrones-quotes-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
 | Python | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
 | PHP | `voxgig-sdk/game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go` | `go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Random():load({ id = "test01" })
 ### TypeScript
 
 ```ts
-import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
+import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes-sdk'
 
 const client = new GameOfThronesQuotesSDK()
 

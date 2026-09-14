@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
+import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes-sdk'
 
 const client = new GameOfThronesQuotesSDK()
 ```
@@ -545,7 +545,7 @@ game-of-thrones-quotes/
 Import the SDK from the package root:
 
 ```ts
-import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes'
+import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes-sdk'
 ```
 
 ### Entity state
