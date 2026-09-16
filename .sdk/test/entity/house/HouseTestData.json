@@ -29,5 +29,131 @@
         "slug": "sa3"
       }
     }
+  },
+  "requests": {
+    "GET /houses": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getHouses",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "members": {
+                        "description": "Members belonging to this house",
+                        "items": {
+                          "properties": {
+                            "name": {
+                              "description": "Full name of the character",
+                              "type": "string"
+                            },
+                            "slug": {
+                              "description": "URL-friendly identifier for the character",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "description": "Full name of the house",
+                        "type": "string"
+                      },
+                      "slug": {
+                        "description": "URL-friendly identifier for the house",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "List of houses with members"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /house/{house}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getHouseDetails",
+        "parameters": [
+          {
+            "description": "Slug or name of the house",
+            "in": "path",
+            "name": "house",
+            "required": true,
+            "schema": {
+              "example": "lannister",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "members": [
+                    {
+                      "name": "Tyrion Lannister",
+                      "slug": "tyrion"
+                    },
+                    {
+                      "name": "Cersei Lannister",
+                      "slug": "cersei"
+                    }
+                  ],
+                  "name": "House Lannister of Casterly Rock",
+                  "slug": "lannister"
+                },
+                "schema": {
+                  "properties": {
+                    "members": {
+                      "description": "Members belonging to this house",
+                      "items": {
+                        "properties": {
+                          "name": {
+                            "description": "Full name of the character",
+                            "type": "string"
+                          },
+                          "slug": {
+                            "description": "URL-friendly identifier for the character",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "name": {
+                      "description": "Full name of the house",
+                      "type": "string"
+                    },
+                    "slug": {
+                      "description": "URL-friendly identifier for the house",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Details of the specified house"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

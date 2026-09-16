@@ -33,5 +33,109 @@
         "slug": "scc"
       }
     }
+  },
+  "requests": {
+    "GET /random/{count}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getRandomQuotes",
+        "parameters": [
+          {
+            "description": "Number of random quotes to retrieve",
+            "in": "path",
+            "name": "count",
+            "required": true,
+            "schema": {
+              "example": 5,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "character": {
+                        "properties": {
+                          "name": {
+                            "description": "Full name of the character",
+                            "type": "string"
+                          },
+                          "slug": {
+                            "description": "URL-friendly identifier for the character",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "sentence": {
+                        "description": "The quote text",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Multiple random quotes"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /random": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getRandomQuote",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "character": {
+                    "name": "Jon Snow",
+                    "slug": "jon"
+                  },
+                  "sentence": "If I fall, don't bring me back."
+                },
+                "schema": {
+                  "properties": {
+                    "character": {
+                      "properties": {
+                        "name": {
+                          "description": "Full name of the character",
+                          "type": "string"
+                        },
+                        "slug": {
+                          "description": "URL-friendly identifier for the character",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "sentence": {
+                      "description": "The quote text",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A random quote"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

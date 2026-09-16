@@ -1,12 +1,18 @@
 # GameOfThronesQuotes SDK feature factory
 
 from gameofthronesquotes_sdk.feature.base_feature import GameOfThronesQuotesBaseFeature
+from gameofthronesquotes_sdk.feature.ratelimit_feature import GameOfThronesQuotesRatelimitFeature
+from gameofthronesquotes_sdk.feature.retry_feature import GameOfThronesQuotesRetryFeature
 from gameofthronesquotes_sdk.feature.test_feature import GameOfThronesQuotesTestFeature
+from gameofthronesquotes_sdk.feature.timeout_feature import GameOfThronesQuotesTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: GameOfThronesQuotesBaseFeature(),
+    "ratelimit": lambda: GameOfThronesQuotesRatelimitFeature(),
+    "retry": lambda: GameOfThronesQuotesRetryFeature(),
     "test": lambda: GameOfThronesQuotesTestFeature(),
+    "timeout": lambda: GameOfThronesQuotesTimeoutFeature(),
 }
 
 
