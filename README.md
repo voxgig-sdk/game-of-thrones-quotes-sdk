@@ -105,12 +105,12 @@ local result, err = client:Random():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/game-of-thrones-quotes-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
-| Python | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
-| PHP | `voxgig-sdk/game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
+| TypeScript | `@voxgig-sdk/game-of-thrones-quotes-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/tags) |
+| Python | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/tags) |
+| PHP | `voxgig-sdk/game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go` | `go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go@latest` |
-| Ruby | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
-| Lua | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases) |
+| Ruby | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/tags) |
+| Lua | `voxgig-sdk-game-of-thrones-quotes` | publish pending — [install from git tag](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-cli` | `go install github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-cli/cmd/game-of-thrones-quotes@latest` |
 | Go MCP server | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-mcp` | `go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-mcp@latest` |
 

@@ -127,18 +127,18 @@ class Config {
 
     entity: {
       
-      author: {
-      },
-
-      character: {
-      },
-
-      house: {
-      },
-
-      random: {
-      },
-
+        author: {
+        },
+  
+        character: {
+        },
+  
+        house: {
+        },
+  
+        random: {
+        },
+  
     }
   }
 

@@ -1,6 +1,6 @@
 # Flows
 
-@"BasicAuthorFlow.aon"
-@"BasicCharacterFlow.aon"
-@"BasicHouseFlow.aon"
-@"BasicRandomFlow.aon"
+@"./BasicAuthorFlow.aon"
+@"./BasicCharacterFlow.aon"
+@"./BasicHouseFlow.aon"
+@"./BasicRandomFlow.aon"
