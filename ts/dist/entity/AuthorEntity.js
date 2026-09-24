@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthorEntity = void 0;
 const GameOfThronesQuotesEntityBase_1 = require("../GameOfThronesQuotesEntityBase");
-// TODO: needs Entity superclass
 class AuthorEntity extends GameOfThronesQuotesEntityBase_1.GameOfThronesQuotesEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

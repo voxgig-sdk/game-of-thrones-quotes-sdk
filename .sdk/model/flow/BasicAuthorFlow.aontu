@@ -1,0 +1,27 @@
+# BasicAuthorFlow
+
+main: kit: flow: BasicAuthorFlow:
+{
+  entity: "author",
+  kind: "basic",
+  name: "BasicAuthorFlow",
+  step: [
+    {
+      m: {
+        character: "character01",
+        count: "count01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "author_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAuthorFlow"
+}

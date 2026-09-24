@@ -1,7 +1,7 @@
 // Typed models for the GameOfThronesQuotes SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,8 +14,6 @@ import (
 
 // Author is the typed data model for the author entity.
 type Author struct {
-	Character *map[string]any `json:"character,omitempty"`
-	Sentence *string `json:"sentence,omitempty"`
 }
 
 // AuthorListMatch is the typed request payload for Author.ListTyped.
@@ -26,11 +24,6 @@ type AuthorListMatch struct {
 
 // Character is the typed data model for the character entity.
 type Character struct {
-	House *map[string]any `json:"house,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Quotes *[]any `json:"quotes,omitempty"`
-	Slug *string `json:"slug,omitempty"`
 }
 
 // CharacterLoadMatch is the typed request payload for Character.LoadTyped.
@@ -49,10 +42,6 @@ type CharacterListMatch struct {
 
 // House is the typed data model for the house entity.
 type House struct {
-	Id *string `json:"id,omitempty"`
-	Members *[]any `json:"members,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Slug *string `json:"slug,omitempty"`
 }
 
 // HouseLoadMatch is the typed request payload for House.LoadTyped.
@@ -70,11 +59,6 @@ type HouseListMatch struct {
 
 // Random is the typed data model for the random entity.
 type Random struct {
-	Character *map[string]any `json:"character,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Sentence *string `json:"sentence,omitempty"`
-	Slug *string `json:"slug,omitempty"`
 }
 
 // RandomLoadMatch is the typed request payload for Random.LoadTyped.

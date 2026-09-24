@@ -24,27 +24,95 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "author": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "character",
-              "req": false,
-              "type": "`$OBJECT`"
+          "fields": {
+            "character": {
+              "a": true,
+              "h": "Character",
+              "n": "character",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "sentence",
-              "req": false,
-              "short": "The quote text",
-              "type": "`$STRING`"
+            "sentence": {
+              "a": true,
+              "h": "Sentence",
+              "n": "sentence",
+              "r": false,
+              "sh": "The quote text",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "author",
           "op": {
             "list": {
@@ -52,39 +120,45 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /author/{character}/{count}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "tyrion",
-                        "kind": "param",
-                        "name": "character",
-                        "orig": "character",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "tyrion",
+                        "k": "param",
+                        "n": "character",
+                        "or": "character",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 2,
-                        "kind": "param",
-                        "name": "count",
-                        "orig": "count",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 2,
+                        "k": "param",
+                        "n": "count",
+                        "or": "count",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /author/{character}/{count}",
-                    "json": "{\"operationId\":\"getQuotesByAuthor\",\"parameters\":[{\"description\":\"Slug or name of the character\",\"in\":\"path\",\"name\":\"character\",\"required\":true,\"schema\":{\"example\":\"tyrion\",\"type\":\"string\"}},{\"description\":\"Number of quotes to retrieve\",\"in\":\"path\",\"name\":\"count\",\"required\":true,\"schema\":{\"example\":2,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"character\":{\"properties\":{\"name\":{\"description\":\"Full name of the character\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the character\",\"type\":\"string\"}},\"type\":\"object\"},\"sentence\":{\"description\":\"The quote text\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Quotes from the specified character\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/author/{character}/{count}",
+                  "q": {
+                    "exist": [
+                      "character",
+                      "count"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/author/{character}/{count}",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "author"
                     },
@@ -95,13 +169,7 @@
                       "var": "count"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "character",
-                      "count"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -110,11 +178,7 @@
             }
           },
           "relations": {
-            "ancestors": [
-              [
-                "author"
-              ]
-            ]
+            "ancestors": []
           }
         },
         "character": {
@@ -122,41 +186,46 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "house",
-              "req": false,
-              "type": "`$OBJECT`"
+          "fields": {
+            "house": {
+              "a": true,
+              "h": "House",
+              "n": "house",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "Full name of the character",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "Full name of the character",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "quotes",
-              "req": false,
-              "short": "Quotes by this character",
-              "type": "`$ARRAY`"
+            "quotes": {
+              "a": true,
+              "h": "Quotes",
+              "n": "quotes",
+              "r": false,
+              "sh": "Quotes by this character",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "slug",
-              "req": false,
-              "short": "URL-friendly identifier for the character",
-              "type": "`$STRING`"
+            "slug": {
+              "a": true,
+              "h": "Slug",
+              "n": "slug",
+              "r": false,
+              "sh": "URL-friendly identifier for the character",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -168,24 +237,24 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /characters",
-                    "json": "{\"operationId\":\"getCharacters\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"house\":{\"properties\":{\"name\":{\"description\":\"Full name of the house\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the house\",\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"description\":\"Full name of the character\",\"type\":\"string\"},\"quotes\":{\"description\":\"Quotes by this character\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"slug\":{\"description\":\"URL-friendly identifier for the character\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"List of characters with quotes\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/characters",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/characters",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "characters"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -197,35 +266,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /character/{character}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "jon",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "character",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "jon",
+                        "k": "param",
+                        "n": "id",
+                        "or": "character",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /character/{character}",
-                    "json": "{\"operationId\":\"getCharacterDetails\",\"parameters\":[{\"description\":\"Slug or name of the character\",\"in\":\"path\",\"name\":\"character\",\"required\":true,\"schema\":{\"example\":\"jon\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"house\":{\"name\":\"House Stark of Winterfell\",\"slug\":\"stark\"},\"name\":\"Jon Snow\",\"quotes\":[\"If I fall, don't bring me back.\"],\"slug\":\"jon\"},\"schema\":{\"properties\":{\"house\":{\"properties\":{\"name\":{\"description\":\"Full name of the house\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the house\",\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"description\":\"Full name of the character\",\"type\":\"string\"},\"quotes\":{\"description\":\"Quotes by this character\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"slug\":{\"description\":\"URL-friendly identifier for the character\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Details of the specified character with quotes\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/character/{character}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/character/{character}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "character": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "character"
                     },
@@ -233,12 +306,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -255,35 +323,39 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "members",
-              "req": false,
-              "short": "Members belonging to this house",
-              "type": "`$ARRAY`"
+            "members": {
+              "a": true,
+              "h": "Members",
+              "n": "members",
+              "r": false,
+              "sh": "Members belonging to this house",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "Full name of the house",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "Full name of the house",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "slug",
-              "req": false,
-              "short": "URL-friendly identifier for the house",
-              "type": "`$STRING`"
+            "slug": {
+              "a": true,
+              "h": "Slug",
+              "n": "slug",
+              "r": false,
+              "sh": "URL-friendly identifier for the house",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -295,24 +367,24 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /houses",
-                    "json": "{\"operationId\":\"getHouses\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"members\":{\"description\":\"Members belonging to this house\",\"items\":{\"properties\":{\"name\":{\"description\":\"Full name of the character\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the character\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"name\":{\"description\":\"Full name of the house\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the house\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"List of houses with members\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/houses",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/houses",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "houses"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -324,35 +396,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /house/{house}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "lannister",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "house",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "lannister",
+                        "k": "param",
+                        "n": "id",
+                        "or": "house",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /house/{house}",
-                    "json": "{\"operationId\":\"getHouseDetails\",\"parameters\":[{\"description\":\"Slug or name of the house\",\"in\":\"path\",\"name\":\"house\",\"required\":true,\"schema\":{\"example\":\"lannister\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"members\":[{\"name\":\"Tyrion Lannister\",\"slug\":\"tyrion\"},{\"name\":\"Cersei Lannister\",\"slug\":\"cersei\"}],\"name\":\"House Lannister of Casterly Rock\",\"slug\":\"lannister\"},\"schema\":{\"properties\":{\"members\":{\"description\":\"Members belonging to this house\",\"items\":{\"properties\":{\"name\":{\"description\":\"Full name of the character\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the character\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"name\":{\"description\":\"Full name of the house\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the house\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Details of the specified house\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/house/{house}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/house/{house}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "house": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "house"
                     },
@@ -360,12 +436,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -382,41 +453,46 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "character",
-              "req": false,
-              "type": "`$OBJECT`"
+          "fields": {
+            "character": {
+              "a": true,
+              "h": "Character",
+              "n": "character",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "Full name of the character",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "Full name of the character",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "sentence",
-              "req": false,
-              "short": "The quote text",
-              "type": "`$STRING`"
+            "sentence": {
+              "a": true,
+              "h": "Sentence",
+              "n": "sentence",
+              "r": false,
+              "sh": "The quote text",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "slug",
-              "req": false,
-              "short": "URL-friendly identifier for the character",
-              "type": "`$STRING`"
+            "slug": {
+              "a": true,
+              "h": "Slug",
+              "n": "slug",
+              "r": false,
+              "sh": "URL-friendly identifier for the character",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -428,35 +504,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /random/{count}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": 5,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "count",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 5,
+                        "k": "param",
+                        "n": "id",
+                        "or": "count",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /random/{count}",
-                    "json": "{\"operationId\":\"getRandomQuotes\",\"parameters\":[{\"description\":\"Number of random quotes to retrieve\",\"in\":\"path\",\"name\":\"count\",\"required\":true,\"schema\":{\"example\":5,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"character\":{\"properties\":{\"name\":{\"description\":\"Full name of the character\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the character\",\"type\":\"string\"}},\"type\":\"object\"},\"sentence\":{\"description\":\"The quote text\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Multiple random quotes\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/random/{count}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/random/{count}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "count": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "random"
                     },
@@ -464,35 +544,30 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /random",
-                    "json": "{\"operationId\":\"getRandomQuote\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"character\":{\"name\":\"Jon Snow\",\"slug\":\"jon\"},\"sentence\":\"If I fall, don't bring me back.\"},\"schema\":{\"properties\":{\"character\":{\"properties\":{\"name\":{\"description\":\"Full name of the character\",\"type\":\"string\"},\"slug\":{\"description\":\"URL-friendly identifier for the character\",\"type\":\"string\"}},\"type\":\"object\"},\"sentence\":{\"description\":\"The quote text\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"A random quote\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/random",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/random",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "random"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.character`"
                   }
@@ -921,16 +996,16 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {
                 "character": "character01",
                 "count": "count01"
               },
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -950,13 +1025,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -966,19 +1041,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "character_ref01",
                 "srcdatavar": "character_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "character01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -998,13 +1073,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1014,19 +1089,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "house_ref01",
                 "srcdatavar": "house_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "house01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1046,17 +1121,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "random_ref01",
                 "srcdatavar": "random_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {

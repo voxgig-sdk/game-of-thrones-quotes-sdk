@@ -1,0 +1,120 @@
+# Entity: random
+
+main: kit: entity: random: {
+
+  alias: field: {}
+
+  fields: {
+    character: {
+      h: "Character"
+      n: "character"
+      r: false
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Full name of the character"
+      t: "`$STRING`"
+    }
+    sentence: {
+      h: "Sentence"
+      n: "sentence"
+      r: false
+      sh: "The quote text"
+      t: "`$STRING`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      r: false
+      sh: "URL-friendly identifier for the character"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "random"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /random/{count}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 5
+                k: "param"
+                n: "id"
+                or: "count"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/random/{count}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              count: "id"
+            }
+          }
+          s: [
+            {
+              lit: "random"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /random"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/random"
+          s: [
+            {
+              lit: "random"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.character`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

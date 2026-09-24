@@ -1,0 +1,84 @@
+# Entity: author
+
+main: kit: entity: author: {
+
+  alias: field: {}
+
+  fields: {
+    character: {
+      h: "Character"
+      n: "character"
+      r: false
+      t: "`$OBJECT`"
+    }
+    sentence: {
+      h: "Sentence"
+      n: "sentence"
+      r: false
+      sh: "The quote text"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "author"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /author/{character}/{count}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "tyrion"
+                k: "param"
+                n: "character"
+                or: "character"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: 2
+                k: "param"
+                n: "count"
+                or: "count"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/author/{character}/{count}"
+          q: {
+            exist: [
+              "character"
+              "count"
+            ]
+          }
+          s: [
+            {
+              lit: "author"
+            }
+            {
+              var: "character"
+            }
+            {
+              var: "count"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

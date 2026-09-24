@@ -37,130 +37,13 @@
   "requests": {
     "GET /characters": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "getCharacters",
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "properties": {
-                      "house": {
-                        "properties": {
-                          "name": {
-                            "description": "Full name of the house",
-                            "type": "string"
-                          },
-                          "slug": {
-                            "description": "URL-friendly identifier for the house",
-                            "type": "string"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "name": {
-                        "description": "Full name of the character",
-                        "type": "string"
-                      },
-                      "quotes": {
-                        "description": "Quotes by this character",
-                        "items": {
-                          "type": "string"
-                        },
-                        "type": "array"
-                      },
-                      "slug": {
-                        "description": "URL-friendly identifier for the character",
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "List of characters with quotes"
-          }
-        },
-        "securitySource": "unspecified"
-      }
+      "version": 2,
+      "source": "openapi3"
     },
     "GET /character/{character}": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "getCharacterDetails",
-        "parameters": [
-          {
-            "description": "Slug or name of the character",
-            "in": "path",
-            "name": "character",
-            "required": true,
-            "schema": {
-              "example": "jon",
-              "type": "string"
-            }
-          }
-        ],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "house": {
-                    "name": "House Stark of Winterfell",
-                    "slug": "stark"
-                  },
-                  "name": "Jon Snow",
-                  "quotes": [
-                    "If I fall, don't bring me back."
-                  ],
-                  "slug": "jon"
-                },
-                "schema": {
-                  "properties": {
-                    "house": {
-                      "properties": {
-                        "name": {
-                          "description": "Full name of the house",
-                          "type": "string"
-                        },
-                        "slug": {
-                          "description": "URL-friendly identifier for the house",
-                          "type": "string"
-                        }
-                      },
-                      "type": "object"
-                    },
-                    "name": {
-                      "description": "Full name of the character",
-                      "type": "string"
-                    },
-                    "quotes": {
-                      "description": "Quotes by this character",
-                      "items": {
-                        "type": "string"
-                      },
-                      "type": "array"
-                    },
-                    "slug": {
-                      "description": "URL-friendly identifier for the character",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Details of the specified character with quotes"
-          }
-        },
-        "securitySource": "unspecified"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

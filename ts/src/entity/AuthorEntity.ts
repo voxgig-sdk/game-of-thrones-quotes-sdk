@@ -19,7 +19,6 @@ import type {
   AuthorListMatch,
 } from '../GameOfThronesQuotesTypes'
 
-// TODO: needs Entity superclass
 class AuthorEntity extends GameOfThronesQuotesEntityBase<Author> {
 
   constructor(client: GameOfThronesQuotesSDK, entopts: any) {
