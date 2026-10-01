@@ -49,9 +49,7 @@
 ---@class Random
 ---@field character? table
 ---@field id? string
----@field name? string
 ---@field sentence? string
----@field slug? string
 
 ---@class RandomLoadMatch
 ---@field id number

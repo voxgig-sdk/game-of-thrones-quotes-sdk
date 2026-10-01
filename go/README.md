@@ -305,9 +305,7 @@ API path: `/houses`
 | --- | --- |
 | `"character"` |  |
 | `"id"` |  |
-| `"name"` | Full name of the character |
 | `"sentence"` | The quote text |
-| `"slug"` | URL-friendly identifier for the character |
 
 Operations: Load.
 
@@ -445,9 +443,7 @@ Create an instance: `random := client.Random(nil)`
 | --- | --- | --- |
 | `character` | `map[string]any` |  |
 | `id` | `string` |  |
-| `name` | `string` | Full name of the character |
 | `sentence` | `string` | The quote text |
-| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 

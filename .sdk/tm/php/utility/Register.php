@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 GameOfThronesQuotesUtility::setRegistrar(function (GameOfThronesQuotesUtility $u): void {
     $u->clean = [GameOfThronesQuotesClean::class, 'call'];
+    $u->clean_add = [GameOfThronesQuotesClean::class, 'add'];
+    $u->clean_explain = [GameOfThronesQuotesDone::class, 'clean_explain'];
     $u->done = [GameOfThronesQuotesDone::class, 'call'];
     $u->make_error = [GameOfThronesQuotesMakeError::class, 'call'];
     $u->feature_add = [GameOfThronesQuotesFeatureAdd::class, 'call'];

@@ -17,25 +17,11 @@ main: kit: entity: random: {
       r: false
       t: "`$STRING`"
     }
-    name: {
-      h: "Name"
-      n: "name"
-      r: false
-      sh: "Full name of the character"
-      t: "`$STRING`"
-    }
     sentence: {
       h: "Sentence"
       n: "sentence"
       r: false
       sh: "The quote text"
-      t: "`$STRING`"
-    }
-    slug: {
-      h: "Slug"
-      n: "slug"
-      r: false
-      sh: "URL-friendly identifier for the character"
       t: "`$STRING`"
     }
   }
@@ -108,7 +94,7 @@ main: kit: entity: random: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.character`"
+            res: "`body`"
           }
         }
       ]

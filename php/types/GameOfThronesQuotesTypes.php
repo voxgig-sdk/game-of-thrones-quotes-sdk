@@ -81,9 +81,7 @@ class Random
 {
     public ?array $character = null;
     public ?string $id = null;
-    public ?string $name = null;
     public ?string $sentence = null;
-    public ?string $slug = null;
 }
 
 /** Request payload for Random#load. */

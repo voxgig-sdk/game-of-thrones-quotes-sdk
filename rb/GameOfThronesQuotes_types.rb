@@ -152,20 +152,12 @@ HouseListMatch = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] name
-#   @return [String, nil]
-#
 # @!attribute [rw] sentence
-#   @return [String, nil]
-#
-# @!attribute [rw] slug
 #   @return [String, nil]
 RandomType = Struct.new(
   :character,
   :id,
-  :name,
   :sentence,
-  :slug,
   keyword_init: true
 )
 

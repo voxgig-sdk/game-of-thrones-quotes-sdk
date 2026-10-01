@@ -287,9 +287,7 @@ random = client.Random
 | --- | --- | --- | --- |
 | `character` | `Hash` | No |  |
 | `id` | `String` | No |  |
-| `name` | `String` | No | Full name of the character |
 | `sentence` | `String` | No | The quote text |
-| `slug` | `String` | No | URL-friendly identifier for the character |
 
 ### Operations
 

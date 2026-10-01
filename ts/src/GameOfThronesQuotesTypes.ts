@@ -56,9 +56,7 @@ export interface HouseListMatch {
 export interface Random {
   character?: Record<string, any>
   id?: string
-  name?: string
   sentence?: string
-  slug?: string
 }
 
 export interface RandomLoadMatch {

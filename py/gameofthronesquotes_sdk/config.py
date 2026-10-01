@@ -436,22 +436,10 @@ def make_config():
             "type": "`$STRING`",
           },
           {
-            "name": "name",
-            "title": "Name",
-            "type": "`$STRING`",
-            "short": "Full name of the character",
-          },
-          {
             "name": "sentence",
             "title": "Sentence",
             "type": "`$STRING`",
             "short": "The quote text",
-          },
-          {
-            "name": "slug",
-            "title": "Slug",
-            "type": "`$STRING`",
-            "short": "URL-friendly identifier for the character",
           },
         ],
         "id": {
@@ -522,7 +510,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.character`",
+                  "res": "`body`",
                 },
                 "args": {},
                 "select": {},

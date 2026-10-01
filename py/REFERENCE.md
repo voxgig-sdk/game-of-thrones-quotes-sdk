@@ -284,9 +284,7 @@ random = client.Random()
 | --- | --- | --- | --- |
 | `character` | `dict` | No |  |
 | `id` | `str` | No |  |
-| `name` | `str` | No | Full name of the character |
 | `sentence` | `str` | No | The quote text |
-| `slug` | `str` | No | URL-friendly identifier for the character |
 
 ### Operations
 

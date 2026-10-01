@@ -12,9 +12,14 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`):
+GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)), or
+from a clone as a Composer path repository:
 
-- Releases: [https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk
+composer config repositories.game-of-thrones-quotes-sdk path ./game-of-thrones-quotes-sdk/php
+composer require voxgig-sdk/game-of-thrones-quotes-sdk:@dev
+```
 
 
 ## Tutorial: your first API call
@@ -126,13 +131,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = GameOfThronesQuotesSDK::test([
-    "entity" => ["random" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["house" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the ENTITY (throws on error);
+// list() returns entity instances (throws on error);
 // call data_get() for the mock record.
-$random = $client->Random()->load(["id" => "test01"]);
-print_r($random->data_get());
+$house = $client->House()->list();
+print_r(array_map(fn($item) => $item->data_get(), $house));
 ```
 
 ### Use a custom fetch function
@@ -295,9 +300,7 @@ API path: `/houses`
 | --- | --- |
 | `character` |  |
 | `id` |  |
-| `name` | Full name of the character |
 | `sentence` | The quote text |
-| `slug` | URL-friendly identifier for the character |
 
 Operations: Load.
 
@@ -420,9 +423,7 @@ Create an instance: `$random = $client->Random();`
 | --- | --- | --- |
 | `character` | `array` |  |
 | `id` | `string` |  |
-| `name` | `string` | Full name of the character |
 | `sentence` | `string` | The quote text |
-| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 

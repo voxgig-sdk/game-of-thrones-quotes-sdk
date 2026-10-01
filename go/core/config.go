@@ -411,22 +411,10 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
-						"name": "name",
-						"title": "Name",
-						"type": "`$STRING`",
-						"short": "Full name of the character",
-					},
-					map[string]any{
 						"name": "sentence",
 						"title": "Sentence",
 						"type": "`$STRING`",
 						"short": "The quote text",
-					},
-					map[string]any{
-						"name": "slug",
-						"title": "Slug",
-						"type": "`$STRING`",
-						"short": "URL-friendly identifier for the character",
 					},
 				},
 				"id": map[string]any{
@@ -497,7 +485,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.character`",
+									"res": "`body`",
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},

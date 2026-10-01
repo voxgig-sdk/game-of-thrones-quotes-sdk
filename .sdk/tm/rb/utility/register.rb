@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 GameOfThronesQuotesUtility.registrar = ->(u) {
   u.clean = GameOfThronesQuotesUtilities::Clean
+  u.clean_add = GameOfThronesQuotesUtilities::CleanAdd
+  u.clean_explain = GameOfThronesQuotesUtilities::CleanExplain
   u.done = GameOfThronesQuotesUtilities::Done
   u.make_error = GameOfThronesQuotesUtilities::MakeError
   u.feature_add = GameOfThronesQuotesUtilities::FeatureAdd

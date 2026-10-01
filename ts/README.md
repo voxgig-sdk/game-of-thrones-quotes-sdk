@@ -15,9 +15,13 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`):
+release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)), or from a
+clone, which carries the compiled `dist/`:
 
-- Releases: [https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk
+npm install ./game-of-thrones-quotes-sdk/ts
+```
 
 
 ## Tutorial: your first API call
@@ -337,9 +341,7 @@ API path: `/houses`
 | --- | --- |
 | `character` |  |
 | `id` |  |
-| `name` | Full name of the character |
 | `sentence` | The quote text |
-| `slug` | URL-friendly identifier for the character |
 
 Operations: load.
 
@@ -457,9 +459,7 @@ Create an instance: `const random = client.Random()`
 | --- | --- | --- |
 | `character` | `Record<string, any>` |  |
 | `id` | `string` |  |
-| `name` | `string` | Full name of the character |
 | `sentence` | `string` | The quote text |
-| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 

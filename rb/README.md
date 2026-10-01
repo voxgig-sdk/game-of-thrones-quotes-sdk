@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases](https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/game-of-thrones-quotes-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-game-of-thrones-quotes-sdk", path: "./game-of-thrones-quotes-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -284,9 +293,7 @@ API path: `/houses`
 | --- | --- |
 | `character` |  |
 | `id` |  |
-| `name` | Full name of the character |
 | `sentence` | The quote text |
-| `slug` | URL-friendly identifier for the character |
 
 Operations: Load.
 
@@ -409,9 +416,7 @@ Create an instance: `random = client.Random`
 | --- | --- | --- |
 | `character` | `Hash` |  |
 | `id` | `String` |  |
-| `name` | `String` | Full name of the character |
 | `sentence` | `String` | The quote text |
-| `slug` | `String` | URL-friendly identifier for the character |
 
 #### Example: Load
 

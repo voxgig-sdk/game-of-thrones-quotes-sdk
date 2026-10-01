@@ -4,23 +4,17 @@
       "RANDOM00": {
         "character": {},
         "id": "RANDOM00",
-        "name": "s34",
-        "sentence": "s35",
-        "slug": "s36"
+        "sentence": "s20"
       },
       "RANDOM01": {
         "character": {},
         "id": "RANDOM01",
-        "name": "s66",
-        "sentence": "s67",
-        "slug": "s68"
+        "sentence": "s3e"
       },
       "RANDOM02": {
         "character": {},
         "id": "RANDOM02",
-        "name": "s98",
-        "sentence": "s99",
-        "slug": "s9a"
+        "sentence": "s5c"
       }
     }
   },
@@ -28,9 +22,7 @@
     "random": {
       "random_ref01": {
         "character": {},
-        "name": "sca",
-        "sentence": "scb",
-        "slug": "scc"
+        "sentence": "s7a"
       }
     }
   },

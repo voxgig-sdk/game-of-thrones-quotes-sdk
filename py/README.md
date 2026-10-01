@@ -287,9 +287,7 @@ API path: `/houses`
 | --- | --- |
 | `character` |  |
 | `id` |  |
-| `name` | Full name of the character |
 | `sentence` | The quote text |
-| `slug` | URL-friendly identifier for the character |
 
 Operations: Load.
 
@@ -407,9 +405,7 @@ Create an instance: `random = client.Random()`
 | --- | --- | --- |
 | `character` | `dict` |  |
 | `id` | `str` |  |
-| `name` | `str` | Full name of the character |
 | `sentence` | `str` | The quote text |
-| `slug` | `str` | URL-friendly identifier for the character |
 
 #### Example: Load
 

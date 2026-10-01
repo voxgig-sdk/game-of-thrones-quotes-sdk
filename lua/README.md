@@ -276,9 +276,7 @@ API path: `/houses`
 | --- | --- |
 | `character` |  |
 | `id` |  |
-| `name` | Full name of the character |
 | `sentence` | The quote text |
-| `slug` | URL-friendly identifier for the character |
 
 Operations: Load.
 
@@ -396,9 +394,7 @@ Create an instance: `local random = client:Random(nil)`
 | --- | --- | --- |
 | `character` | `table` |  |
 | `id` | `string` |  |
-| `name` | `string` | Full name of the character |
 | `sentence` | `string` | The quote text |
-| `slug` | `string` | URL-friendly identifier for the character |
 
 #### Example: Load
 

@@ -468,28 +468,12 @@
               "r": false,
               "t": "`$STRING`"
             },
-            "name": {
-              "a": true,
-              "h": "Name",
-              "n": "name",
-              "r": false,
-              "sh": "Full name of the character",
-              "t": "`$STRING`"
-            },
             "sentence": {
               "a": true,
               "h": "Sentence",
               "n": "sentence",
               "r": false,
               "sh": "The quote text",
-              "t": "`$STRING`"
-            },
-            "slug": {
-              "a": true,
-              "h": "Slug",
-              "n": "slug",
-              "r": false,
-              "sh": "URL-friendly identifier for the character",
               "t": "`$STRING`"
             }
           },
@@ -569,7 +553,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.character`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -1180,7 +1164,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

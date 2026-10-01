@@ -54,9 +54,7 @@ SDK operations: `load`.
 
 Key fields to recognise:
 
-- `name`: Full name of the character
 - `sentence`: The quote text
-- `slug`: URL-friendly identifier for the character
 
 ### Route map
 

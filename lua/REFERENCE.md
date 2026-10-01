@@ -284,9 +284,7 @@ local random = client:Random(nil)
 | --- | --- | --- | --- |
 | `character` | `table` | No |  |
 | `id` | `string` | No |  |
-| `name` | `string` | No | Full name of the character |
 | `sentence` | `string` | No | The quote text |
-| `slug` | `string` | No | URL-friendly identifier for the character |
 
 ### Operations
 
