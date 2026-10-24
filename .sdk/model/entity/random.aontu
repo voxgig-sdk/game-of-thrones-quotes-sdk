@@ -66,6 +66,10 @@ main: kit: entity: random: {
               count: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "random"
@@ -87,6 +91,10 @@ main: kit: entity: random: {
           }
           m: "GET"
           o: "/random"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "random"

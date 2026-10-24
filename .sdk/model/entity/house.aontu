@@ -52,6 +52,10 @@ main: kit: entity: house: {
           }
           m: "GET"
           o: "/houses"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "houses"
@@ -96,6 +100,10 @@ main: kit: entity: house: {
             param: {
               house: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

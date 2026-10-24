@@ -6,6 +6,17 @@ require_relative "../GameOfThronesQuotes_sdk"
 require_relative "runner"
 
 class AuthorDirectTest < Minitest::Test
+  # main.kit.test.live.strict is true (the default is true): a live
+  # request that fails, or a live test missing an input it needs,
+  # fails the test.
+  # An account with no record for a test to read skips it either way.
+  LIVE_STRICT = true
+
+  def live_ok(result)
+    status = Helpers.to_int(result["status"])
+    result["err"].nil? && result["ok"] && status >= 200 && status < 300
+  end
+
   def test_direct_list_author
     setup = author_direct_setup([
       { "id" => "direct01" },
@@ -19,24 +30,15 @@ class AuthorDirectTest < Minitest::Test
     if setup[:live]
       ["character01", "count01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
-          skip "live test needs #{_live_key} via *_ENTID env var (synthetic IDs only)"
-          return
+          Runner.live_miss(LIVE_STRICT, "Live test blocked: needs #{_live_key} via GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID")
         end
       end
     end
     client = setup[:client]
 
     params = {}
-    if setup[:live]
-      params["character"] = setup[:idmap]["character01"]
-    else
-      params["character"] = "direct01"
-    end
-    if setup[:live]
-      params["count"] = setup[:idmap]["count01"]
-    else
-      params["count"] = "direct01"
-    end
+    params["character"] = setup[:live] ? setup[:idmap]["character01"] : "direct01"
+    params["count"] = setup[:live] ? setup[:idmap]["count01"] : "direct02"
 
     result = client.direct({
       "path" => "author/{character}/{count}",
@@ -44,22 +46,13 @@ class AuthorDirectTest < Minitest::Test
       "params" => params,
     })
     if setup[:live]
-      # Live mode is lenient: synthetic IDs frequently 4xx and the list-
-      # response shape varies wildly across public APIs. Skip rather than
-      # fail when the call doesn't return a usable list.
-      if !result["err"].nil?
-        skip("list call failed (likely synthetic IDs against live API): #{result["err"]}")
-        return
+      unless live_ok(result)
+        Runner.live_miss(LIVE_STRICT, "Live list failed: " + Runner.live_describe(result))
       end
-      unless result["ok"]
-        skip("list call not ok (likely synthetic IDs against live API)")
-        return
+      if Runner.live_list(result["data"]).nil?
+        Runner.live_miss(LIVE_STRICT, "Live list returned no list: " + Runner.live_describe(result))
       end
-      status = Helpers.to_int(result["status"])
-      if status < 200 || status >= 300
-        skip("expected 2xx status, got #{status}")
-        return
-      end
+      assert Runner.live_list(result["data"]).is_a?(Array)
     else
       assert_nil result["err"]
       assert result["ok"]
@@ -91,11 +84,12 @@ def author_direct_setup(mockres)
     merged_opts = Runner.live_client_options.merge({
     })
     client = GameOfThronesQuotesSDK.new(merged_opts)
+    idmap = env["GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID"]
     return {
       client: client,
       calls: calls,
       live: true,
-      idmap: {},
+      idmap: idmap.is_a?(Hash) ? idmap : {},
     }
   end
 

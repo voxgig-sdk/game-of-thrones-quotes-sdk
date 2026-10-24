@@ -3,5 +3,25 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "A free API to retrieve quotes from Game of Thrones. Users can retrieve random quotes, quotes by specific characters, and information about houses and their members.",
+      "A random quote",
+      "Details of the specified character with quotes",
+      "Details of the specified house",
+      "Full name of the character",
+      "Full name of the house",
+      "List of characters with quotes",
+      "List of houses with members",
+      "Members belonging to this house",
+      "Multiple random quotes",
+      "Production server",
+      "Quotes by this character",
+      "Quotes from the specified character",
+      "The quote text",
+      "URL-friendly identifier for the character",
+      "URL-friendly identifier for the house"
+    ]
+  }
 }

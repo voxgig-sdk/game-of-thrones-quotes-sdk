@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.House();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('house hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.GameOfThronesQuotesSDK.test(offline).House().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.GameOfThronesQuotesSDK.test(offline).House()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.GameOfThronesQuotesSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.House().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.GameOfThronesQuotesSDK.test().House().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.GameOfThronesQuotesSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.House().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.House().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.GameOfThronesQuotesSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.House().list({ "id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.GAME_OF_THRONES_QUOTES_TEST_LIVE;
         for (const op of ['list', 'load']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 }, "members": { "a": true, "h": "Members", "n": "members", "r": false, "sh": "Members belonging to this house", "t": "`$ARRAY`", "key$": "members", "index$": 1 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Full name of the house", "t": "`$STRING`", "key$": "name", "index$": 2 }, "slug": { "a": true, "h": "Slug", "n": "slug", "r": false, "sh": "URL-friendly identifier for the house", "t": "`$STRING`", "key$": "slug", "index$": 3 } }, "id": { "field": "id", "name": "id" }, "name": "house", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /houses", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/houses", "q": {}, "r": {}, "s": [{ "lit": "houses" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /house/{house}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "lannister", "k": "param", "n": "id", "or": "house", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/house/{house}", "q": { "exist": ["id"] }, "r": { "param": { "house": "id" } }, "s": [{ "lit": "house" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "house", "name__orig": "house", "Name": "House", "name_": "house", "name-": "house", "NAME": "HOUSE", "index$": 2 }, { "active": true, "entity": "house", "key$": "BasicHouseFlow", "kind": "basic", "name": "BasicHouseFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "house_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "house_ref01", "srcdatavar": "house_ref01_data", "suffix": "_dt0" }, "m": { "id": "house01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-house_ref01" } }], "index$": 1 }] }, 'House', { "GET /houses": { "protocol": "http", "parameters": [] }, "GET /house/{house}": { "protocol": "http", "parameters": [{ "name": "house", "in": "path", "required": true, "description": "Slug or name of the house", "schema": { "type": "string", "example": "lannister" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 }, "members": { "a": true, "h": "Members", "n": "members", "r": false, "sh": "Members belonging to this house", "t": "`$ARRAY`", "key$": "members", "index$": 1 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Full name of the house", "t": "`$STRING`", "key$": "name", "index$": 2 }, "slug": { "a": true, "h": "Slug", "n": "slug", "r": false, "sh": "URL-friendly identifier for the house", "t": "`$STRING`", "key$": "slug", "index$": 3 } }, "id": { "field": "id", "name": "id" }, "name": "house", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /houses", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/houses", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "houses" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /house/{house}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "lannister", "k": "param", "n": "id", "or": "house", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/house/{house}", "q": { "exist": ["id"] }, "r": { "param": { "house": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "house" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "house", "name__orig": "house", "Name": "House", "name_": "house", "name-": "house", "NAME": "HOUSE", "index$": 2 }, { "active": true, "entity": "house", "key$": "BasicHouseFlow", "kind": "basic", "name": "BasicHouseFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "house_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "house_ref01", "srcdatavar": "house_ref01_data", "suffix": "_dt0" }, "m": { "id": "house01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-house_ref01" } }], "index$": 1 }] }, 'House', { "GET /houses": { "protocol": "http", "parameters": [] }, "GET /house/{house}": { "protocol": "http", "parameters": [{ "name": "house", "in": "path", "required": true, "description": "Slug or name of the house", "schema": { "type": "string", "example": "lannister" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -80,6 +127,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(house_ref01_data_dt0.id === house_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

@@ -52,9 +52,8 @@ const client = GameOfThronesQuotesSDK.test({
   },
 })
 const random = await client.Random().load({ id: 1 })
-// random is the Random entity, populated with mock data
-// — call random.data() for the record itself
-console.log(random)
+// random is the Random entity; .data() reads its mock record
+console.log(random.data())
 ```
 
 ### Python
@@ -62,7 +61,7 @@ console.log(random)
 ```python
 client = GameOfThronesQuotesSDK.test()
 random = client.Random().load({"id": "test01"})
-print(random)
+print(random.data_get())
 ```
 
 ### PHP
@@ -111,8 +110,8 @@ local result, err = client:Random():load({ id = "test01" })
 | Golang | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go` | `go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go@latest` |
 | Ruby | `voxgig-sdk-game-of-thrones-quotes-sdk` | publish pending — [install from source](rb/README.md#install) |
 | Lua | `voxgig-sdk-game-of-thrones-quotes-sdk` | publish pending — [install from source](lua/README.md#install) |
-| Go CLI | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-cli` | `go install github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-cli/cmd/game-of-thrones-quotes@latest` |
-| Go MCP server | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-mcp` | `go get github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-mcp@latest` |
+| Go CLI | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-cli` | build from source — [go-cli/README.md](go-cli/README.md) |
+| Go MCP server | `github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go-mcp` | build from source — [go-mcp/README.md](go-mcp/README.md) |
 
 ## Quickstart
 
@@ -123,10 +122,10 @@ import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes-sdk'
 
 const client = new GameOfThronesQuotesSDK()
 
-// List all authors (returns AuthorEntity[] — .data() for the record)
+// List all authors (returns AuthorEntity[], one entity per record)
 const authors = await client.Author().list({ character: "example", count: 1 })
 for (const author of authors) {
-  console.log(author)
+  console.log(author.data())
 }
 ```
 
@@ -142,9 +141,10 @@ See the [TypeScript README](ts/README.md) for the full guide.
 
 ## Use it from an AI agent (MCP)
 
-The generated MCP server exposes every operation in this SDK as an
-[MCP](https://modelcontextprotocol.io) tool that Claude, Cursor or Cline
-can call directly. Build and register it:
+The generated MCP server exposes this SDK's list and load operations as
+[MCP](https://modelcontextprotocol.io) tools that Claude, Cursor or Cline
+can call directly. It only reads: create, update, patch and remove become tools when the SDK's model sets
+`main: kit: target: 'go-mcp': tool: write: true`. Build and register it:
 
 ```bash
 cd go-mcp && go build -o game-of-thrones-quotes-mcp .
@@ -185,10 +185,10 @@ from gameofthronesquotes_sdk import GameOfThronesQuotesSDK
 
 client = GameOfThronesQuotesSDK()
 
-# List all authors (returns a list, raises on error)
+# List all authors (a list of entities, one per record; raises on error)
 authors = client.Author().list({"character": "example", "count": 1})
 for author in authors:
-    print(author)
+    print(author.data_get())
 ```
 
 ### PHP
@@ -199,8 +199,8 @@ require_once 'gameofthronesquotes_sdk.php';
 
 $client = new GameOfThronesQuotesSDK();
 
-// List all authors (returns an array; throws on error)
-$authors = $client->Author()->list();
+// List all authors (an array of entities, one per record; throws on error)
+$authors = $client->Author()->list(["character" => "example", "count" => 1]);
 print_r(array_map(fn($item) => $item->data_get(), $authors));
 ```
 
@@ -211,12 +211,14 @@ import sdk "github.com/voxgig-sdk/game-of-thrones-quotes-sdk/go"
 
 client := sdk.New()
 
-// List all authors
-authors, err := client.Author(nil).List(nil, nil)
+// List all authors (one entity per record; err is non-nil on failure)
+authors, err := client.Author(nil).List(map[string]any{"character": "example", "count": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(authors)
+for _, author := range authors.([]any) {
+    fmt.Println(author.(sdk.Entity).Data())
+}
 ```
 
 ### Ruby
@@ -226,21 +228,25 @@ require_relative "GameOfThronesQuotes_sdk"
 
 client = GameOfThronesQuotesSDK.new
 
-# List all authors (returns an Array; raises on error)
-authors = client.Author.list
-puts authors
+# List all authors (an Array of entities, one per record; raises on error)
+authors = client.Author.list({ "character" => "example", "count" => 1 })
+authors.each { |item| puts item.data_get }
 ```
 
 ### Lua
 
 ```lua
 local sdk = require("game-of-thrones-quotes_sdk")
+local json = require("dkjson")
 
 local client = sdk.new()
 
--- List all authors
-local authors, err = client:Author():list()
-print(authors)
+-- List all authors (an array of entities, one per record; err on failure)
+local authors, err = client:Author():list({ character = "example", count = 1 })
+if err then error(err) end
+for _, author in ipairs(authors) do
+  print(json.encode(author:data_get()))
+end
 ```
 
 ## Direct and prepare
@@ -266,10 +272,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
-if (result instanceof Error) {
-  throw result
+if (result.ok) {
+  console.log(result.data)
 }
-console.log(result.data)
 ```
 
 **Python:**
@@ -354,23 +359,52 @@ Pass custom features via the `extend` option at construction time.
 This repository contains its own generator (`.sdk/`), so the SDK is
 customizable without forking any upstream tool:
 
-- **The model** (`.sdk/model/`) declares everything this project owns:
-  package names, versions, active features, per-target settings. It is
-  written in [aontu](https://aontu.dev), a JSON-based
+- **The model** (`.sdk/model/`) is what generation reads: the API's
+  entities and operations, the targets, the features, and this project's
+  own settings. It is written in [aontu](https://aontu.dev), a JSON-based
   specification language designed for building ontologies: easy to edit
   by hand, and files unify rather than override, so small declarations
   compose into one model. Regeneration re-reads it every time.
 - **Templates** (`.sdk/tm/`) and **components** (`.sdk/src/cmp/`) are
   the two layers of generation, copied into this repo: templates are the
   literal per-language source, components generate the API-shaped parts.
-- **Regeneration merges.** By default, newly generated content is
-  three-way merged into existing files, so generator updates and local
-  edits usually converge without manual conflict handling. A project can
-  opt for plain overwrite instead.
+- **Regeneration overwrites.** Each run rewrites every generated file from
+  the model, the templates and the components, so an edit made to
+  generated output is lost. Say what this project needs in its own model
+  (`.sdk/model/project.aontu`), or extend a target with a component of its
+  own in `.sdk/src/cmp/<target>/`, registered with `registerComponent`,
+  which `voxgig-sdkgen doctor` reports as an addition rather than drift.
 - **Custom features and entire custom targets** arrive through sdkgen
   packages (`voxgig-sdkgen package add`), on the same rails as the
   bundled languages, and `voxgig-sdkgen doctor` reports any drift from
   what a resync would write.
+
+### Project map
+
+| Path | What it holds | Edit it? |
+| --- | --- | --- |
+| `.sdk/model/project.aontu` | This project's own decisions: package names, versions, features and per-target settings | Yes. The scaffold writes it once and never again. |
+| `.sdk/model/text.aontu` | The README wording, in `main.kit.text`: the tagline, the summary and the entity descriptions | Yes. The scaffold writes it once and never again. |
+| `.sdk/model/guide/guide.aontu` | How the spec's paths map onto entities and operations | Yes. The scaffold writes it once and never again. |
+| `.sdk/model/`, the rest | The API model built from the spec, and the target and feature definitions | Not by hand. Generation, `target add` and a new scaffold run rewrite it. |
+| `.sdk/def/` | The OpenAPI spec | Replace it when the API changes. Generation rebuilds the model from it. |
+| `.sdk/src/cmp/<target>/`, `.sdk/tm/<target>/` | The components and templates that generate each target | Only to add a component of your own. `target add` overwrites the copies. |
+| `.sdk/test/` | The shared test cases the generated tests run | No. |
+| `<target>/`, such as `ts/` | One generated SDK per target, with its own tests | No. Generation overwrites it. |
+| `README.md`, `LICENSE`, `Makefile` and the other root files | The repository's generated files | No. Generation overwrites them. |
+
+### Common commands
+
+Run these from `.sdk/`:
+
+```bash
+npm run generate               # regenerate every target from the model
+npm run add-target <target>    # add a target, or resync one after an sdkgen update
+npm run add-feature <feature>  # add a feature to every target
+npx voxgig-sdkgen doctor       # report where .sdk/ differs from what a resync writes
+```
+
+In an SDK directory, `make test` runs that SDK's tests.
 
 How-to: [customize and propagate templates](https://github.com/voxgig/sdkgen/blob/main/docs/how-to/customize-and-propagate-templates.md).
 The full story: [voxgig.com/sdk/custom](https://voxgig.com/sdk/custom).
