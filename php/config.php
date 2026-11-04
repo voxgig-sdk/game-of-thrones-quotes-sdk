@@ -449,26 +449,17 @@ class GameOfThronesQuotesConfig
               'type' => '`$OBJECT`',
             ],
             [
-              'name' => 'id',
-              'title' => 'Id',
-              'type' => '`$STRING`',
-            ],
-            [
               'name' => 'sentence',
               'title' => 'Sentence',
               'type' => '`$STRING`',
               'short' => 'The quote text',
             ],
           ],
-          'id' => [
-            'field' => 'id',
-            'name' => 'id',
-          ],
           'name' => 'random',
           'op' => [
-            'load' => [
+            'list' => [
               'input' => 'data',
-              'name' => 'load',
+              'name' => 'list',
               'points' => [
                 [
                   'kind' => 'http',
@@ -479,18 +470,14 @@ class GameOfThronesQuotesConfig
                       'lit' => 'random',
                     ],
                     [
-                      'var' => 'id',
+                      'var' => 'count',
                     ],
                   ],
                   'parts' => [
                     'random',
-                    '{id}',
+                    '{count}',
                   ],
-                  'rename' => [
-                    'param' => [
-                      'count' => 'id',
-                    ],
-                  ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
@@ -498,7 +485,7 @@ class GameOfThronesQuotesConfig
                   'args' => [
                     'params' => [
                       [
-                        'name' => 'id',
+                        'name' => 'count',
                         'orig' => 'count',
                         'type' => '`$INTEGER`',
                         'kind' => 'param',
@@ -509,7 +496,7 @@ class GameOfThronesQuotesConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'id',
+                      'count',
                     ],
                   ],
                   'response' => [
@@ -517,6 +504,12 @@ class GameOfThronesQuotesConfig
                     'media' => 'application/json',
                   ],
                 ],
+              ],
+            ],
+            'load' => [
+              'input' => 'data',
+              'name' => 'load',
+              'points' => [
                 [
                   'kind' => 'http',
                   'method' => 'GET',

@@ -11,12 +11,6 @@ main: kit: entity: random: {
       r: false
       t: "`$OBJECT`"
     }
-    id: {
-      h: "Id"
-      n: "id"
-      r: false
-      t: "`$STRING`"
-    }
     sentence: {
       h: "Sentence"
       n: "sentence"
@@ -26,15 +20,10 @@ main: kit: entity: random: {
     }
   }
 
-  id: {
-    field: "id"
-    name: "id"
-  }
-
   name: "random"
   op: {
-    load: {
-      name: "load"
+    list: {
+      name: "list"
       points: [
         {
           co: {
@@ -47,7 +36,7 @@ main: kit: entity: random: {
               {
                 ex: 5
                 k: "param"
-                n: "id"
+                n: "count"
                 or: "count"
                 r: true
                 t: "`$INTEGER`"
@@ -58,13 +47,8 @@ main: kit: entity: random: {
           o: "/random/{count}"
           q: {
             exist: [
-              "id"
+              "count"
             ]
-          }
-          r: {
-            param: {
-              count: "id"
-            }
           }
           rs: {
             kind: "json"
@@ -75,7 +59,7 @@ main: kit: entity: random: {
               lit: "random"
             }
             {
-              var: "id"
+              var: "count"
             }
           ]
           t: {
@@ -83,6 +67,11 @@ main: kit: entity: random: {
             res: "`body`"
           }
         }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
         {
           co: {
             id: "GET /random"

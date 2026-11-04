@@ -80,13 +80,19 @@ class HouseListMatch
 class Random
 {
     public ?array $character = null;
-    public ?string $id = null;
     public ?string $sentence = null;
 }
 
 /** Request payload for Random#load. */
 class RandomLoadMatch
 {
-    public int $id;
+    public ?array $character = null;
+    public ?string $sentence = null;
+}
+
+/** Request payload for Random#list. */
+class RandomListMatch
+{
+    public int $count;
 }
 

@@ -40,9 +40,13 @@ class AuthorDirectTest extends TestCase
                 }
             }
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
+        $query = [];
         $params["character"] = $setup["live"] ? ($setup["idmap"]["character01"] ?? null) : "direct01";
         $params["count"] = $setup["live"] ? ($setup["idmap"]["count01"] ?? null) : "direct02";
 
@@ -50,6 +54,7 @@ class AuthorDirectTest extends TestCase
             "path" => "author/{character}/{count}",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {
@@ -92,6 +97,9 @@ function author_direct_setup($mockres)
         ]);
         $client = new GameOfThronesQuotesSDK($merged_opts);
         $idmap = $env["GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID"] ?? [];
+        // A path parameter's example stands in for an id *_ENTID does not give.
+        $idmap = array_merge(["character01" => 'tyrion', "count01" => 2],
+            is_array($idmap) ? $idmap : []);
         return [
             "client" => $client,
             "calls" => $calls,

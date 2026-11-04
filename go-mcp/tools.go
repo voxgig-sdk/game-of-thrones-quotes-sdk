@@ -13,7 +13,7 @@ import (
 
 // ListArgs is what an agent sends to game-of-thrones-quotes_list.
 type ListArgs struct {
-	Entity string         `json:"entity" jsonschema:"one of: author | character | house"`
+	Entity string         `json:"entity" jsonschema:"one of: author | character | house | random"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional filter map; omit it for the first page"`
 }
 
@@ -28,7 +28,7 @@ func registerTools(server *mcp.Server, client *sdk.GameOfThronesQuotesSDK) {
 		Name:        "game-of-thrones-quotes_list",
 		Description: "List records from GameOfThronesQuotes. Args: entity, query (optional filter map; omit it for the first page). Returns the first page of records as JSON.",
 		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
-		InputSchema: entitySchema[ListArgs]("author", "character", "house"),
+		InputSchema: entitySchema[ListArgs]("author", "character", "house", "random"),
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args ListArgs) (*mcp.CallToolResult, any, error) {
 		return runOp(ctx, client, "list", args.Entity, args.Query)
 	})
@@ -101,7 +101,7 @@ func runOp(_ context.Context, client *sdk.GameOfThronesQuotesSDK, op string, ent
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.GameOfThronesQuotesSDK, name string) (sdk.GameOfThronesQuotesEntity, error) {
+func entityFor(client *sdk.GameOfThronesQuotesSDK, name string) (sdk.GameOfThronesQuotesEntityBase, error) {
 	switch strings.ToLower(name) {
 	case "author":
 		return client.Author(nil), nil

@@ -192,6 +192,20 @@ func (sdk *GameOfThronesQuotesSDK) Prepare(fetchargs map[string]any) (map[string
 		}
 	}
 
+	// A raw request has no point to declare its response type, so it asks
+	// for the JSON it reads: an API that negotiates on Accept otherwise
+	// answers in its own default format. A caller's own accept wins.
+	hasAccept := false
+	for k := range ctx.Spec.Headers {
+		if strings.ToLower(k) == "accept" {
+			hasAccept = true
+			break
+		}
+	}
+	if !hasAccept {
+		ctx.Spec.Headers["accept"] = "application/json"
+	}
+
 	_, err := utility.PrepareAuth(ctx)
 	if err != nil {
 		return nil, err
@@ -375,7 +389,7 @@ func (sdk *GameOfThronesQuotesSDK) Graphql(
 // Author returns a Author entity bound to this client.
 // Idiomatic usage: client.Author(nil).List(nil, nil) or
 // client.Author(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *GameOfThronesQuotesSDK) Author(data map[string]any) GameOfThronesQuotesEntity {
+func (sdk *GameOfThronesQuotesSDK) Author(data map[string]any) GameOfThronesQuotesEntityBase {
 	return NewAuthorEntityFunc(sdk, data)
 }
 
@@ -383,7 +397,7 @@ func (sdk *GameOfThronesQuotesSDK) Author(data map[string]any) GameOfThronesQuot
 // Character returns a Character entity bound to this client.
 // Idiomatic usage: client.Character(nil).List(nil, nil) or
 // client.Character(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *GameOfThronesQuotesSDK) Character(data map[string]any) GameOfThronesQuotesEntity {
+func (sdk *GameOfThronesQuotesSDK) Character(data map[string]any) GameOfThronesQuotesEntityBase {
 	return NewCharacterEntityFunc(sdk, data)
 }
 
@@ -391,7 +405,7 @@ func (sdk *GameOfThronesQuotesSDK) Character(data map[string]any) GameOfThronesQ
 // House returns a House entity bound to this client.
 // Idiomatic usage: client.House(nil).List(nil, nil) or
 // client.House(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *GameOfThronesQuotesSDK) House(data map[string]any) GameOfThronesQuotesEntity {
+func (sdk *GameOfThronesQuotesSDK) House(data map[string]any) GameOfThronesQuotesEntityBase {
 	return NewHouseEntityFunc(sdk, data)
 }
 
@@ -399,7 +413,7 @@ func (sdk *GameOfThronesQuotesSDK) House(data map[string]any) GameOfThronesQuote
 // Random returns a Random entity bound to this client.
 // Idiomatic usage: client.Random(nil).List(nil, nil) or
 // client.Random(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *GameOfThronesQuotesSDK) Random(data map[string]any) GameOfThronesQuotesEntity {
+func (sdk *GameOfThronesQuotesSDK) Random(data map[string]any) GameOfThronesQuotesEntityBase {
 	return NewRandomEntityFunc(sdk, data)
 }
 

@@ -188,12 +188,12 @@ const PLAN: any[] = [
   {
     "entity": "random",
     "accessor": "Random",
-    "op": "load",
+    "op": "list",
     "method": "GET",
     "path": "/random/{count}",
     "args": [
       {
-        "name": "id",
+        "name": "count",
         "wire": "count",
         "value": 5
       }

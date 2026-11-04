@@ -7,6 +7,22 @@ main: kit: flow: BasicRandomFlow:
   name: "BasicRandomFlow",
   step: [
     {
+      m: {
+        count: "count01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "random_ref01"
+          }
+        }
+      ]
+    }
+
+    {
       i: {
         ref: "random_ref01",
         srcdatavar: "random_ref01_data",

@@ -285,17 +285,24 @@ $random = $client->Random();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `array` | No |  |
-| `id` | `string` | No |  |
 | `sentence` | `string` | No | The quote text |
 
 ### Operations
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
+
+```php
+$results = $client->Random()->list(["count" => 1]);
+```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
-$result = $client->Random()->load(["id" => 1]);
+$result = $client->Random()->load();
 ```
 
 ### Common Methods

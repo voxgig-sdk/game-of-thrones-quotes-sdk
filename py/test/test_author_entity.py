@@ -52,9 +52,9 @@ class TestAuthorEntity:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
         if setup["live"]:
-            for _live_key in ["character01", "count01"]:
+            for _live_key, _live_ex in {"character01": "tyrion", "count01": 2}.items():
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
-                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID")
+                    setup["idmap"][_live_key] = _live_ex
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -64,6 +64,8 @@ class TestAuthorEntity:
         if len(author_ref01_data_raw) > 0:
             author_ref01_data = helpers.to_map(author_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         author_ref01_ent = client.Author(None)
         author_ref01_match = {

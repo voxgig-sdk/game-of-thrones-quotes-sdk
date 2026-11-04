@@ -63,7 +63,13 @@ type Random struct {
 
 // RandomLoadMatch is the typed request payload for Random.LoadTyped.
 type RandomLoadMatch struct {
-	Id int `json:"id"`
+	Character *map[string]any `json:"character,omitempty"`
+	Sentence *string `json:"sentence,omitempty"`
+}
+
+// RandomListMatch is the typed request payload for Random.ListTyped.
+type RandomListMatch struct {
+	Count int `json:"count"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

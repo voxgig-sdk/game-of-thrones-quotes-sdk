@@ -37,7 +37,7 @@ class TestRandomEntity:
         client = GameOfThronesQuotesSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.Random(None).load({"id": "x"}, None)
+            client.Random(None).list({"count": "x"}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,13 +46,15 @@ class TestRandomEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["load"]:
+        for _op in ["list", "load"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "random." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
         if setup["live"]:
-            runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow loads a random record it has no list to find")
+            for _live_key, _live_ex in {"count01": 5}.items():
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    setup["idmap"][_live_key] = _live_ex
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -62,15 +64,23 @@ class TestRandomEntity:
         if len(random_ref01_data_raw) > 0:
             random_ref01_data = helpers.to_map(random_ref01_data_raw[0][1])
 
-        # LOAD
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
         random_ref01_ent = client.Random(None)
-        random_ref01_match_dt0 = {
-            "id": random_ref01_data["id"],
+        random_ref01_match = {
+            "count": setup["idmap"]["count01"],
         }
+
+        random_ref01_list_result = random_ref01_ent.list(random_ref01_match, None)
+        assert isinstance(random_ref01_list_result, list)
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        random_ref01_match_dt0 = {}
         random_ref01_data_dt0_loaded = random_ref01_ent.load(random_ref01_match_dt0, None)
-        random_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(random_ref01_data_dt0_loaded))
-        assert random_ref01_data_dt0_load_result is not None
-        assert random_ref01_data_dt0_load_result["id"] == random_ref01_data["id"]
+        assert random_ref01_data_dt0_loaded is not None
 
 
 
@@ -90,7 +100,7 @@ def _random_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["random01", "random02", "random03"],
+        ["random01", "random02", "random03", "count01"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

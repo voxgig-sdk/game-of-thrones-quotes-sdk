@@ -17,6 +17,97 @@ import (
 const randomDirectLiveStrict = true
 
 func TestRandomDirect(t *testing.T) {
+	t.Run("direct-list-random", func(t *testing.T) {
+		setup := randomDirectSetup([]any{
+			map[string]any{"id": "direct01"},
+			map[string]any{"id": "direct02"},
+		})
+		_mode := "unit"
+		if setup.live {
+			_mode = "live"
+		}
+		if _shouldSkip, _reason := isControlSkipped("direct", "direct-list-random", _mode); _shouldSkip {
+			if _reason == "" {
+				_reason = "skipped via sdk-test-control.json"
+			}
+			t.Skip(_reason)
+			return
+		}
+		if setup.live {
+			for _, _liveKey := range []string{"count01"} {
+				if v := setup.idmap[_liveKey]; v == nil {
+					liveMiss(t, randomDirectLiveStrict, "Live test blocked: needs %s via GAME_OF_THRONES_QUOTES_TEST_RANDOM_ENTID", _liveKey)
+					return
+				}
+			}
+		}
+		if setup.live {
+			livePace()
+		}
+		client := setup.client
+
+		params := map[string]any{}
+		query := map[string]any{}
+		if setup.live {
+			params["count"] = setup.idmap["count01"]
+		} else {
+			params["count"] = "direct01"
+		}
+
+		result, err := client.Direct(map[string]any{
+			"path":   "random/{count}",
+			"method": "GET",
+			"params": params,
+			"query":  query,
+		})
+		if setup.live {
+			if err != nil {
+				liveMiss(t, randomDirectLiveStrict, "Live list failed: %v", err)
+			}
+			if status := core.ToInt(result["status"]); result["ok"] != true || status < 200 || status >= 300 {
+				liveMiss(t, randomDirectLiveStrict, "Live list failed: %s", liveDescribe(result))
+			}
+			if _, ok := liveList(result["data"]); !ok {
+				liveMiss(t, randomDirectLiveStrict, "Live list returned no list: %s", liveDescribe(result))
+			}
+		} else {
+			if err != nil {
+				t.Fatalf("direct failed: %v", err)
+			}
+			if result["ok"] != true {
+				t.Fatalf("expected ok to be true, got %v", result["ok"])
+			}
+			if core.ToInt(result["status"]) != 200 {
+				t.Fatalf("expected status 200, got %v", result["status"])
+			}
+		}
+
+		if !setup.live {
+			if dataList, ok := result["data"].([]any); ok {
+				if len(dataList) != 2 {
+					t.Fatalf("expected 2 items, got %d", len(dataList))
+				}
+			} else {
+				t.Fatalf("expected data to be an array, got %T", result["data"])
+			}
+
+			if len(*setup.calls) != 1 {
+				t.Fatalf("expected 1 call, got %d", len(*setup.calls))
+			}
+			call := (*setup.calls)[0]
+			if initMap, ok := call["init"].(map[string]any); ok {
+				if initMap["method"] != "GET" {
+					t.Fatalf("expected method GET, got %v", initMap["method"])
+				}
+			}
+			if url, ok := call["url"].(string); ok {
+				if !strings.Contains(url, "direct01") {
+					t.Fatalf("expected url to contain direct01, got %v", url)
+				}
+			}
+		}
+	})
+
 	t.Run("direct-load-random", func(t *testing.T) {
 		setup := randomDirectSetup(map[string]any{"id": "direct01"})
 		_mode := "unit"
@@ -30,21 +121,16 @@ func TestRandomDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
-		params := map[string]any{}
-		query := map[string]any{}
-		if setup.live {
-			params["id"] = 5
-		} else {
-			params["id"] = "direct01"
-		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "random/{id}",
+			"path":   "random",
 			"method": "GET",
-			"params": params,
-			"query":  query,
+			"params": map[string]any{},
 		})
 		if setup.live {
 			if err != nil {
@@ -87,10 +173,7 @@ func TestRandomDirect(t *testing.T) {
 					t.Fatalf("expected method GET, got %v", initMap["method"])
 				}
 			}
-			if url, ok := call["url"].(string); ok {
-				if !strings.Contains(url, "direct01") {
-					t.Fatalf("expected url to contain direct01, got %v", url)
-				}
+			if _, ok := call["url"].(string); ok {
 			}
 		}
 	})
@@ -135,6 +218,12 @@ func randomDirectSetup(mockres any) *randomDirectSetupResult {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
 				idmap = entidMap
+			}
+		}
+		// A path parameter's example stands in for an id *_ENTID does not give.
+		for k, v := range map[string]any{"count01": 5} {
+			if idmap[k] == nil {
+				idmap[k] = v
 			}
 		}
 

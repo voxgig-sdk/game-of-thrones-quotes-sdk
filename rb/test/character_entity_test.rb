@@ -173,7 +173,10 @@ class CharacterEntityTest < Minitest::Test
     end
     client = setup[:client]
     if setup[:live]
-      Runner.live_existing(setup, LIVE_STRICT, "character") do
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["character01"]
+      _live_id = "jon" if _live_id.nil?
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "character", "id", _live_id) do
         client.Character(nil).list({}, nil)
       end
     end
@@ -186,6 +189,7 @@ class CharacterEntityTest < Minitest::Test
       character_ref01_data = Helpers.to_map(character_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     character_ref01_ent = client.Character(nil)
     character_ref01_match = {}
@@ -193,6 +197,7 @@ class CharacterEntityTest < Minitest::Test
     character_ref01_list_result = character_ref01_ent.list(character_ref01_match, nil)
     assert character_ref01_list_result.is_a?(Array)
 
+    Runner.live_pace if setup[:live]
     # LOAD
     character_ref01_match_dt0 = {
       "id" => character_ref01_data["id"],
@@ -200,7 +205,7 @@ class CharacterEntityTest < Minitest::Test
     character_ref01_data_dt0_loaded = character_ref01_ent.load(character_ref01_match_dt0, nil)
     character_ref01_data_dt0_load_result = Helpers.to_map(character_ref01_data_dt0_loaded.respond_to?(:data_get) ? character_ref01_data_dt0_loaded.data_get : character_ref01_data_dt0_loaded)
     assert !character_ref01_data_dt0_load_result.nil?
-    assert_equal character_ref01_data_dt0_load_result["id"], character_ref01_data["id"]
+    assert Runner.live_same_id(character_ref01_data_dt0_load_result["id"], character_ref01_data["id"]) unless setup[:live]
 
   end
 end

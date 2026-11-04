@@ -41,9 +41,13 @@ func TestAuthorDirect(t *testing.T) {
 				}
 			}
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
+		query := map[string]any{}
 		if setup.live {
 			params["character"] = setup.idmap["character01"]
 		} else {
@@ -59,6 +63,7 @@ func TestAuthorDirect(t *testing.T) {
 			"path":   "author/{character}/{count}",
 			"method": "GET",
 			"params": params,
+			"query":  query,
 		})
 		if setup.live {
 			if err != nil {
@@ -151,6 +156,12 @@ func authorDirectSetup(mockres any) *authorDirectSetupResult {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
 				idmap = entidMap
+			}
+		}
+		// A path parameter's example stands in for an id *_ENTID does not give.
+		for k, v := range map[string]any{"character01": "tyrion", "count01": 2} {
+			if idmap[k] == nil {
+				idmap[k] = v
 			}
 		}
 

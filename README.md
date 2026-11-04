@@ -46,22 +46,22 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = GameOfThronesQuotesSDK.test({
   entity: {
-    random: {
+    character: {
       test01: { id: 'test01' },
     },
   },
 })
-const random = await client.Random().load({ id: 1 })
-// random is the Random entity; .data() reads its mock record
-console.log(random.data())
+const characters = await client.Character().list()
+// characters is an array of Character entities, one per mock record
+console.log(characters.map((character) => character.data()))
 ```
 
 ### Python
 
 ```python
 client = GameOfThronesQuotesSDK.test()
-random = client.Random().load({"id": "test01"})
-print(random.data_get())
+characters = client.Character().list()
+print([item.data_get() for item in characters])
 ```
 
 ### PHP
@@ -69,17 +69,17 @@ print(random.data_get())
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = GameOfThronesQuotesSDK::test([
-    "entity" => ["random" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["character" => ["test01" => ["id" => "test01"]]],
 ]);
-$random = $client->Random()->load(["id" => "test01"]);
+$characters = $client->Character()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Random(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+result, err := client.Character(nil).List(
+    nil, nil,
 )
 ```
 
@@ -88,16 +88,16 @@ result, err := client.Random(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = GameOfThronesQuotesSDK.test({
-  "entity" => { "random" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "character" => { "test01" => { "id" => "test01" } } },
 })
-random = client.Random.load({ "id" => "test01" })
+characters = client.Character.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Random():load({ id = "test01" })
+local results, err = client:Character():list()
 ```
 
 ## Packages
@@ -171,7 +171,7 @@ The API exposes 4 entities:
 | **Author** | The Author entity (list). | `/author/{character}/{count}` |
 | **Character** | The Character entity (list, load). | `/characters` |
 | **House** | The House entity (list, load). | `/houses` |
-| **Random** | The Random entity (load). | `/random/{count}` |
+| **Random** | The Random entity (list, load). | `/random/{count}` |
 
 The operations available across these entities are **load**, **list** — see each entity's
 own list above for exactly which it supports.

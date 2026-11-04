@@ -59,7 +59,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $random = $client->Random()->load(["id" => 1]);
+    $characters = $client->Character()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -131,13 +131,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = GameOfThronesQuotesSDK::test([
-    "entity" => ["house" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["character" => ["test01" => ["id" => "test01"]]],
 ]);
 
 // list() returns entity instances (throws on error);
 // call data_get() for the mock record.
-$house = $client->House()->list();
-print_r(array_map(fn($item) => $item->data_get(), $house));
+$character = $client->Character()->list();
+print_r(array_map(fn($item) => $item->data_get(), $character));
 ```
 
 ### Use a custom fetch function
@@ -299,10 +299,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `id` |  |
 | `sentence` | The quote text |
 
-Operations: Load.
+Operations: List, Load.
 
 API path: `/random/{count}`
 
@@ -415,6 +414,7 @@ Create an instance: `$random = $client->Random();`
 
 | Method | Description |
 | --- | --- |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -422,14 +422,20 @@ Create an instance: `$random = $client->Random();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `array` |  |
-| `id` | `string` |  |
 | `sentence` | `string` | The quote text |
 
 #### Example: Load
 
 ```php
 // load() returns the ENTITY — call data_get() for the Random record (throws on error).
-$random = $client->Random()->load(["id" => 1]);
+$random = $client->Random()->load();
+```
+
+#### Example: List
+
+```php
+// list() returns an array of Random entities, one per record (throws on error).
+$randoms = $client->Random()->list(["count" => 1]);
 ```
 
 ## Features
@@ -590,15 +596,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$random = $client->Random();
-$random->load(["id" => 1]);
+$character = $client->Character();
+$character->list();
 
-// $random->data_get() now returns the random data from the last load
-// $random->match_get() returns the last match criteria
+// $character->data_get() now returns the character data from the last list
+// $character->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

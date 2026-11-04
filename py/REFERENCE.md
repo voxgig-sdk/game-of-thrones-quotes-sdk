@@ -283,17 +283,26 @@ random = client.Random()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `dict` | No |  |
-| `id` | `str` | No |  |
 | `sentence` | `str` | No | The quote text |
 
 ### Operations
+
+#### `list(reqmatch=None, ctrl=None) -> list[RandomEntity]`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
+
+```python
+results = client.Random().list({"count": 1})
+for random in results:
+    print(random.data_get())
+```
 
 #### `load(reqmatch, ctrl=None) -> RandomEntity`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
-result = client.Random().load({"id": 1})
+result = client.Random().load()
 ```
 
 ### Common Methods

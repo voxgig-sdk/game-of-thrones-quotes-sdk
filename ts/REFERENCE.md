@@ -338,17 +338,24 @@ const random = client.Random()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `Record<string, any>` | No |  |
-| `id` | `string` | No |  |
 | `sentence` | `string` | No | The quote text |
 
 ### Operations
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Resolves to an array of entities, one per record.
+
+```ts
+const results = await client.Random().list({ count: 1 })
+```
 
 #### `load(match: object, ctrl?: object)`
 
 Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.Random().load({ id: 1 })
+const result = await client.Random().load()
 ```
 
 ### Common Methods

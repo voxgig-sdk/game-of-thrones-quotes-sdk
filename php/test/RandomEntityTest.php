@@ -33,7 +33,7 @@ class RandomEntityTest extends TestCase
         $client = GameOfThronesQuotesSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->Random(null)->load(["id" => 'x'], null);
+            $client->Random(null)->list(["count" => 'x'], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,7 +45,7 @@ class RandomEntityTest extends TestCase
         $setup = random_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["load"] as $_op) {
+        foreach (["list", "load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "random." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -53,7 +53,11 @@ class RandomEntityTest extends TestCase
             }
         }
         if (!empty($setup["live"])) {
-            Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: " . "the flow loads a random record it has no list to find");
+            foreach (["count01" => 5] as $_liveKey => $_liveEx) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    $setup["idmap"][$_liveKey] = $_liveEx;
+                }
+            }
         }
         $client = $setup["client"];
 
@@ -65,15 +69,25 @@ class RandomEntityTest extends TestCase
             $random_ref01_data = Helpers::to_map($random_ref01_data_raw[0][1]);
         }
 
-        // LOAD
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
         $random_ref01_ent = $client->Random(null);
-        $random_ref01_match_dt0 = [
-            "id" => $random_ref01_data["id"],
+        $random_ref01_match = [
+            "count" => $setup["idmap"]["count01"],
         ];
+
+        $random_ref01_list_result = $random_ref01_ent->list($random_ref01_match, null);
+        $this->assertIsArray($random_ref01_list_result);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $random_ref01_match_dt0 = [];
         $random_ref01_data_dt0_loaded = $random_ref01_ent->load($random_ref01_match_dt0, null);
-        $random_ref01_data_dt0_load_result = Helpers::to_map(is_object($random_ref01_data_dt0_loaded) && method_exists($random_ref01_data_dt0_loaded, 'data_get') ? $random_ref01_data_dt0_loaded->data_get() : $random_ref01_data_dt0_loaded);
-        $this->assertNotNull($random_ref01_data_dt0_load_result);
-        $this->assertEquals($random_ref01_data_dt0_load_result["id"], $random_ref01_data["id"]);
+        $this->assertNotNull($random_ref01_data_dt0_loaded);
 
     }
 }
@@ -93,7 +107,7 @@ function random_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["random01", "random02", "random03"] as $k) {
+    foreach (["random01", "random02", "random03", "count01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

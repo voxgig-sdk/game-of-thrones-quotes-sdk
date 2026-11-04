@@ -48,11 +48,14 @@
 
 ---@class Random
 ---@field character? table
----@field id? string
 ---@field sentence? string
 
 ---@class RandomLoadMatch
----@field id number
+---@field character? table
+---@field sentence? string
+
+---@class RandomListMatch
+---@field count number
 
 local M = {}
 

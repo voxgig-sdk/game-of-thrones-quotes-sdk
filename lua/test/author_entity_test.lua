@@ -45,9 +45,9 @@ describe("AuthorEntity", function()
       end
     end
     if setup.live then
-      for _, _live_key in ipairs({"character01", "count01"}) do
+      for _live_key, _live_ex in pairs({["character01"] = "tyrion", ["count01"] = 2}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
-          runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: needs " .. _live_key .. " via GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID")
+          setup.idmap[_live_key] = _live_ex
         end
       end
     end
@@ -61,6 +61,9 @@ describe("AuthorEntity", function()
       author_ref01_data = helpers.to_map(author_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local author_ref01_ent = client:Author(nil)
     local author_ref01_match = {

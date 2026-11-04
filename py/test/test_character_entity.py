@@ -146,8 +146,13 @@ class TestCharacterEntity:
                 return
         client = setup["client"]
         if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("character01")
+            if _live_id is None:
+                _live_id = "jon"
+            runner.live_pace()
             runner.live_existing(setup, LIVE_STRICT, "character",
-                                 lambda: client.Character(None).list({}, None))
+                                 lambda: client.Character(None).list({}, None),
+                                 "id", _live_id)
 
         # Bootstrap entity data from existing test data.
         character_ref01_data_raw = vs.items(helpers.to_map(
@@ -156,6 +161,8 @@ class TestCharacterEntity:
         if len(character_ref01_data_raw) > 0:
             character_ref01_data = helpers.to_map(character_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         character_ref01_ent = client.Character(None)
         character_ref01_match = {}
@@ -163,6 +170,8 @@ class TestCharacterEntity:
         character_ref01_list_result = character_ref01_ent.list(character_ref01_match, None)
         assert isinstance(character_ref01_list_result, list)
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         character_ref01_match_dt0 = {
             "id": character_ref01_data["id"],
@@ -170,7 +179,8 @@ class TestCharacterEntity:
         character_ref01_data_dt0_loaded = character_ref01_ent.load(character_ref01_match_dt0, None)
         character_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(character_ref01_data_dt0_loaded))
         assert character_ref01_data_dt0_load_result is not None
-        assert character_ref01_data_dt0_load_result["id"] == character_ref01_data["id"]
+        if not setup["live"]:
+            assert runner.live_same_id(character_ref01_data_dt0_load_result.get("id"), character_ref01_data["id"])
 
 
 

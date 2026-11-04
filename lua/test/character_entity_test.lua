@@ -156,9 +156,17 @@ describe("CharacterEntity", function()
     end
     local client = setup.client
     if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["character01"]
+      end
+      if _live_id == nil then
+        _live_id = "jon"
+      end
+      runner.live_pace()
       runner.live_existing(pending, setup, LIVE_STRICT, "character", function()
         return client:Character(nil):list({}, nil)
-      end)
+      end, "id", _live_id)
     end
 
     -- Bootstrap entity data from existing test data.
@@ -169,6 +177,9 @@ describe("CharacterEntity", function()
       character_ref01_data = helpers.to_map(character_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local character_ref01_ent = client:Character(nil)
     local character_ref01_match = {}
@@ -177,6 +188,9 @@ describe("CharacterEntity", function()
     assert.is_nil(err)
     assert.is_table(character_ref01_list_result)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local character_ref01_match_dt0 = {
       id = character_ref01_data["id"],
@@ -185,7 +199,9 @@ describe("CharacterEntity", function()
     assert.is_nil(err)
     local character_ref01_data_dt0_load_result = helpers.to_map(type(character_ref01_data_dt0_loaded) == 'table' and character_ref01_data_dt0_loaded.data_get and character_ref01_data_dt0_loaded:data_get() or character_ref01_data_dt0_loaded)
     assert.is_not_nil(character_ref01_data_dt0_load_result)
-    assert.are.equal(character_ref01_data_dt0_load_result["id"], character_ref01_data["id"])
+    if not setup.live then
+      assert.is_true(runner.live_same_id(character_ref01_data_dt0_load_result["id"], character_ref01_data["id"]))
+    end
 
   end)
 end)

@@ -58,10 +58,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const random = await client.Random().load({ id: 1 })
-  console.log(random.data())
+  const characters = await client.Character().list()
+  console.log(characters.map((item) => item.data()))
 } catch (err) {
-  console.error('load failed:', err)
+  console.error('list failed:', err)
 }
 ```
 
@@ -123,9 +123,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = GameOfThronesQuotesSDK.test()
 
-const random = await client.Random().load({ id: 1 })
-// random is the Random entity; .data() reads its mock record
-console.log(random.data())
+const characters = await client.Character().list()
+// characters is an array of Character entities, one per mock record
+console.log(characters.map((character) => character.data()))
 ```
 
 You can also use the instance method:
@@ -140,10 +140,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Random()
+const entity = client.Character()
 
 // First call runs the operation and stores its result
-await entity.load({ id: 1 })
+await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -337,10 +337,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `id` |  |
 | `sentence` | The quote text |
 
-Operations: load.
+Operations: list, load.
 
 API path: `/random/{count}`
 
@@ -448,6 +447,7 @@ Create an instance: `const random = client.Random()`
 
 | Method | Description |
 | --- | --- |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -455,13 +455,18 @@ Create an instance: `const random = client.Random()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `Record<string, any>` |  |
-| `id` | `string` |  |
 | `sentence` | `string` | The quote text |
 
 #### Example: Load
 
 ```ts
-const random = await client.Random().load({ id: 1 })
+const random = await client.Random().load()
+```
+
+#### Example: List
+
+```ts
+const randoms = await client.Random().list({ count: 1 })
 ```
 
 ## Features
@@ -613,16 +618,16 @@ import { GameOfThronesQuotesSDK } from '@voxgig-sdk/game-of-thrones-quotes-sdk'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const random = client.Random()
-await random.load({ id: 1 })
+const character = client.Character()
+await character.list()
 
-// random.data() now returns the random data from the last `load`
-// random.match() returns { id: 1 }
+// character.data() now returns the character data from the last `list`
+// character.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

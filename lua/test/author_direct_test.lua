@@ -38,9 +38,13 @@ describe("AuthorDirect", function()
         end
       end
     end
+    if setup.live then
+      runner.live_pace()
+    end
     local client = setup.client
 
     local params = {}
+    local query = {}
     if setup.live then
       params["character"] = setup.idmap["character01"]
     else
@@ -56,6 +60,7 @@ describe("AuthorDirect", function()
       path = "author/{character}/{count}",
       method = "GET",
       params = params,
+      query = query,
     })
     if setup.live then
       if not live_ok(result, err) then
@@ -102,6 +107,15 @@ function author_direct_setup(mockres)
     end
     local client = sdk.new(merged_opts)
     local idmap = env["GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID"]
+    if type(idmap) ~= "table" then
+      idmap = {}
+    end
+    -- A path parameter's example stands in for an id *_ENTID does not give.
+    for _k, _v in pairs({["character01"] = "tyrion", ["count01"] = 2}) do
+      if idmap[_k] == nil then
+        idmap[_k] = _v
+      end
+    end
     return {
       client = client,
       calls = calls,

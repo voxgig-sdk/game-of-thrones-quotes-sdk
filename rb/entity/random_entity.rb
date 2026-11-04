@@ -253,6 +253,33 @@ class RandomEntity
 
 
   
+  # List Random items matching the given filter.
+  #
+  # @param reqmatch [RandomListMatch, Hash, nil] match filter (any subset of
+  #   Random fields); defaults to nil, treated as an empty match that lists all.
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<RandomEntity>] the matching Random items, one entity per
+  #   record (data_get reads the record); raises GameOfThronesQuotesError on failure
+  def list(reqmatch = nil, ctrl = nil)
+    utility = @_utility
+    ctx = utility.make_context.call({
+      "opname" => "list",
+      "ctrl" => ctrl,
+      "match" => @_match,
+      "data" => @_data,
+      "reqmatch" => reqmatch,
+    }, @_entctx)
+
+    records = _run_op(ctx) do
+      if ctx.result
+        @_match = ctx.result.resmatch if ctx.result.resmatch
+      end
+    end
+
+    records
+  end
+
+
 
   
 

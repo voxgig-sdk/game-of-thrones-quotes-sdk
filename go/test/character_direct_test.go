@@ -33,6 +33,9 @@ func TestCharacterDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 
@@ -90,6 +93,9 @@ func TestCharacterDirect(t *testing.T) {
 			}
 			t.Skip(_reason)
 			return
+		}
+		if setup.live {
+			livePace()
 		}
 		client := setup.client
 
@@ -196,6 +202,12 @@ func characterDirectSetup(mockres any) *characterDirectSetupResult {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
 				idmap = entidMap
+			}
+		}
+		// A path parameter's example stands in for an id *_ENTID does not give.
+		for k, v := range map[string]any{"character01": "jon"} {
+			if idmap[k] == nil {
+				idmap[k] = v
 			}
 		}
 

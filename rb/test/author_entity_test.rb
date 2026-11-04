@@ -42,9 +42,9 @@ class AuthorEntityTest < Minitest::Test
       end
     end
     if setup[:live]
-      ["character01", "count01"].each do |_live_key|
+      { "character01" => "tyrion", "count01" => 2 }.each do |_live_key, _live_ex|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
-          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID")
+          setup[:idmap][_live_key] = _live_ex
         end
       end
     end
@@ -58,6 +58,7 @@ class AuthorEntityTest < Minitest::Test
       author_ref01_data = Helpers.to_map(author_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     author_ref01_ent = client.Author(nil)
     author_ref01_match = {

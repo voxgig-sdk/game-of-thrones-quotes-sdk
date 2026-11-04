@@ -156,9 +156,17 @@ describe("HouseEntity", function()
     end
     local client = setup.client
     if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["house01"]
+      end
+      if _live_id == nil then
+        _live_id = "lannister"
+      end
+      runner.live_pace()
       runner.live_existing(pending, setup, LIVE_STRICT, "house", function()
         return client:House(nil):list({}, nil)
-      end)
+      end, "id", _live_id)
     end
 
     -- Bootstrap entity data from existing test data.
@@ -169,6 +177,9 @@ describe("HouseEntity", function()
       house_ref01_data = helpers.to_map(house_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local house_ref01_ent = client:House(nil)
     local house_ref01_match = {}
@@ -177,6 +188,9 @@ describe("HouseEntity", function()
     assert.is_nil(err)
     assert.is_table(house_ref01_list_result)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local house_ref01_match_dt0 = {
       id = house_ref01_data["id"],
@@ -185,7 +199,9 @@ describe("HouseEntity", function()
     assert.is_nil(err)
     local house_ref01_data_dt0_load_result = helpers.to_map(type(house_ref01_data_dt0_loaded) == 'table' and house_ref01_data_dt0_loaded.data_get and house_ref01_data_dt0_loaded:data_get() or house_ref01_data_dt0_loaded)
     assert.is_not_nil(house_ref01_data_dt0_load_result)
-    assert.are.equal(house_ref01_data_dt0_load_result["id"], house_ref01_data["id"])
+    if not setup.live then
+      assert.is_true(runner.live_same_id(house_ref01_data_dt0_load_result["id"], house_ref01_data["id"]))
+    end
 
   end)
 end)

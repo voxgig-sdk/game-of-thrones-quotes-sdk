@@ -63,9 +63,9 @@ func TestAuthorEntity(t *testing.T) {
 			}
 		}
 		if setup.live {
-			for _, _liveKey := range []string{"character01", "count01"} {
+			for _liveKey, _liveEx := range map[string]any{"character01": "tyrion", "count01": float64(2)} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
-					liveMiss(t, authorEntityLiveStrict, "Live entity test blocked: needs %s via GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID", _liveKey)
+					setup.idmap[_liveKey] = _liveEx
 				}
 			}
 		}
@@ -82,6 +82,9 @@ func TestAuthorEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = authorRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		authorRef01Ent := client.Author(nil)
 		authorRef01Match := map[string]any{

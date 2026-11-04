@@ -50,7 +50,7 @@ Key fields to recognise:
 
 Results: Multiple random quotes; A random quote.
 
-SDK operations: `load`.
+SDK operations: `list`, `load`.
 
 Key fields to recognise:
 
@@ -67,7 +67,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Character | `load` | `GET /character/{character}` | See reference |
 | House | `list` | `GET /houses` | See reference |
 | House | `load` | `GET /house/{house}` | See reference |
-| Random | `load` | `GET /random/{count}` | See reference |
+| Random | `list` | `GET /random/{count}` | See reference |
 | Random | `load` | `GET /random` | See reference |
 
 ## Connect to the API
@@ -116,7 +116,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `game-of-thrones-quotes_list`: List records for an entity. Supported entities: `author`, `character`, `house`.
+- `game-of-thrones-quotes_list`: List records for an entity. Supported entities: `author`, `character`, `house`, `random`.
 - `game-of-thrones-quotes_load`: Load one record for an entity. Supported entities: `character`, `house`, `random`.
 
 ## Operational features

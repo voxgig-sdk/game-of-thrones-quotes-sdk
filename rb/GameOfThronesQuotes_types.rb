@@ -149,24 +149,33 @@ HouseListMatch = Struct.new(
 # @!attribute [rw] character
 #   @return [Hash, nil]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
 # @!attribute [rw] sentence
 #   @return [String, nil]
 RandomType = Struct.new(
   :character,
-  :id,
   :sentence,
   keyword_init: true
 )
 
 # Request payload for Random#load.
 #
-# @!attribute [rw] id
-#   @return [Integer]
+# @!attribute [rw] character
+#   @return [Hash, nil]
+#
+# @!attribute [rw] sentence
+#   @return [String, nil]
 RandomLoadMatch = Struct.new(
-  :id,
+  :character,
+  :sentence,
+  keyword_init: true
+)
+
+# Request payload for Random#list.
+#
+# @!attribute [rw] count
+#   @return [Integer]
+RandomListMatch = Struct.new(
+  :count,
   keyword_init: true
 )
 

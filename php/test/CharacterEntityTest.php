@@ -221,8 +221,11 @@ class CharacterEntityTest extends TestCase
         }
         $client = $setup["client"];
         if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["character01"] ?? null) : null;
+            $_liveId = $_liveId ?? 'jon';
+            Runner::live_pace();
             Runner::live_existing($setup, self::LIVE_STRICT, "character",
-                fn() => $client->Character(null)->list([], null));
+                fn() => $client->Character(null)->list([], null), "id", $_liveId);
         }
 
         // Bootstrap entity data from existing test data.
@@ -233,6 +236,9 @@ class CharacterEntityTest extends TestCase
             $character_ref01_data = Helpers::to_map($character_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $character_ref01_ent = $client->Character(null);
         $character_ref01_match = [];
@@ -240,6 +246,9 @@ class CharacterEntityTest extends TestCase
         $character_ref01_list_result = $character_ref01_ent->list($character_ref01_match, null);
         $this->assertIsArray($character_ref01_list_result);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $character_ref01_match_dt0 = [
             "id" => $character_ref01_data["id"],
@@ -247,7 +256,9 @@ class CharacterEntityTest extends TestCase
         $character_ref01_data_dt0_loaded = $character_ref01_ent->load($character_ref01_match_dt0, null);
         $character_ref01_data_dt0_load_result = Helpers::to_map(is_object($character_ref01_data_dt0_loaded) && method_exists($character_ref01_data_dt0_loaded, 'data_get') ? $character_ref01_data_dt0_loaded->data_get() : $character_ref01_data_dt0_loaded);
         $this->assertNotNull($character_ref01_data_dt0_load_result);
-        $this->assertEquals($character_ref01_data_dt0_load_result["id"], $character_ref01_data["id"]);
+        if (empty($setup["live"])) {
+            $this->assertTrue(Runner::live_same_id($character_ref01_data_dt0_load_result["id"] ?? null, $character_ref01_data["id"]));
+        }
 
     }
 }

@@ -13,7 +13,11 @@ type Context = core.Context
 type Utility = core.Utility
 type Feature = core.Feature
 type Entity = core.Entity
-type GameOfThronesQuotesEntity = core.GameOfThronesQuotesEntity
+type GameOfThronesQuotesEntityBase = core.GameOfThronesQuotesEntityBase
+
+// Deprecated: use GameOfThronesQuotesEntityBase.
+type GameOfThronesQuotesEntity = core.GameOfThronesQuotesEntityBase
+
 type StreamItem = core.StreamItem
 type FetcherFunc = core.FetcherFunc
 type Spec = core.Spec
@@ -42,16 +46,16 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
-	core.NewAuthorEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
+	core.NewAuthorEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntityBase {
 		return entity.NewAuthorEntity(client, entopts)
 	}
-	core.NewCharacterEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
+	core.NewCharacterEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntityBase {
 		return entity.NewCharacterEntity(client, entopts)
 	}
-	core.NewHouseEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
+	core.NewHouseEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntityBase {
 		return entity.NewHouseEntity(client, entopts)
 	}
-	core.NewRandomEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntity {
+	core.NewRandomEntityFunc = func(client *core.GameOfThronesQuotesSDK, entopts map[string]any) core.GameOfThronesQuotesEntityBase {
 		return entity.NewRandomEntity(client, entopts)
 	}
 }

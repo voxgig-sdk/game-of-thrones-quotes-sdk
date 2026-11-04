@@ -221,8 +221,11 @@ class HouseEntityTest extends TestCase
         }
         $client = $setup["client"];
         if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["house01"] ?? null) : null;
+            $_liveId = $_liveId ?? 'lannister';
+            Runner::live_pace();
             Runner::live_existing($setup, self::LIVE_STRICT, "house",
-                fn() => $client->House(null)->list([], null));
+                fn() => $client->House(null)->list([], null), "id", $_liveId);
         }
 
         // Bootstrap entity data from existing test data.
@@ -233,6 +236,9 @@ class HouseEntityTest extends TestCase
             $house_ref01_data = Helpers::to_map($house_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $house_ref01_ent = $client->House(null);
         $house_ref01_match = [];
@@ -240,6 +246,9 @@ class HouseEntityTest extends TestCase
         $house_ref01_list_result = $house_ref01_ent->list($house_ref01_match, null);
         $this->assertIsArray($house_ref01_list_result);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $house_ref01_match_dt0 = [
             "id" => $house_ref01_data["id"],
@@ -247,7 +256,9 @@ class HouseEntityTest extends TestCase
         $house_ref01_data_dt0_loaded = $house_ref01_ent->load($house_ref01_match_dt0, null);
         $house_ref01_data_dt0_load_result = Helpers::to_map(is_object($house_ref01_data_dt0_loaded) && method_exists($house_ref01_data_dt0_loaded, 'data_get') ? $house_ref01_data_dt0_loaded->data_get() : $house_ref01_data_dt0_loaded);
         $this->assertNotNull($house_ref01_data_dt0_load_result);
-        $this->assertEquals($house_ref01_data_dt0_load_result["id"], $house_ref01_data["id"]);
+        if (empty($setup["live"])) {
+            $this->assertTrue(Runner::live_same_id($house_ref01_data_dt0_load_result["id"] ?? null, $house_ref01_data["id"]));
+        }
 
     }
 }

@@ -47,19 +47,19 @@ client := sdk.TestSDK(testopts, sdkopts)
 
 ### Instance Methods
 
-#### `Author(data map[string]any) GameOfThronesQuotesEntity`
+#### `Author(data map[string]any) GameOfThronesQuotesEntityBase`
 
 Create a new `Author` entity instance. Pass `nil` for no initial data.
 
-#### `Character(data map[string]any) GameOfThronesQuotesEntity`
+#### `Character(data map[string]any) GameOfThronesQuotesEntityBase`
 
 Create a new `Character` entity instance. Pass `nil` for no initial data.
 
-#### `House(data map[string]any) GameOfThronesQuotesEntity`
+#### `House(data map[string]any) GameOfThronesQuotesEntityBase`
 
 Create a new `House` entity instance. Pass `nil` for no initial data.
 
-#### `Random(data map[string]any) GameOfThronesQuotesEntity`
+#### `Random(data map[string]any) GameOfThronesQuotesEntityBase`
 
 Create a new `Random` entity instance. Pass `nil` for no initial data.
 
@@ -326,17 +326,30 @@ fmt.Println(random.GetName()) // "random"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `map[string]any` | No |  |
-| `id` | `string` | No |  |
 | `sentence` | `string` | No | The quote text |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
+
+```go
+results, err := client.Random(nil).List(map[string]any{"count": 1}, nil)
+if err != nil {
+    panic(err)
+}
+for _, item := range results.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
+```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
 
 ```go
-result, err := client.Random(nil).Load(map[string]any{"id": 1}, nil)
+result, err := client.Random(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }

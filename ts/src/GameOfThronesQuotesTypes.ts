@@ -55,11 +55,15 @@ export interface HouseListMatch {
 
 export interface Random {
   character?: Record<string, any>
-  id?: string
   sentence?: string
 }
 
 export interface RandomLoadMatch {
-  id: number
+  character?: Record<string, any>
+  sentence?: string
+}
+
+export interface RandomListMatch {
+  count: number
 }
 

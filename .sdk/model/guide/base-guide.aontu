@@ -39,8 +39,7 @@ guide: {
       op: load: method: *GET
     }
     path: "/random/{count}": {
-      rename: param: "count": *"id"
-      op: load: method: *GET
+      op: list: method: *GET
     }
   }
 

@@ -141,7 +141,7 @@ operation, of the 4 the SDK has:
 
 | Tool | Entities |
 |------|----------|
-| `game-of-thrones-quotes_list` | author, character, house |
+| `game-of-thrones-quotes_list` | author, character, house, random |
 | `game-of-thrones-quotes_load` | character, house, random |
 
 JSON schemas are emitted by the SDK from each tool's argument struct's

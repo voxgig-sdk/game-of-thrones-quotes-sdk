@@ -115,7 +115,7 @@ class GameOfThronesQuotesContext
   end
 
   def make_error(code, msg)
-    GameOfThronesQuotesError.new(code, msg, self)
+    GameOfThronesQuotesError.new(msg, code: code, ctx: self)
   end
 
   # The serialised context leaves the pipeline (a logger, an error dump), so

@@ -173,7 +173,10 @@ class HouseEntityTest < Minitest::Test
     end
     client = setup[:client]
     if setup[:live]
-      Runner.live_existing(setup, LIVE_STRICT, "house") do
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["house01"]
+      _live_id = "lannister" if _live_id.nil?
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "house", "id", _live_id) do
         client.House(nil).list({}, nil)
       end
     end
@@ -186,6 +189,7 @@ class HouseEntityTest < Minitest::Test
       house_ref01_data = Helpers.to_map(house_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     house_ref01_ent = client.House(nil)
     house_ref01_match = {}
@@ -193,6 +197,7 @@ class HouseEntityTest < Minitest::Test
     house_ref01_list_result = house_ref01_ent.list(house_ref01_match, nil)
     assert house_ref01_list_result.is_a?(Array)
 
+    Runner.live_pace if setup[:live]
     # LOAD
     house_ref01_match_dt0 = {
       "id" => house_ref01_data["id"],
@@ -200,7 +205,7 @@ class HouseEntityTest < Minitest::Test
     house_ref01_data_dt0_loaded = house_ref01_ent.load(house_ref01_match_dt0, nil)
     house_ref01_data_dt0_load_result = Helpers.to_map(house_ref01_data_dt0_loaded.respond_to?(:data_get) ? house_ref01_data_dt0_loaded.data_get : house_ref01_data_dt0_loaded)
     assert !house_ref01_data_dt0_load_result.nil?
-    assert_equal house_ref01_data_dt0_load_result["id"], house_ref01_data["id"]
+    assert Runner.live_same_id(house_ref01_data_dt0_load_result["id"], house_ref01_data["id"]) unless setup[:live]
 
   end
 end

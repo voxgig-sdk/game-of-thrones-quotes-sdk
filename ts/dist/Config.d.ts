@@ -334,16 +334,12 @@ declare class Config {
                 type: string;
                 short: string;
             })[];
-            id: {
-                field: string;
-                name: string;
-            };
             name: string;
             op: {
-                load: {
+                list: {
                     input: string;
                     name: string;
-                    points: ({
+                    points: {
                         kind: string;
                         method: string;
                         orig: string;
@@ -355,11 +351,7 @@ declare class Config {
                             lit?: undefined;
                         })[];
                         parts: string[];
-                        rename: {
-                            param: {
-                                count: string;
-                            };
-                        };
+                        rename: {};
                         transform: {
                             req: string;
                             res: string;
@@ -381,7 +373,12 @@ declare class Config {
                             kind: string;
                             media: string;
                         };
-                    } | {
+                    }[];
+                };
+                load: {
+                    input: string;
+                    name: string;
+                    points: {
                         kind: string;
                         method: string;
                         orig: string;
@@ -389,24 +386,18 @@ declare class Config {
                             lit: string;
                         }[];
                         parts: string[];
-                        rename: {
-                            param?: undefined;
-                        };
+                        rename: {};
                         transform: {
                             req: string;
                             res: string;
                         };
-                        args: {
-                            params?: undefined;
-                        };
-                        select: {
-                            exist?: undefined;
-                        };
+                        args: {};
+                        select: {};
                         response: {
                             kind: string;
                             media: string;
                         };
-                    })[];
+                    }[];
                 };
             };
             relations: {

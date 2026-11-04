@@ -15,6 +15,7 @@ main: kit: entity: character: {
       h: "Id"
       n: "id"
       r: false
+      syn: true
       t: "`$STRING`"
     }
     name: {

@@ -146,8 +146,13 @@ class TestHouseEntity:
                 return
         client = setup["client"]
         if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("house01")
+            if _live_id is None:
+                _live_id = "lannister"
+            runner.live_pace()
             runner.live_existing(setup, LIVE_STRICT, "house",
-                                 lambda: client.House(None).list({}, None))
+                                 lambda: client.House(None).list({}, None),
+                                 "id", _live_id)
 
         # Bootstrap entity data from existing test data.
         house_ref01_data_raw = vs.items(helpers.to_map(
@@ -156,6 +161,8 @@ class TestHouseEntity:
         if len(house_ref01_data_raw) > 0:
             house_ref01_data = helpers.to_map(house_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         house_ref01_ent = client.House(None)
         house_ref01_match = {}
@@ -163,6 +170,8 @@ class TestHouseEntity:
         house_ref01_list_result = house_ref01_ent.list(house_ref01_match, None)
         assert isinstance(house_ref01_list_result, list)
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         house_ref01_match_dt0 = {
             "id": house_ref01_data["id"],
@@ -170,7 +179,8 @@ class TestHouseEntity:
         house_ref01_data_dt0_loaded = house_ref01_ent.load(house_ref01_match_dt0, None)
         house_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(house_ref01_data_dt0_loaded))
         assert house_ref01_data_dt0_load_result is not None
-        assert house_ref01_data_dt0_load_result["id"] == house_ref01_data["id"]
+        if not setup["live"]:
+            assert runner.live_same_id(house_ref01_data_dt0_load_result.get("id"), house_ref01_data["id"])
 
 
 

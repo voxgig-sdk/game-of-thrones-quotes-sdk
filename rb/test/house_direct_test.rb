@@ -27,14 +27,17 @@ class HouseDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
+    query = {}
 
     result = client.direct({
       "path" => "houses",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)
@@ -61,6 +64,7 @@ class HouseDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
@@ -119,6 +123,9 @@ def house_direct_setup(mockres)
     })
     client = GameOfThronesQuotesSDK.new(merged_opts)
     idmap = env["GAME_OF_THRONES_QUOTES_TEST_HOUSE_ENTID"]
+    # A path parameter's example stands in for an id *_ENTID does not give.
+    idmap = { "house01" => "lannister" }
+      .merge(idmap.is_a?(Hash) ? idmap : {})
     return {
       client: client,
       calls: calls,

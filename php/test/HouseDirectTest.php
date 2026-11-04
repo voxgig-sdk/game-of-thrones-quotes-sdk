@@ -33,14 +33,19 @@ class HouseDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
+        $query = [];
 
         $result = $client->direct([
             "path" => "houses",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {
@@ -67,6 +72,9 @@ class HouseDirectTest extends TestCase
         if ($_shouldSkip) {
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
+        }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
         }
         $client = $setup["client"];
 
@@ -127,6 +135,9 @@ function house_direct_setup($mockres)
         ]);
         $client = new GameOfThronesQuotesSDK($merged_opts);
         $idmap = $env["GAME_OF_THRONES_QUOTES_TEST_HOUSE_ENTID"] ?? [];
+        // A path parameter's example stands in for an id *_ENTID does not give.
+        $idmap = array_merge(["house01" => 'lannister'],
+            is_array($idmap) ? $idmap : []);
         return [
             "client" => $client,
             "calls" => $calls,

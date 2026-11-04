@@ -12,11 +12,11 @@ var NewTestFeatureFunc func() Feature
 
 var NewTimeoutFeatureFunc func() Feature
 
-var NewAuthorEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
+var NewAuthorEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntityBase
 
-var NewCharacterEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
+var NewCharacterEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntityBase
 
-var NewHouseEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
+var NewHouseEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntityBase
 
-var NewRandomEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntity
+var NewRandomEntityFunc func(client *GameOfThronesQuotesSDK, entopts map[string]any) GameOfThronesQuotesEntityBase
 

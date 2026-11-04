@@ -3,18 +3,21 @@
     "random": {
       "RANDOM00": {
         "character": {},
-        "id": "RANDOM00",
-        "sentence": "s20"
+        "sentence": "s15",
+        "count": "COUNT01",
+        "id": "RANDOM00"
       },
       "RANDOM01": {
         "character": {},
-        "id": "RANDOM01",
-        "sentence": "s3e"
+        "sentence": "s29",
+        "count": "COUNT01",
+        "id": "RANDOM01"
       },
       "RANDOM02": {
         "character": {},
-        "id": "RANDOM02",
-        "sentence": "s5c"
+        "sentence": "s3d",
+        "count": "COUNT01",
+        "id": "RANDOM02"
       }
     }
   },
@@ -22,7 +25,7 @@
     "random": {
       "random_ref01": {
         "character": {},
-        "sentence": "s7a"
+        "sentence": "s51"
       }
     }
   },

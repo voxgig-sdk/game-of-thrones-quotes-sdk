@@ -22,6 +22,57 @@ class RandomDirectTest extends TestCase
         return empty($result["err"]) && !empty($result["ok"]) && $status >= 200 && $status < 300;
     }
 
+    public function test_direct_list_random(): void
+    {
+        $setup = random_direct_setup([
+            ["id" => "direct01"],
+            ["id" => "direct02"],
+        ]);
+        [$_shouldSkip, $_reason] = Runner::is_control_skipped("direct", "direct-list-random", $setup["live"] ? "live" : "unit");
+        if ($_shouldSkip) {
+            $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
+            return;
+        }
+        if ($setup["live"]) {
+            foreach (["count01"] as $_liveKey) {
+                if (null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live test blocked: needs " . $_liveKey . " via GAME_OF_THRONES_QUOTES_TEST_RANDOM_ENTID");
+                }
+            }
+        }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        $client = $setup["client"];
+
+        $params = [];
+        $query = [];
+        $params["count"] = $setup["live"] ? ($setup["idmap"]["count01"] ?? null) : "direct01";
+
+        $result = $client->direct([
+            "path" => "random/{count}",
+            "method" => "GET",
+            "params" => $params,
+            "query" => $query,
+        ]);
+        if ($setup["live"]) {
+            if (!self::liveOk($result)) {
+                Runner::live_miss(self::LIVE_STRICT, "Live list failed: " . Runner::live_describe($result));
+            }
+            if (null === Runner::live_list($result["data"] ?? null)) {
+                Runner::live_miss(self::LIVE_STRICT, "Live list returned no list: " . Runner::live_describe($result));
+            }
+            $this->assertIsArray(Runner::live_list($result["data"]));
+        } else {
+            $this->assertArrayNotHasKey("err", $result);
+            $this->assertTrue($result["ok"]);
+            $this->assertEquals(200, Helpers::to_int($result["status"]));
+            $this->assertIsArray($result["data"]);
+            $this->assertCount(2, $result["data"]);
+            $this->assertCount(1, $setup["calls"]);
+        }
+    }
+
     public function test_direct_load_random(): void
     {
         $setup = random_direct_setup(["id" => "direct01"]);
@@ -30,18 +81,19 @@ class RandomDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
         $query = [];
         if ($setup["live"]) {
-            $params["id"] = 5;
         } else {
-            $params["id"] = "direct01";
         }
 
         $result = $client->direct([
-            "path" => "random/{id}",
+            "path" => "random",
             "method" => "GET",
             "params" => $params,
             "query" => $query,
@@ -89,6 +141,9 @@ function random_direct_setup($mockres)
         ]);
         $client = new GameOfThronesQuotesSDK($merged_opts);
         $idmap = $env["GAME_OF_THRONES_QUOTES_TEST_RANDOM_ENTID"] ?? [];
+        // A path parameter's example stands in for an id *_ENTID does not give.
+        $idmap = array_merge(["count01" => 5],
+            is_array($idmap) ? $idmap : []);
         return [
             "client" => $client,
             "calls" => $calls,

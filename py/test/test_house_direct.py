@@ -1,6 +1,7 @@
 # House direct test
 
 import json
+import os
 import pytest
 
 from gameofthronesquotes_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -32,14 +33,18 @@ class TestHouseDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
 
         result = client.direct({
             "path": "houses",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):
@@ -59,6 +64,8 @@ class TestHouseDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
@@ -111,6 +118,9 @@ def _house_direct_setup(mockres):
         })
         client = GameOfThronesQuotesSDK(merged_opts)
         idmap = env.get("GAME_OF_THRONES_QUOTES_TEST_HOUSE_ENTID")
+        # A path parameter's example stands in for an id *_ENTID does not give.
+        idmap = {"house01": "lannister",
+                 **(idmap if isinstance(idmap, dict) else {})}
         return {
             "client": client,
             "calls": calls,

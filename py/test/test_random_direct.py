@@ -1,6 +1,7 @@
 # Random direct test
 
 import json
+import os
 import pytest
 
 from gameofthronesquotes_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -23,25 +24,68 @@ def _live_ok(result):
 
 class TestRandomDirect:
 
+    def test_should_direct_list_random(self):
+        setup = _random_direct_setup([
+            {"id": "direct01"},
+            {"id": "direct02"},
+        ])
+        _skip, _reason = runner.is_control_skipped("direct", "direct-list-random", "live" if setup["live"] else "unit")
+        if _skip:
+            pytest.skip(_reason or "skipped via sdk-test-control.json")
+            return
+        if setup["live"]:
+            for _live_key in ["count01"]:
+                if setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via GAME_OF_THRONES_QUOTES_TEST_RANDOM_ENTID")
+
+        if setup["live"]:
+            runner.live_pace()
+        client = setup["client"]
+
+        params = {}
+        query = {}
+        if setup["live"]:
+            params["count"] = setup["idmap"].get("count01")
+        else:
+            params["count"] = "direct01"
+
+        result = client.direct({
+            "path": "random/{count}",
+            "method": "GET",
+            "params": params,
+            "query": query,
+        })
+        if setup["live"]:
+            if not _live_ok(result):
+                runner.live_miss(LIVE_STRICT, "Live list failed: " + runner.live_describe(result))
+            if runner.live_list(result.get("data")) is None:
+                runner.live_miss(LIVE_STRICT, "Live list returned no list: " + runner.live_describe(result))
+        else:
+            assert result["ok"] is True
+            assert helpers.to_int(result["status"]) == 200
+            assert isinstance(result["data"], list)
+            assert len(result["data"]) == 2
+            assert len(setup["calls"]) == 1
+
     def test_should_direct_load_random(self):
         setup = _random_direct_setup({"id": "direct01"})
         _skip, _reason = runner.is_control_skipped("direct", "direct-load-random", "live" if setup["live"] else "unit")
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
         query = {}
         if setup["live"]:
-            params["id"] = 5
             pass
         else:
-            params["id"] = "direct01"
             pass
 
         result = client.direct({
-            "path": "random/{id}",
+            "path": "random",
             "method": "GET",
             "params": params,
             "query": query,
@@ -81,6 +125,9 @@ def _random_direct_setup(mockres):
         })
         client = GameOfThronesQuotesSDK(merged_opts)
         idmap = env.get("GAME_OF_THRONES_QUOTES_TEST_RANDOM_ENTID")
+        # A path parameter's example stands in for an id *_ENTID does not give.
+        idmap = {"count01": 5,
+                 **(idmap if isinstance(idmap, dict) else {})}
         return {
             "client": client,
             "calls": calls,

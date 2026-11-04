@@ -47,7 +47,7 @@ describe('RandomEntity', async () => {
       return
     }
     const client = GameOfThronesQuotesSDK.test(undefined, { feature: { validate: { active: true } } })
-    await assert.rejects(client.Random().load({"id":"x"} as any),
+    await assert.rejects(client.Random().list({"count":"x"} as any),
       (err: any) => 'validate_failed' === err.code)
   })
 
@@ -56,14 +56,14 @@ describe('RandomEntity', async () => {
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.GAME_OF_THRONES_QUOTES_TEST_LIVE
-    for (const op of ['load']) {
+    for (const op of ['list', 'load']) {
       if (!live && maybeSkipControl(t, 'entityOp', 'random.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"character":{"a":true,"h":"Character","n":"character","r":false,"t":"`$OBJECT`","key$":"character","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":1},"sentence":{"a":true,"h":"Sentence","n":"sentence","r":false,"sh":"The quote text","t":"`$STRING`","key$":"sentence","index$":2}},"id":{"field":"id","name":"id"},"name":"random","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /random/{count}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":5,"k":"param","n":"id","or":"count","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/random/{count}","q":{"exist":["id"]},"r":{"param":{"count":"id"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"random"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /random","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/random","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"random"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"random","name__orig":"random","Name":"Random","name_":"random","name-":"random","NAME":"RANDOM","index$":3}, {"active":true,"entity":"random","key$":"BasicRandomFlow","kind":"basic","name":"BasicRandomFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"random_ref01","srcdatavar":"random_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-random_ref01"}}],"index$":0}]}, 'Random', {"GET /random/{count}":{"protocol":"http","parameters":[{"name":"count","in":"path","required":true,"description":"Number of random quotes to retrieve","schema":{"type":"integer","minimum":1,"example":5},"index$":0}]},"GET /random":{"protocol":"http","parameters":[]}}, { strict: LIVE_STRICT, t })
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"character":{"a":true,"h":"Character","n":"character","r":false,"t":"`$OBJECT`","key$":"character","index$":0},"sentence":{"a":true,"h":"Sentence","n":"sentence","r":false,"sh":"The quote text","t":"`$STRING`","key$":"sentence","index$":1}},"name":"random","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /random/{count}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":5,"k":"param","n":"count","or":"count","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/random/{count}","q":{"exist":["count"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"random"},{"var":"count"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /random","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/random","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"random"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"random","name__orig":"random","Name":"Random","name_":"random","name-":"random","NAME":"RANDOM","index$":3}, {"active":true,"entity":"random","key$":"BasicRandomFlow","kind":"basic","name":"BasicRandomFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{"count":"count01"},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"random_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"random_ref01","srcdatavar":"random_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-random_ref01"}}],"index$":1}]}, 'Random', {"GET /random/{count}":{"protocol":"http","parameters":[{"name":"count","in":"path","required":true,"description":"Number of random quotes to retrieve","schema":{"type":"integer","minimum":1,"example":5},"index$":0}]},"GET /random":{"protocol":"http","parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -73,12 +73,18 @@ describe('RandomEntity', async () => {
 
     let random_ref01_data = Object.values(setup.data.existing.random)[0] as any
 
-    // LOAD
+    // LIST
     const random_ref01_ent = client.Random()
+    const random_ref01_match: any = {}
+    random_ref01_match['count'] = setup.idmap['count01']
+
+    const random_ref01_list = (await random_ref01_ent.list(random_ref01_match)).map((e: any) => e.data())
+
+
+    // LOAD
     const random_ref01_match_dt0: any = {}
-    random_ref01_match_dt0.id = random_ref01_data.id
     const random_ref01_data_dt0 = (await random_ref01_ent.load(random_ref01_match_dt0)).data()
-    assert(random_ref01_data_dt0.id === random_ref01_data.id)
+    assert(null != random_ref01_data_dt0)
 
 
   })
@@ -115,7 +121,7 @@ function basicSetup(extra?: any) {
   const transform = struct.transform
 
   let idmap = transform(
-    ['random01','random02','random03'],
+    ['random01','random02','random03','count01'],
     {
       '`$PACK`': ['', {
         '`$KEY`': '`$COPY`',

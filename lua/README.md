@@ -55,7 +55,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local random, err = client:Random():load({ id = 1 })
+local characters, err = client:Character():list()
 if err then error(err) end
 ```
 
@@ -113,9 +113,21 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Random():load({ id = "test01" })
--- result is the entity; data_get() reads its mock record; err is set on failure
+local result, err = client:Character():list()
+-- result is an array of entities, one per mock record; err is set on failure
 ```
+
+### Verify the server over HTTPS
+
+An `https://` request goes through LuaSocket and LuaSec, and the SDK checks
+the server itself before any of the request is sent: its certificate against
+the system's trust store, and its name against the host (an address against
+the certificate's addresses). Nothing turns that off. `SSL_CERT_FILE` or
+`SSL_CERT_DIR` names the trust store, as for OpenSSL; with neither set and no
+system store found, an `https://` request fails rather than going unverified.
+`GAME_OF_THRONES_QUOTES_CA_BUNDLE` names a PEM file of roots added to the store,
+for a local service with its own certificate authority or a self-signed
+certificate. A different policy is a custom fetch function, described next.
 
 ### Use a custom fetch function
 
@@ -276,10 +288,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `id` |  |
 | `sentence` | The quote text |
 
-Operations: Load.
+Operations: List, Load.
 
 API path: `/random/{count}`
 
@@ -387,6 +398,7 @@ Create an instance: `local random = client:Random(nil)`
 
 | Method | Description |
 | --- | --- |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -394,13 +406,18 @@ Create an instance: `local random = client:Random(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `table` |  |
-| `id` | `string` |  |
 | `sentence` | `string` | The quote text |
 
 #### Example: Load
 
 ```lua
-local random, err = client:Random():load({ id = 1 })
+local random, err = client:Random():load()
+```
+
+#### Example: List
+
+```lua
+local randoms, err = client:Random():list({ count = 1 })
 ```
 
 ## Features
@@ -561,15 +578,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local random = client:Random()
-random:load({ id = 1 })
+local character = client:Character()
+character:list()
 
--- random:data_get() now returns the random data from the last load
--- random:match_get() returns the last match criteria
+-- character:data_get() now returns the character data from the last list
+-- character:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

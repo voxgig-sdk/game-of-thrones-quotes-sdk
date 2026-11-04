@@ -29,7 +29,7 @@ describe("RandomEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:Random(nil):load({ ["id"] = "x" }, nil)
+    local _, err = client:Random(nil):list({ ["count"] = "x" }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -37,7 +37,7 @@ describe("RandomEntity", function()
     local setup = random_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"load"}) do
+    for _, _op in ipairs({"list", "load"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "random." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -45,7 +45,11 @@ describe("RandomEntity", function()
       end
     end
     if setup.live then
-      runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: " .. "the flow loads a random record it has no list to find")
+      for _live_key, _live_ex in pairs({["count01"] = 5}) do
+        if setup.synthetic_only or setup.idmap[_live_key] == nil then
+          setup.idmap[_live_key] = _live_ex
+        end
+      end
     end
     local client = setup.client
 
@@ -57,16 +61,27 @@ describe("RandomEntity", function()
       random_ref01_data = helpers.to_map(random_ref01_data_raw[1][2])
     end
 
-    -- LOAD
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
     local random_ref01_ent = client:Random(nil)
-    local random_ref01_match_dt0 = {
-      id = random_ref01_data["id"],
+    local random_ref01_match = {
+      ["count"] = setup.idmap["count01"],
     }
+
+    local random_ref01_list_result, err = random_ref01_ent:list(random_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(random_ref01_list_result)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local random_ref01_match_dt0 = {}
     local random_ref01_data_dt0_loaded, err = random_ref01_ent:load(random_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local random_ref01_data_dt0_load_result = helpers.to_map(type(random_ref01_data_dt0_loaded) == 'table' and random_ref01_data_dt0_loaded.data_get and random_ref01_data_dt0_loaded:data_get() or random_ref01_data_dt0_loaded)
-    assert.is_not_nil(random_ref01_data_dt0_load_result)
-    assert.are.equal(random_ref01_data_dt0_load_result["id"], random_ref01_data["id"])
+    assert.is_not_nil(random_ref01_data_dt0_loaded)
 
   end)
 end)
@@ -91,7 +106,7 @@ function random_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "random01", "random02", "random03" },
+    { "random01", "random02", "random03", "count01" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

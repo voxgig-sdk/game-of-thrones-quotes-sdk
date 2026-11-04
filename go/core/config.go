@@ -427,26 +427,17 @@ func MakeConfig() map[string]any {
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
-						"name": "id",
-						"title": "Id",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "sentence",
 						"title": "Sentence",
 						"type": "`$STRING`",
 						"short": "The quote text",
 					},
 				},
-				"id": map[string]any{
-					"field": "id",
-					"name": "id",
-				},
 				"name": "random",
 				"op": map[string]any{
-					"load": map[string]any{
+					"list": map[string]any{
 						"input": "data",
-						"name": "load",
+						"name": "list",
 						"points": []any{
 							map[string]any{
 								"kind": "http",
@@ -457,18 +448,14 @@ func MakeConfig() map[string]any {
 										"lit": "random",
 									},
 									map[string]any{
-										"var": "id",
+										"var": "count",
 									},
 								},
 								"parts": []any{
 									"random",
-									"{id}",
+									"{count}",
 								},
-								"rename": map[string]any{
-									"param": map[string]any{
-										"count": "id",
-									},
-								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
@@ -476,7 +463,7 @@ func MakeConfig() map[string]any {
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"name": "id",
+											"name": "count",
 											"orig": "count",
 											"type": "`$INTEGER`",
 											"kind": "param",
@@ -487,7 +474,7 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"id",
+										"count",
 									},
 								},
 								"response": map[string]any{
@@ -495,6 +482,12 @@ func MakeConfig() map[string]any {
 									"media": "application/json",
 								},
 							},
+						},
+					},
+					"load": map[string]any{
+						"input": "data",
+						"name": "load",
+						"points": []any{
 							map[string]any{
 								"kind": "http",
 								"method": "GET",

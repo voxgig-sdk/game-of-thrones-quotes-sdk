@@ -283,17 +283,24 @@ local random = client:Random(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `table` | No |  |
-| `id` | `string` | No |  |
 | `sentence` | `string` | No | The quote text |
 
 ### Operations
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
+
+```lua
+local results, err = client:Random():list({ count = 1 })
+```
 
 #### `load(reqmatch, ctrl) -> any, err`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
-local result, err = client:Random():load({ id = 1 })
+local result, err = client:Random():load()
 ```
 
 ### Common Methods

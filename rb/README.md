@@ -61,9 +61,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  random = client.Random.load({ "id" => 1 })
+  characters = client.Character.list()
 rescue => err
-  warn "load failed: #{err}"
+  warn "list failed: #{err}"
 end
 ```
 
@@ -129,13 +129,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
 client = GameOfThronesQuotesSDK.test({
-  "entity" => { "random" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "character" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the ENTITY (raises on error);
-# data_get reads its mock record.
-random = client.Random.load({ "id" => "test01" })
-puts random.data_get
+# list returns an Array of Character entities, one per mock record (raises on
+# error); data_get reads each record.
+characters = client.Character.list()
+characters.each { |item| puts item.data_get }
 ```
 
 ### Use a custom fetch function
@@ -294,10 +294,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `character` |  |
-| `id` |  |
 | `sentence` | The quote text |
 
-Operations: Load.
+Operations: List, Load.
 
 API path: `/random/{count}`
 
@@ -413,6 +412,7 @@ Create an instance: `random = client.Random`
 
 | Method | Description |
 | --- | --- |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -420,14 +420,21 @@ Create an instance: `random = client.Random`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `Hash` |  |
-| `id` | `String` |  |
 | `sentence` | `String` | The quote text |
 
 #### Example: Load
 
 ```ruby
 # load returns the ENTITY — call data_get for the Random record (raises on error).
-random = client.Random.load({ "id" => 1 })
+random = client.Random.load()
+```
+
+#### Example: List
+
+```ruby
+# list returns an Array of Random entities, one per record (raises on error).
+randoms = client.Random.list({ "count" => 1 })
+randoms.each { |item| puts item.data_get }
 ```
 
 ## Features
@@ -588,15 +595,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-random = client.Random
-random.load({ "id" => 1 })
+character = client.Character
+character.list()
 
-# random.data_get now returns the random data from the last load
-# random.match_get returns the last match criteria
+# character.data_get now returns the character data from the last list
+# character.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

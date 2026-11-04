@@ -146,6 +146,9 @@ function directSetup(mockres?: any) {
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }
+    // A path parameter's example stands in for an id *_ENTID does not give.
+    idmap = Object.assign({ character01: 'jon' },
+      'object' === typeof idmap ? idmap : {})
 
     return { client, calls, live, idmap, transport }
   }

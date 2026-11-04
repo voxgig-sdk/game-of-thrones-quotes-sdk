@@ -1,6 +1,7 @@
 # Author direct test
 
 import json
+import os
 import pytest
 
 from gameofthronesquotes_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -37,9 +38,12 @@ class TestAuthorDirect:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
         if setup["live"]:
             params["character"] = setup["idmap"].get("character01")
         else:
@@ -53,6 +57,7 @@ class TestAuthorDirect:
             "path": "author/{character}/{count}",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):
@@ -88,6 +93,9 @@ def _author_direct_setup(mockres):
         })
         client = GameOfThronesQuotesSDK(merged_opts)
         idmap = env.get("GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID")
+        # A path parameter's example stands in for an id *_ENTID does not give.
+        idmap = {"character01": "tyrion", "count01": 2,
+                 **(idmap if isinstance(idmap, dict) else {})}
         return {
             "client": client,
             "calls": calls,

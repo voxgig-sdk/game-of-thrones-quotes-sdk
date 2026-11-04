@@ -69,12 +69,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-random, err := client.Random(nil).Load(map[string]any{"id": 1}, nil)
+characters, err := client.Character(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = random
+_ = characters
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -138,13 +138,16 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-random, err := client.Random(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+characters, err := client.Character(nil).List(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(random.(sdk.Entity).Data()) // the entity's mock record
+// A []any of entities, one per mock record.
+for _, item := range characters.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Use a custom fetch function
@@ -221,14 +224,14 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Author` | `(data map[string]any) GameOfThronesQuotesEntity` | Create an Author entity instance. |
-| `Character` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Character entity instance. |
-| `House` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a House entity instance. |
-| `Random` | `(data map[string]any) GameOfThronesQuotesEntity` | Create a Random entity instance. |
+| `Author` | `(data map[string]any) GameOfThronesQuotesEntityBase` | Create an Author entity instance. |
+| `Character` | `(data map[string]any) GameOfThronesQuotesEntityBase` | Create a Character entity instance. |
+| `House` | `(data map[string]any) GameOfThronesQuotesEntityBase` | Create a House entity instance. |
+| `Random` | `(data map[string]any) GameOfThronesQuotesEntityBase` | Create a Random entity instance. |
 
-### Entity interface (GameOfThronesQuotesEntity)
+### Entity interface (GameOfThronesQuotesEntityBase)
 
-All entities implement the `GameOfThronesQuotesEntity` interface.
+All entities implement the `GameOfThronesQuotesEntityBase` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
@@ -305,10 +308,9 @@ API path: `/houses`
 | Field | Description |
 | --- | --- |
 | `"character"` |  |
-| `"id"` |  |
 | `"sentence"` | The quote text |
 
-Operations: Load.
+Operations: List, Load.
 
 API path: `/random/{count}`
 
@@ -445,6 +447,7 @@ Create an instance: `random := client.Random(nil)`
 
 | Method | Description |
 | --- | --- |
+| `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -452,17 +455,29 @@ Create an instance: `random := client.Random(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `character` | `map[string]any` |  |
-| `id` | `string` |  |
 | `sentence` | `string` | The quote text |
 
 #### Example: Load
 
 ```go
-random, err := client.Random(nil).Load(map[string]any{"id": 1}, nil)
+random, err := client.Random(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
 fmt.Println(random.(sdk.Entity).Data()) // the loaded entity's record
+```
+
+#### Example: List
+
+```go
+randoms, err := client.Random(nil).List(map[string]any{"count": 1}, nil)
+if err != nil {
+    panic(err)
+}
+// A []any of entities, one per record.
+for _, item := range randoms.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ## Features
@@ -621,15 +636,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-random := client.Random(nil)
-random.Load(map[string]any{"id": 1}, nil)
+character := client.Character(nil)
+character.List(nil, nil)
 
-// random.Data() now returns the random data from the last load
-// random.Match() returns the last match criteria
+// character.Data() now returns the character data from the last list
+// character.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

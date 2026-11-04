@@ -24,6 +24,7 @@
         "repr": "auto"
       },
       "contributor": {},
+      "copies": "merge",
       "doc": {
         "active": true,
         "assets": {
@@ -203,6 +204,7 @@
               "h": "Id",
               "n": "id",
               "r": false,
+              "syn": true,
               "t": "`$STRING`"
             },
             "name": {
@@ -341,6 +343,7 @@
               "h": "Id",
               "n": "id",
               "r": false,
+              "syn": true,
               "t": "`$STRING`"
             },
             "members": {
@@ -481,13 +484,6 @@
               "r": false,
               "t": "`$OBJECT`"
             },
-            "id": {
-              "a": true,
-              "h": "Id",
-              "n": "id",
-              "r": false,
-              "t": "`$STRING`"
-            },
             "sentence": {
               "a": true,
               "h": "Sentence",
@@ -497,15 +493,11 @@
               "t": "`$STRING`"
             }
           },
-          "id": {
-            "field": "id",
-            "name": "id"
-          },
           "name": "random",
           "op": {
-            "load": {
+            "list": {
               "input": "data",
-              "name": "load",
+              "name": "list",
               "points": [
                 {
                   "a": true,
@@ -520,7 +512,7 @@
                         "a": true,
                         "ex": 5,
                         "k": "param",
-                        "n": "id",
+                        "n": "count",
                         "or": "count",
                         "r": true,
                         "t": "`$INTEGER`"
@@ -532,14 +524,10 @@
                   "o": "/random/{count}",
                   "q": {
                     "exist": [
-                      "id"
+                      "count"
                     ]
                   },
-                  "r": {
-                    "param": {
-                      "count": "id"
-                    }
-                  },
+                  "r": {},
                   "rs": {
                     "kind": "json",
                     "media": "application/json"
@@ -549,14 +537,20 @@
                       "lit": "random"
                     },
                     {
-                      "var": "id"
+                      "var": "count"
                     }
                   ],
                   "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
-                },
+                }
+              ]
+            },
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
                 {
                   "a": true,
                   "co": {
@@ -1140,6 +1134,24 @@
             {
               "a": true,
               "d": {},
+              "i": {},
+              "m": {
+                "count": "count01"
+              },
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "random_ref01"
+                  }
+                }
+              ]
+            },
+            {
+              "a": true,
+              "d": {},
               "i": {
                 "ref": "random_ref01",
                 "srcdatavar": "random_ref01_data",
@@ -1159,6 +1171,9 @@
             }
           ]
         }
+      },
+      "http": {
+        "useragent": ""
       },
       "info": {
         "auth": false,

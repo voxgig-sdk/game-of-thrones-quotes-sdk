@@ -34,9 +34,11 @@ class AuthorDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
+    query = {}
     params["character"] = setup[:live] ? setup[:idmap]["character01"] : "direct01"
     params["count"] = setup[:live] ? setup[:idmap]["count01"] : "direct02"
 
@@ -44,6 +46,7 @@ class AuthorDirectTest < Minitest::Test
       "path" => "author/{character}/{count}",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)
@@ -85,6 +88,9 @@ def author_direct_setup(mockres)
     })
     client = GameOfThronesQuotesSDK.new(merged_opts)
     idmap = env["GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID"]
+    # A path parameter's example stands in for an id *_ENTID does not give.
+    idmap = { "character01" => "tyrion", "count01" => 2 }
+      .merge(idmap.is_a?(Hash) ? idmap : {})
     return {
       client: client,
       calls: calls,

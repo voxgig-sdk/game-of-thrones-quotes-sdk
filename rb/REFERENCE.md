@@ -289,17 +289,25 @@ random = client.Random
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `character` | `Hash` | No |  |
-| `id` | `String` | No |  |
 | `sentence` | `String` | No | The quote text |
 
 ### Operations
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
+
+```ruby
+results = client.Random.list({ "count" => 1 })
+results.each { |item| puts item.data_get }
+```
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
-result = client.Random.load({ "id" => 1 })
+result = client.Random.load()
 ```
 
 ### Common Methods

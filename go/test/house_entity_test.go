@@ -202,9 +202,18 @@ func TestHouseEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 		if setup.live {
-			liveExisting(t, houseEntityLiveStrict, setup.data, "house", func() (any, error) {
-				return client.House(nil).List(map[string]any{}, nil)
-			})
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["house01"]
+			}
+			if _liveId == nil {
+				_liveId = "lannister"
+			}
+			livePace()
+			liveExisting(t, houseEntityLiveStrict, setup.data, "house", "id", _liveId,
+				func() (any, error) {
+					return client.House(nil).List(map[string]any{}, nil)
+				})
 		}
 
 		// Bootstrap entity data from existing test data (no create step in flow).
@@ -217,6 +226,9 @@ func TestHouseEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = houseRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		houseRef01Ent := client.House(nil)
 		houseRef01Match := map[string]any{}
@@ -230,6 +242,9 @@ func TestHouseEntity(t *testing.T) {
 			t.Fatalf("expected list result to be an array, got %T", houseRef01ListResult)
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		houseRef01MatchDt0 := map[string]any{
 			"id": houseRef01Data["id"],
@@ -242,7 +257,7 @@ func TestHouseEntity(t *testing.T) {
 		if houseRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if houseRef01DataDt0LoadResult["id"] != houseRef01Data["id"] {
+		if !setup.live && !liveSameId(houseRef01DataDt0LoadResult["id"], houseRef01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 

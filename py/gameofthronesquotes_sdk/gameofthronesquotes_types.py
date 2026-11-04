@@ -66,9 +66,13 @@ class HouseListMatch(TypedDict, total=False):
 
 class Random(TypedDict, total=False):
     character: dict
-    id: str
     sentence: str
 
 
-class RandomLoadMatch(TypedDict):
-    id: int
+class RandomLoadMatch(TypedDict, total=False):
+    character: dict
+    sentence: str
+
+
+class RandomListMatch(TypedDict):
+    count: int

@@ -38,7 +38,7 @@ func TestRandomEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.Random(nil).Load(map[string]any{"id": "x"}, nil)
+		_, err := client.Random(nil).List(map[string]any{"count": "x"}, nil)
 		if sdkerr, ok := err.(*core.GameOfThronesQuotesError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestRandomEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"load"} {
+		for _, _op := range []string{"list", "load"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "random." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -63,7 +63,11 @@ func TestRandomEntity(t *testing.T) {
 			}
 		}
 		if setup.live {
-			liveMiss(t, randomEntityLiveStrict, "Live entity test blocked: %s", "the flow loads a random record it has no list to find")
+			for _liveKey, _liveEx := range map[string]any{"count01": float64(5)} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					setup.idmap[_liveKey] = _liveEx
+				}
+			}
 		}
 		client := setup.client
 		_ = client
@@ -78,21 +82,35 @@ func TestRandomEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = randomRef01Data
 
-		// LOAD
-		randomRef01Ent := client.Random(nil)
-		randomRef01MatchDt0 := map[string]any{
-			"id": randomRef01Data["id"],
+		if setup.live {
+			livePace()
 		}
+		// LIST
+		randomRef01Ent := client.Random(nil)
+		randomRef01Match := map[string]any{
+			"count": setup.idmap["count01"],
+		}
+
+		randomRef01ListResult, err := randomRef01Ent.List(randomRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, randomRef01ListOk := randomRef01ListResult.([]any)
+		if !randomRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", randomRef01ListResult)
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		randomRef01MatchDt0 := map[string]any{}
 		randomRef01DataDt0Loaded, err := randomRef01Ent.Load(randomRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		randomRef01DataDt0LoadResult := core.ToMapAny(entityData(randomRef01DataDt0Loaded))
-		if randomRef01DataDt0LoadResult == nil {
-			t.Fatal("expected load result to be a map")
-		}
-		if randomRef01DataDt0LoadResult["id"] != randomRef01Data["id"] {
-			t.Fatal("expected load result id to match")
+		if randomRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
 		}
 
 	})
@@ -123,7 +141,7 @@ func randomBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"random01", "random02", "random03"},
+		[]any{"random01", "random02", "random03", "count01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

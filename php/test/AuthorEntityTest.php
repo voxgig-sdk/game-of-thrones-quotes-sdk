@@ -53,9 +53,9 @@ class AuthorEntityTest extends TestCase
             }
         }
         if (!empty($setup["live"])) {
-            foreach (["character01", "count01"] as $_liveKey) {
+            foreach (["character01" => 'tyrion', "count01" => 2] as $_liveKey => $_liveEx) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
-                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via GAME_OF_THRONES_QUOTES_TEST_AUTHOR_ENTID");
+                    $setup["idmap"][$_liveKey] = $_liveEx;
                 }
             }
         }
@@ -69,6 +69,9 @@ class AuthorEntityTest extends TestCase
             $author_ref01_data = Helpers::to_map($author_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $author_ref01_ent = $client->Author(null);
         $author_ref01_match = [

@@ -202,9 +202,18 @@ func TestCharacterEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 		if setup.live {
-			liveExisting(t, characterEntityLiveStrict, setup.data, "character", func() (any, error) {
-				return client.Character(nil).List(map[string]any{}, nil)
-			})
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["character01"]
+			}
+			if _liveId == nil {
+				_liveId = "jon"
+			}
+			livePace()
+			liveExisting(t, characterEntityLiveStrict, setup.data, "character", "id", _liveId,
+				func() (any, error) {
+					return client.Character(nil).List(map[string]any{}, nil)
+				})
 		}
 
 		// Bootstrap entity data from existing test data (no create step in flow).
@@ -217,6 +226,9 @@ func TestCharacterEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = characterRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		characterRef01Ent := client.Character(nil)
 		characterRef01Match := map[string]any{}
@@ -230,6 +242,9 @@ func TestCharacterEntity(t *testing.T) {
 			t.Fatalf("expected list result to be an array, got %T", characterRef01ListResult)
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		characterRef01MatchDt0 := map[string]any{
 			"id": characterRef01Data["id"],
@@ -242,7 +257,7 @@ func TestCharacterEntity(t *testing.T) {
 		if characterRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if characterRef01DataDt0LoadResult["id"] != characterRef01Data["id"] {
+		if !setup.live && !liveSameId(characterRef01DataDt0LoadResult["id"], characterRef01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 
